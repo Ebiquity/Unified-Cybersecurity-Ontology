@@ -1,0 +1,2507 @@
+<?xml version="1.0"?>
+
+
+<!DOCTYPE Ontology [
+    <!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+    <!ENTITY xml "http://www.w3.org/XML/1998/namespace" >
+    <!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+    <!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+]>
+
+
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://ffrdc.ebiquity.umbc.edu/ns/ontology/"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     ontologyIRI="http://ffrdc.ebiquity.umbc.edu/ns/ontology/"
+     versionIRI="http://ffrdc.ebiquity.umbc.edu/ns/ontology/">
+    <Prefix name="" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="cbx" IRI="http://cybox.mitre.org/cybox_v1#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="http://capec.mitre.org/capec_v1#Indicator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://capec.mitre.org/capec_v1#Observable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://capec.mitre.org/capec_v1#Weakness"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="cbx:Observable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="AttackPattern"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="BaseGroup"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="CCE"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="CVE"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="CVSSScoreType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="ConfidenceType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="EnvironmentalGroup"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Exploit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Indicator"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KillChain"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="KillChainPhase"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Malware"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="OSVDB"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="StatementType"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="TemporalGroup"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Address"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#AtError"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Attack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Attacker"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Backdoor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BotnetAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BoundaryCondition"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#BufferOverFlow"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CWE"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Campaign"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ConfigurationError"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Consequence"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CourseofAction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DataCorruption"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DenialOfService"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DirectoryExposure"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DistributedCode"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#DomainExpert"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ExICMPEchoReq"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ExIPPacketSize"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ExceptionCondition"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ExcessForks"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ExploitTarget"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#File"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Hardware"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IDPS"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IPAddress"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IPFrag"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IPv4Address"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#IPv6Address"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Incident"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#InputValidationError"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#KernelModule"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Logic"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LogicExploit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LossOfConf"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LossOfIntegrity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MACAddress"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MalformedInput"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MaliciousCodeExecution"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Means"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MeansOrConsequence"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MemoryConsumption"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#MitnickAttack"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NetFlood"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#NetworkState"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Observable"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OperatingSystem"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#OtherTechnicalTerms"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ParisiticCode"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PingOfDeath"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PingScan"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#PrivilegeEsc"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Probe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Process"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Product"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RSTProbe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RaceCondition"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#RemoteAccess"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Rootkit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SelfPropagatingCode"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SerialError"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Software"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Source"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SynFlood"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SynScan"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SysCrash"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#System"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TCPConnect"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TCPPortScan"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TTP"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ThreatActor"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Time"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#TriggeredCode"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Trojans"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UCOThing"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UnauthRoot"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UnauthUser"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#UserEnumeration"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Virus"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Vulnerability"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Web"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#WebBrowser"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#Worm"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#rstProbe"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://stix.mitre.org/STIX#KillChain"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="http://stix.mitre.org/STIX#KillChainPhase"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="behaviour"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasAffectedSoftware"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasAssociatedCampaign"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasAttacker"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasCOAType"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasCVE_ID"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasCVSSScore"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasCampaign"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasConfidenceValue"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasConfiguration"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasCost"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasEfficacy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasImpact"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasIncident"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasIndicator"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasIntendedEffect"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasKernel"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasKillChain"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasKillChainPhase"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasMotivation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasOSVDB"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasObservable"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasObservedMeans"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasParameterObservables"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasRelatedCOA"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasRelatedIncident"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasRelatedIndicator"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasRelatedMeans"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasRequestedCOA"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasSoftware"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasSophistication"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasStage"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasStatus"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasSuggestedCOA"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasTakenCOA"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasType"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasWeakness"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#affectsProduct"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#associatedCampaigns"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#connectedTo"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#exploitsVulnerability"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasConsequence"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasIPAddress"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasIPv4Address"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasIPv6Address"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMACAddress"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMeans"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasMitigation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasProduct"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasSource"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasTerms"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasVulnerability"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isLaunchedBy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isResultOf"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#isUnderAttack"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#resultsIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#usesAttacks"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="discoveryTime"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="hasConfidenceValue"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="hasTime"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="hasTitle"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#anomolousDataOutFlow"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#chgGid"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#chgPPid"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#chgSUid"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#chgUid"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#commonConsequences"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#cweExtendedSummary"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#cweID"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#cweName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#cweSummary"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#dataSize"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#description"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#generated-on-datetime"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasAccessComplexity"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasAccessVector"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasAuthentication"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasAvailabilityImpact"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasCodeSize"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasConfidentialityImpact"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasDataSize"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasIntegrityImpact"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasLibSize"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasMACAddress"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasSource"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasVendor"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#hasVulnerabilityTerm"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#isNew"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#lastModifiedDateTime"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#newDestIP"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#newPortsOpened"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#numChildProcesses"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#numOpenFiles"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#numProcessesRunning"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#opensPort"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#publishedDateTime"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#score"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#selfDist"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#showsInfectionSigns"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#summary"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#timeOfIntroduction"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="High"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="Low"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="Medium"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="None"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="Remedy"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="Response"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="Unknown"/>
+    </Declaration>
+    <EquivalentClasses>
+        <Class IRI="http://capec.mitre.org/capec_v1#Indicator"/>
+        <Class IRI="Indicator"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="http://capec.mitre.org/capec_v1#Observable"/>
+        <Class abbreviatedIRI="cbx:Observable"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="http://capec.mitre.org/capec_v1#Weakness"/>
+        <Class IRI="#CWE"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class abbreviatedIRI="cbx:Observable"/>
+        <Class IRI="#Observable"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="CVSSScoreType"/>
+        <ObjectUnionOf>
+            <Class IRI="BaseGroup"/>
+            <Class IRI="EnvironmentalGroup"/>
+            <Class IRI="TemporalGroup"/>
+        </ObjectUnionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KillChain"/>
+        <Class IRI="http://stix.mitre.org/STIX#KillChain"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="KillChainPhase"/>
+        <Class IRI="http://stix.mitre.org/STIX#KillChainPhase"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Attack"/>
+        <Class IRI="#Incident"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Attack"/>
+        <ObjectMinCardinality cardinality="1">
+            <ObjectProperty IRI="#hasConsequence"/>
+            <Class IRI="#Consequence"/>
+        </ObjectMinCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Attack"/>
+        <ObjectMinCardinality cardinality="1">
+            <ObjectProperty IRI="#hasMeans"/>
+            <Class IRI="#Means"/>
+        </ObjectMinCardinality>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Attacker"/>
+        <Class IRI="#ThreatActor"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Consequence"/>
+        <Class IRI="#Observable"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Means"/>
+        <Class IRI="#TTP"/>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Means"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="behaviour"/>
+            <ObjectUnionOf>
+                <Class IRI="AttackPattern"/>
+                <Class IRI="Exploit"/>
+                <Class IRI="Malware"/>
+            </ObjectUnionOf>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#Product"/>
+        <ObjectUnionOf>
+            <Class IRI="#Hardware"/>
+            <Class IRI="#Software"/>
+        </ObjectUnionOf>
+    </EquivalentClasses>
+    <EquivalentClasses>
+        <Class IRI="#RemoteAccess"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#PrivilegeEsc"/>
+        </ObjectSomeValuesFrom>
+    </EquivalentClasses>
+    <SubClassOf>
+        <Class IRI="http://capec.mitre.org/capec_v1#Indicator"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://capec.mitre.org/capec_v1#Observable"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://capec.mitre.org/capec_v1#Weakness"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class abbreviatedIRI="cbx:Observable"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="AttackPattern"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="BaseGroup"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="CCE"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="CVE"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="CVSSScoreType"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="ConfidenceType"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="EnvironmentalGroup"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Exploit"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Indicator"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KillChain"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="KillChainPhase"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Malware"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="OSVDB"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="StatementType"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="TemporalGroup"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Address"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#AtError"/>
+        <Class IRI="#LogicExploit"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Attack"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Attacker"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Backdoor"/>
+        <Class IRI="#MaliciousCodeExecution"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Backdoor"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#RemoteAccess"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BotnetAttack"/>
+        <Class IRI="#Consequence"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BoundaryCondition"/>
+        <Class IRI="#InputValidationError"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BufferOverFlow"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#BufferOverFlow"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#DenialOfService"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CWE"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Campaign"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Campaign"/>
+        <ObjectMinCardinality cardinality="1">
+            <ObjectProperty IRI="#usesAttacks"/>
+            <Class IRI="#Attack"/>
+        </ObjectMinCardinality>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ConfigurationError"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ConfigurationError"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#DenialOfService"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Consequence"/>
+        <Class IRI="#MeansOrConsequence"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CourseofAction"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DataCorruption"/>
+        <Class IRI="#LossOfIntegrity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DenialOfService"/>
+        <Class IRI="#Consequence"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DirectoryExposure"/>
+        <Class IRI="#LossOfConf"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DistributedCode"/>
+        <Class IRI="#MaliciousCodeExecution"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DistributedCode"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#BotnetAttack"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#DomainExpert"/>
+        <Class IRI="#Source"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ExICMPEchoReq"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ExIPPacketSize"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ExceptionCondition"/>
+        <Class IRI="#LogicExploit"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ExcessForks"/>
+        <Class IRI="#DenialOfService"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ExploitTarget"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#File"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Hardware"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IDPS"/>
+        <Class IRI="#Source"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IPAddress"/>
+        <Class IRI="#Address"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IPFrag"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IPFrag"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#DenialOfService"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IPv4Address"/>
+        <Class IRI="#IPAddress"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#IPv6Address"/>
+        <Class IRI="#IPAddress"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Incident"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InputValidationError"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#InputValidationError"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#LossOfConf"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#KernelModule"/>
+        <Class IRI="#Software"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Logic"/>
+        <Class IRI="#TriggeredCode"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LogicExploit"/>
+        <Class IRI="#Logic"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LossOfConf"/>
+        <Class IRI="#Consequence"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#LossOfIntegrity"/>
+        <Class IRI="#Consequence"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MACAddress"/>
+        <Class IRI="#Address"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MalformedInput"/>
+        <Class IRI="#InputValidationError"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MaliciousCodeExecution"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Means"/>
+        <Class IRI="#MeansOrConsequence"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Means"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#Consequence"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MeansOrConsequence"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MemoryConsumption"/>
+        <Class IRI="#DenialOfService"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#MitnickAttack"/>
+        <Class IRI="#Consequence"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NetFlood"/>
+        <Class IRI="#DenialOfService"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#NetworkState"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Observable"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OperatingSystem"/>
+        <Class IRI="#Software"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OtherTechnicalTerms"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ParisiticCode"/>
+        <Class IRI="#MaliciousCodeExecution"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ParisiticCode"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#LossOfIntegrity"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PingOfDeath"/>
+        <Class IRI="#DenialOfService"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PingScan"/>
+        <Class IRI="#Probe"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#PrivilegeEsc"/>
+        <Class IRI="#LossOfConf"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Probe"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Probe"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#DirectoryExposure"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Probe"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#MitnickAttack"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Process"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Product"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RSTProbe"/>
+        <Class IRI="#Probe"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RaceCondition"/>
+        <Class IRI="#LogicExploit"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#RemoteAccess"/>
+        <Class IRI="#Consequence"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Rootkit"/>
+        <Class IRI="#MaliciousCodeExecution"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Rootkit"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#DenialOfService"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Rootkit"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#LossOfConf"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SelfPropagatingCode"/>
+        <Class IRI="#MaliciousCodeExecution"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SelfPropagatingCode"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#LossOfConf"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SerialError"/>
+        <Class IRI="#LogicExploit"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Software"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Source"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SynFlood"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SynFlood"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#NetFlood"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SynScan"/>
+        <Class IRI="#Probe"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SysCrash"/>
+        <Class IRI="#DenialOfService"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#System"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TCPConnect"/>
+        <Class IRI="#Probe"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TCPPortScan"/>
+        <Class IRI="#Probe"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TCPPortScan"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#DirectoryExposure"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TTP"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ThreatActor"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Time"/>
+        <Class IRI="#TriggeredCode"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TriggeredCode"/>
+        <Class IRI="#MaliciousCodeExecution"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TriggeredCode"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#LossOfConf"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TriggeredCode"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#LossOfIntegrity"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Trojans"/>
+        <Class IRI="#MaliciousCodeExecution"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Trojans"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#LossOfConf"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Trojans"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#RemoteAccess"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UnauthRoot"/>
+        <Class IRI="#PrivilegeEsc"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UnauthUser"/>
+        <Class IRI="#PrivilegeEsc"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UserEnumeration"/>
+        <Class IRI="#Means"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#UserEnumeration"/>
+        <ObjectSomeValuesFrom>
+            <ObjectProperty IRI="#resultsIn"/>
+            <Class IRI="#PrivilegeEsc"/>
+        </ObjectSomeValuesFrom>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Virus"/>
+        <Class IRI="#SelfPropagatingCode"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Vulnerability"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Web"/>
+        <Class IRI="#Source"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#WebBrowser"/>
+        <Class IRI="#Software"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#Worm"/>
+        <Class IRI="#SelfPropagatingCode"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#rstProbe"/>
+        <Class IRI="#Probe"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://stix.mitre.org/STIX#KillChain"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="http://stix.mitre.org/STIX#KillChainPhase"/>
+        <Class IRI="#UCOThing"/>
+    </SubClassOf>
+    <EquivalentObjectProperties>
+        <ObjectProperty IRI="hasAffectedSoftware"/>
+        <ObjectProperty IRI="hasObservable"/>
+    </EquivalentObjectProperties>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasAttacker"/>
+        <ObjectProperty IRI="#hasMeans"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasCost"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasObservedMeans"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasRequestedCOA"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasTakenCOA"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="hasWeakness"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasIPAddress"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasIPv4Address"/>
+        <ObjectProperty IRI="#hasIPAddress"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasIPv6Address"/>
+        <ObjectProperty IRI="#hasIPAddress"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasInformationSource"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="#hasMACAddress"/>
+        <ObjectProperty abbreviatedIRI="owl:topObjectProperty"/>
+    </SubObjectPropertyOf>
+    <InverseObjectProperties>
+        <ObjectProperty IRI="#isResultOf"/>
+        <ObjectProperty IRI="#resultsIn"/>
+    </InverseObjectProperties>
+    <FunctionalObjectProperty>
+        <ObjectProperty IRI="#hasTerms"/>
+    </FunctionalObjectProperty>
+    <SymmetricObjectProperty>
+        <ObjectProperty IRI="#connectedTo"/>
+    </SymmetricObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#connectedTo"/>
+    </IrreflexiveObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#isResultOf"/>
+    </IrreflexiveObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#isUnderAttack"/>
+    </IrreflexiveObjectProperty>
+    <IrreflexiveObjectProperty>
+        <ObjectProperty IRI="#resultsIn"/>
+    </IrreflexiveObjectProperty>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="behaviour"/>
+        <Class IRI="#TTP"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasAssociatedCampaign"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasAssociatedCampaign"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasAttacker"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasCOAType"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasCVE_ID"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasCVSSScore"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasCampaign"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasConfidenceValue"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasConfidenceValue"/>
+        <Class IRI="StatementType"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasConfidenceValue"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasConfidenceValue"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasConfidenceValue"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasConfiguration"/>
+        <Class IRI="#ExploitTarget"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasCost"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasEfficacy"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasImpact"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasImpact"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasIncident"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasIndicator"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasIndicator"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasIntendedEffect"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasIntendedEffect"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasIntendedEffect"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasKernel"/>
+        <Class IRI="#OperatingSystem"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasKillChain"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasKillChainPhase"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasKillChainPhase"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasMotivation"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasOSVDB"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasObservable"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasObservable"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasObservable"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasObservedMeans"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasParameterObservables"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasRelatedCOA"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasRelatedIncident"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasRelatedIndicator"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasRelatedMeans"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasRequestedCOA"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasSoftware"/>
+        <Class IRI="#Observable"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasSophistication"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasStage"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasStatus"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasSuggestedCOA"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasTakenCOA"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasType"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasWeakness"/>
+        <Class IRI="#ExploitTarget"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#affectsProduct"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#associatedCampaigns"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#connectedTo"/>
+        <Class IRI="#System"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#exploitsVulnerability"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasConsequence"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasIPAddress"/>
+        <Class IRI="#System"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMeans"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMeans"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMeans"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMeans"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasMitigation"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasProduct"/>
+        <Class IRI="#System"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasSource"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasSource"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasTerms"/>
+        <Class IRI="#Web"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasVulnerability"/>
+        <Class IRI="#ExploitTarget"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasVulnerability"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasVulnerability"/>
+        <Class IRI="#Product"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isLaunchedBy"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isLaunchedBy"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isResultOf"/>
+        <Class IRI="#Consequence"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#isUnderAttack"/>
+        <Class IRI="#System"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#resultsIn"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#usesAttacks"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="behaviour"/>
+        <ObjectUnionOf>
+            <Class IRI="AttackPattern"/>
+            <Class IRI="Exploit"/>
+            <Class IRI="Malware"/>
+        </ObjectUnionOf>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasAssociatedCampaign"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasAttacker"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasCVE_ID"/>
+        <Class IRI="CVE"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasCVSSScore"/>
+        <Class IRI="CVSSScoreType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasCampaign"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasConfidenceValue"/>
+        <Class IRI="ConfidenceType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasConfiguration"/>
+        <Class IRI="CCE"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasCost"/>
+        <Class IRI="StatementType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasEfficacy"/>
+        <Class IRI="StatementType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasImpact"/>
+        <Class IRI="StatementType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasIncident"/>
+        <Class IRI="#Incident"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasIndicator"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasIntendedEffect"/>
+        <Class IRI="StatementType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasKernel"/>
+        <Class IRI="#KernelModule"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasKillChain"/>
+        <Class IRI="http://stix.mitre.org/STIX#KillChain"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasKillChainPhase"/>
+        <Class IRI="KillChainPhase"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasMotivation"/>
+        <Class IRI="StatementType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasOSVDB"/>
+        <Class IRI="OSVDB"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasObservable"/>
+        <Class IRI="#Observable"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasObservedMeans"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasParameterObservables"/>
+        <Class IRI="#Consequence"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasRelatedCOA"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasRelatedIncident"/>
+        <Class IRI="#Incident"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasRelatedIndicator"/>
+        <Class IRI="Indicator"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasRelatedMeans"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasRequestedCOA"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasSoftware"/>
+        <Class IRI="#Software"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasSophistication"/>
+        <Class IRI="StatementType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasStage"/>
+        <ObjectOneOf>
+            <NamedIndividual IRI="Response"/>
+            <NamedIndividual IRI="Remedy"/>
+        </ObjectOneOf>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasSuggestedCOA"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasTakenCOA"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasType"/>
+        <Class IRI="StatementType"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasWeakness"/>
+        <Class IRI="#CWE"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#affectsProduct"/>
+        <Class IRI="#Product"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#associatedCampaigns"/>
+        <Class IRI="#Campaign"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#connectedTo"/>
+        <Class IRI="#System"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#exploitsVulnerability"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasConsequence"/>
+        <Class IRI="#Consequence"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasIPAddress"/>
+        <Class IRI="#IPAddress"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasMeans"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasMitigation"/>
+        <Class IRI="#CourseofAction"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasProduct"/>
+        <Class IRI="#Product"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasSource"/>
+        <Class IRI="#Source"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasTerms"/>
+        <Class IRI="#OtherTechnicalTerms"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasVulnerability"/>
+        <Class IRI="#Vulnerability"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isLaunchedBy"/>
+        <Class IRI="#Attacker"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isResultOf"/>
+        <Class IRI="#Means"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isUnderAttack"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#isUnderAttack"/>
+        <Class IRI="#Consequence"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#resultsIn"/>
+        <Class IRI="#Consequence"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#usesAttacks"/>
+        <Class IRI="#Attack"/>
+    </ObjectPropertyRange>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#generated-on-datetime"/>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasAccessComplexity"/>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasAccessVector"/>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasAuthentication"/>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasAvailabilityImpact"/>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasConfidentialityImpact"/>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasIntegrityImpact"/>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#hasSource"/>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </SubDataPropertyOf>
+    <SubDataPropertyOf>
+        <DataProperty IRI="#score"/>
+        <DataProperty IRI="#hasSeverityScore"/>
+    </SubDataPropertyOf>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#hasMACAddress"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="discoveryTime"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="hasTime"/>
+        <Class IRI="#Attack"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="hasTitle"/>
+        <Class IRI="Indicator"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="hasTitle"/>
+        <Class IRI="#Attacker"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="hasTitle"/>
+        <Class IRI="#Campaign"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="hasTitle"/>
+        <Class IRI="#Consequence"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="hasTitle"/>
+        <Class IRI="#CourseofAction"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="hasTitle"/>
+        <Class IRI="#Means"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="hasTitle"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#anomolousDataOutFlow"/>
+        <Class IRI="#NetworkState"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#chgGid"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#chgPPid"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#chgSUid"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#chgUid"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#commonConsequences"/>
+        <Class IRI="#CWE"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#cweExtendedSummary"/>
+        <Class IRI="#CWE"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#cweID"/>
+        <Class IRI="#CWE"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#cweName"/>
+        <Class IRI="#CWE"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#cweSummary"/>
+        <Class IRI="#CWE"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#dataSize"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#description"/>
+        <Class IRI="#CWE"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#generated-on-datetime"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasAccessComplexity"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasAccessVector"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasAuthentication"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasAvailabilityImpact"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasCodeSize"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasConfidentialityImpact"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasDataSize"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasIntegrityImpact"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasLibSize"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasMACAddress"/>
+        <Class IRI="#System"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasVendor"/>
+        <Class IRI="#Product"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#hasVulnerabilityTerm"/>
+        <Class IRI="#Web"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isNew"/>
+        <Class IRI="#Hardware"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isNew"/>
+        <Class IRI="#KernelModule"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#lastModifiedDateTime"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#newDestIP"/>
+        <Class IRI="#NetworkState"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#newPortsOpened"/>
+        <Class IRI="#NetworkState"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#numChildProcesses"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#numOpenFiles"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#numProcessesRunning"/>
+        <Class IRI="#System"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#opensPort"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#publishedDateTime"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#score"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#selfDist"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#showsInfectionSigns"/>
+        <Class IRI="#Process"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#summary"/>
+        <Class IRI="#Vulnerability"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#timeOfIntroduction"/>
+        <Class IRI="#CWE"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="discoveryTime"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="hasConfidenceValue"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="hasTime"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="hasTitle"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#anomolousDataOutFlow"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#chgGid"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#chgPPid"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#chgSUid"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#chgUid"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#dataSize"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#description"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasAccessComplexity"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasAccessVector"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasCodeSize"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasDataSize"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasLibSize"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasMACAddress"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasVendor"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#hasVulnerabilityTerm"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#isNew"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#lastModifiedDateTime"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#newDestIP"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#newPortsOpened"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#numChildProcesses"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#numOpenFiles"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#numProcessesRunning"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#opensPort"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#publishedDateTime"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#score"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#selfDist"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#showsInfectionSigns"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#summary"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#timeOfIntroduction"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>CVE</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">The details of the CVE class are in another ontology yet to be imported.
+CVE is not equal to Vulnerability because Vulnerability also refers to OSVDB_ID</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>hasAffectedSoftware</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">The Affected_Software field captures the list of platforms and software that are affected by this vulnerability. It is implemented through the CybOX Observables, the suggested CybOX objects to use are the Product Object, the Device Object, the System Object, and the Code Object.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>hasAffectedSoftware</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">http://stixproject.github.io/data-model/1.2/et/VulnerabilityType/</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>hasStage</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">hasStage is used to denote stage/phase of a particular course of action represented as nominals</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <Annotation>
+            <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+            <Literal datatypeIRI="&rdf;PlainLiteral">An attack (noun) is the use of an exploit(s) by an adversary to take advantage of a weakness(s) with the intent of achieving a negative technical impact(s).
+
+Source: https://capec.mitre.org/about/glossary.html#Attack
+
+From the bove definition, &quot;the use of an exploit(s)&quot; is means, &quot;an adversary&quot; is attacker, and &quot;to take advantage of... with the intent of achieving a negative technical impact(s)&quot; is consequence.</Literal>
+        </Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Attack</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">An attack (noun) is the use of an exploit(s) by an adversary to take advantage of a weakness(s) with the intent of achieving a negative technical impact(s).
+
+Source: https://capec.mitre.org/about/glossary.html#Attack
+
+From the bove definition, &quot;the use of an exploit(s)&quot; is means, &quot;an adversary&quot; is attacker, and &quot;negative technical impact(s)&quot; is consequence.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Attacker</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">EquivalentClass: ThreatActor
+ThreatActors are characterizations of malicious actors (or adversaries) representing a cyber attack threat including presumed intent and historically observed behavior.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#BotnetAttack</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Botnet</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#BoundaryCondition</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Off-by-one_error</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#BufferOverFlow</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Buffer_overflow</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Campaign</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Campaigns are instances of ThreatActors pursuing an intent, as observed through sets of Incidents and/or TTP, potentially across organizations.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#CourseofAction</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">CoursesOfAction are specific measures to be taken to address threat whether they are corrective or preventative to address ExploitTargets, or responsive to counter or mitigate the potential impacts of Incidents.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#DenialOfService</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Denial-of-service_attack</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#ExceptionCondition</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Exception_handling</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#ExploitTarget</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">ExploitTargets are vulnerabilities or weaknesses in software, systems, networks or configurations that are targeted for exploitation by the TTP of a ThreatActor.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#File</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">A computer file is a resource for storing information, which is available to a computer program and is usually based on some kind of durable storage. A file is &quot;durable&quot; in the sense that it remains available for other programs to use after the program that created it has finished executing. Computer files can be considered as the modern counterpart of paper documents which traditionally are kept in office and library files, and this is the source of the term.
+
+http://dbpedia.org/page/Computer_file</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#Hardware</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Computer_hardware</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#IPAddress</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/IP_address</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#IPFrag</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/IP_fragmentation_attacks</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Incident</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Incidents are discrete instances of Indicators affecting an organization along with information discovered or decided during an incident response investigation.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#KernelModule</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Loadable_kernel_module</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#MalformedInput</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://sw.opencyc.org/concept/Mx4rwQShKJwpEbGdrcN5Y29ycA</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#MaliciousCodeExecution</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Arbitrary_code_execution</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#MitnickAttack</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/The_Art_of_Intrusion</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#NetFlood</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/describe/?url=http%3A%2F%2Fsw.opencyc.org%2F2008%2F06%2F10%2Fconcept%2Fen%2FTribeFloodNet_DenialOfServiceProgram&amp;sid=7707</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#Observable</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Observables are the “base” construct within the STIX architecture. Observables are stateful properties or measurable events pertinent to the operation of computers and networks. Information about a file (name, hash, size, etc.), a registry key value, a service being started, or an HTTP request being sent are all simple examples of observables. STIX leverages CybOX for its representation of Observables.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#OperatingSystem</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/ontology/operatingSystem</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#PingOfDeath</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Ping_of_death</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#Process</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Category:Process_(computing)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#RaceCondition</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Race_condition</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#RemoteAccess</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://en.wikipedia.org/wiki/Remote_Access_Trojans_(RATs)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#Rootkit</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Rootkit</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#Software</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/ontology/Software</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#SysCrash</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Fatal_system_error</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#System</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Computer</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#TTP</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Tactics, Techniques and Procedures (TTP) are representations of the behavior or modus operandi of cyber adversaries.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>#ThreatActor</IRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">ThreatActors are characterizations of malicious actors (or adversaries) representing a cyber attack threat including presumed intent and historically observed behavior.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#Virus</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Computer_virus</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#Vulnerability</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Vulnerability_(computing)</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#WebBrowser</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/class/yago/WebBrowser</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:seeAlso"/>
+        <IRI>#Worm</IRI>
+        <Literal datatypeIRI="&xsd;anyURI">http://dbpedia.org/resource/Computer_worm</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <AbbreviatedIRI>xsd:string</AbbreviatedIRI>
+        <Literal datatypeIRI="&rdf;PlainLiteral">Campaigns are instances of ThreatActors pursuing an intent, as observed through sets of Incidents and/or TTP, potentially across organizations.</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 3.4.2) http://owlapi.sourceforge.net -->
+
