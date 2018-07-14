@@ -1,0 +1,1461 @@
+@prefix : <http://purl.org/cyber/uco#> .
+@prefix cap: <http://capec.mitre.org/capec_v1#> .
+@prefix cbx: <http://cybox.mitre.org/cybox_v1#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix stx: <http://purl.org/stix/> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://purl.org/cyber/uco> .
+
+<http://purl.org/cyber/uco> rdf:type owl:Ontology ;
+                             owl:versionIRI <http://purl.org/cyber/uco> .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#string
+xsd:string rdfs:comment "Campaigns are instances of ThreatActors pursuing an intent, as observed through sets of Incidents and/or TTP, potentially across organizations." .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/cyber/ucoaffectsProduct
+<http://purl.org/cyber/ucoaffectsProduct> rdf:type owl:ObjectProperty ;
+                                          rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                          rdfs:range <http://purl.org/cyber/ucoProduct> .
+
+
+###  http://purl.org/cyber/ucoassociatedCampaigns
+<http://purl.org/cyber/ucoassociatedCampaigns> rdf:type owl:ObjectProperty ;
+                                               rdfs:domain <http://purl.org/cyber/ucoCampaign> ;
+                                               rdfs:range <http://purl.org/cyber/ucoCampaign> .
+
+
+###  http://purl.org/cyber/ucobehaviour
+<http://purl.org/cyber/ucobehaviour> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoTTP> ;
+                                     rdfs:range [ rdf:type owl:Class ;
+                                                  owl:unionOf ( <http://purl.org/cyber/ucoAttackPattern>
+                                                                <http://purl.org/cyber/ucoExploit>
+                                                                <http://purl.org/cyber/ucoMalware>
+                                                              )
+                                                ] .
+
+
+###  http://purl.org/cyber/ucoconnectedTo
+<http://purl.org/cyber/ucoconnectedTo> rdf:type owl:ObjectProperty ,
+                                                owl:SymmetricProperty ,
+                                                owl:IrreflexiveProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoSystem> ;
+                                       rdfs:range <http://purl.org/cyber/ucoSystem> .
+
+
+###  http://purl.org/cyber/ucoexploitsVulnerability
+<http://purl.org/cyber/ucoexploitsVulnerability> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <http://purl.org/cyber/ucoMeans> ;
+                                                 rdfs:range <http://purl.org/cyber/ucoVulnerability> .
+
+
+###  http://purl.org/cyber/ucohasAffectedSoftware
+<http://purl.org/cyber/ucohasAffectedSoftware> rdf:type owl:ObjectProperty ;
+                                               owl:equivalentProperty <http://purl.org/cyber/ucohasObservable> ;
+                                               rdfs:comment "The Affected_Software field captures the list of platforms and software that are affected by this vulnerability. It is implemented through the CybOX Observables, the suggested CybOX objects to use are the Product Object, the Device Object, the System Object, and the Code Object." ;
+                                               rdfs:seeAlso "http://stixproject.github.io/data-model/1.2/et/VulnerabilityType/" .
+
+
+###  http://purl.org/cyber/ucohasAssociatedCampaign
+<http://purl.org/cyber/ucohasAssociatedCampaign> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <http://purl.org/cyber/ucoAttacker> ,
+                                                             <http://purl.org/cyber/ucoCampaign> ;
+                                                 rdfs:range <http://purl.org/cyber/ucoCampaign> .
+
+
+###  http://purl.org/cyber/ucohasAttacker
+<http://purl.org/cyber/ucohasAttacker> rdf:type owl:ObjectProperty ;
+                                       rdfs:subPropertyOf <http://purl.org/cyber/ucohasMeans> ;
+                                       rdfs:domain <http://purl.org/cyber/ucoAttack> ;
+                                       rdfs:range <http://purl.org/cyber/ucoAttacker> .
+
+
+###  http://purl.org/cyber/ucohasCOAType
+<http://purl.org/cyber/ucohasCOAType> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain <http://purl.org/cyber/ucoCourseofAction> .
+
+
+###  http://purl.org/cyber/ucohasCVE_ID
+<http://purl.org/cyber/ucohasCVE_ID> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                     rdfs:range <http://purl.org/cyber/ucoCVE> .
+
+
+###  http://purl.org/cyber/ucohasCVSSScore
+<http://purl.org/cyber/ucohasCVSSScore> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                        rdfs:range <http://purl.org/cyber/ucoCVSSScoreType> .
+
+
+###  http://purl.org/cyber/ucohasCampaign
+<http://purl.org/cyber/ucohasCampaign> rdf:type owl:ObjectProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoIndicator> ;
+                                       rdfs:range <http://purl.org/cyber/ucoCampaign> .
+
+
+###  http://purl.org/cyber/ucohasConfidenceValue
+<http://purl.org/cyber/ucohasConfidenceValue> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain <http://purl.org/cyber/ucoAttack> ,
+                                                          <http://purl.org/cyber/ucoAttacker> ,
+                                                          <http://purl.org/cyber/ucoCampaign> ,
+                                                          <http://purl.org/cyber/ucoIndicator> ,
+                                                          <http://purl.org/cyber/ucoStatementType> ;
+                                              rdfs:range <http://purl.org/cyber/ucoConfidenceType> .
+
+
+###  http://purl.org/cyber/ucohasConfiguration
+<http://purl.org/cyber/ucohasConfiguration> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <http://purl.org/cyber/ucoExploitTarget> ;
+                                            rdfs:range <http://purl.org/cyber/ucoCCE> .
+
+
+###  http://purl.org/cyber/ucohasConsequence
+<http://purl.org/cyber/ucohasConsequence> rdf:type owl:ObjectProperty ;
+                                          rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                          rdfs:range <http://purl.org/cyber/ucoConsequence> .
+
+
+###  http://purl.org/cyber/ucohasCost
+<http://purl.org/cyber/ucohasCost> rdf:type owl:ObjectProperty ;
+                                   rdfs:subPropertyOf owl:topObjectProperty ;
+                                   rdfs:domain <http://purl.org/cyber/ucoCourseofAction> ;
+                                   rdfs:range <http://purl.org/cyber/ucoStatementType> .
+
+
+###  http://purl.org/cyber/ucohasEfficacy
+<http://purl.org/cyber/ucohasEfficacy> rdf:type owl:ObjectProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoCourseofAction> ;
+                                       rdfs:range <http://purl.org/cyber/ucoStatementType> .
+
+
+###  http://purl.org/cyber/ucohasIPAddress
+<http://purl.org/cyber/ucohasIPAddress> rdf:type owl:ObjectProperty ;
+                                        rdfs:subPropertyOf owl:topObjectProperty ;
+                                        rdfs:domain <http://purl.org/cyber/ucoSystem> ;
+                                        rdfs:range <http://purl.org/cyber/ucoIPAddress> .
+
+
+###  http://purl.org/cyber/ucohasIPv4Address
+<http://purl.org/cyber/ucohasIPv4Address> rdf:type owl:ObjectProperty ;
+                                          rdfs:subPropertyOf <http://purl.org/cyber/ucohasIPAddress> .
+
+
+###  http://purl.org/cyber/ucohasIPv6Address
+<http://purl.org/cyber/ucohasIPv6Address> rdf:type owl:ObjectProperty ;
+                                          rdfs:subPropertyOf <http://purl.org/cyber/ucohasIPAddress> .
+
+
+###  http://purl.org/cyber/ucohasImpact
+<http://purl.org/cyber/ucohasImpact> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoCourseofAction> ,
+                                                 <http://purl.org/cyber/ucoIndicator> ;
+                                     rdfs:range <http://purl.org/cyber/ucoStatementType> .
+
+
+###  http://purl.org/cyber/ucohasIncident
+<http://purl.org/cyber/ucohasIncident> rdf:type owl:ObjectProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoCampaign> ;
+                                       rdfs:range <http://purl.org/cyber/ucoIncident> .
+
+
+###  http://purl.org/cyber/ucohasIndicator
+<http://purl.org/cyber/ucohasIndicator> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <http://purl.org/cyber/ucoAttack> ,
+                                                    <http://purl.org/cyber/ucoCampaign> ;
+                                        rdfs:range <http://purl.org/cyber/ucoIndicator> .
+
+
+###  http://purl.org/cyber/ucohasInformationSource
+<http://purl.org/cyber/ucohasInformationSource> rdf:type owl:ObjectProperty ;
+                                                rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://purl.org/cyber/ucohasIntendedEffect
+<http://purl.org/cyber/ucohasIntendedEffect> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://purl.org/cyber/ucoAttacker> ,
+                                                         <http://purl.org/cyber/ucoCampaign> ,
+                                                         <http://purl.org/cyber/ucoMeans> ;
+                                             rdfs:range <http://purl.org/cyber/ucoStatementType> .
+
+
+###  http://purl.org/cyber/ucohasKernel
+<http://purl.org/cyber/ucohasKernel> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoOperatingSystem> ;
+                                     rdfs:range <http://purl.org/cyber/ucoKernelModule> .
+
+
+###  http://purl.org/cyber/ucohasKillChain
+<http://purl.org/cyber/ucohasKillChain> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <http://purl.org/cyber/ucoMeans> ;
+                                        rdfs:range stx:KillChain .
+
+
+###  http://purl.org/cyber/ucohasKillChainPhase
+<http://purl.org/cyber/ucohasKillChainPhase> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://purl.org/cyber/ucoIndicator> ,
+                                                         <http://purl.org/cyber/ucoMeans> ;
+                                             rdfs:range <http://purl.org/cyber/ucoKillChainPhase> .
+
+
+###  http://purl.org/cyber/ucohasMACAddress
+<http://purl.org/cyber/ucohasMACAddress> rdf:type owl:ObjectProperty ;
+                                         rdfs:subPropertyOf owl:topObjectProperty ;
+                                         rdf:type owl:FunctionalProperty ;
+                                         rdfs:domain <http://purl.org/cyber/ucoSystem> .
+
+
+###  http://purl.org/cyber/ucohasMeans
+<http://purl.org/cyber/ucohasMeans> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://purl.org/cyber/ucoAttack> ,
+                                                <http://purl.org/cyber/ucoCampaign> ,
+                                                <http://purl.org/cyber/ucoIndicator> ,
+                                                <http://purl.org/cyber/ucoVulnerability> ;
+                                    rdfs:range <http://purl.org/cyber/ucoMeans> .
+
+
+###  http://purl.org/cyber/ucohasMitigation
+<http://purl.org/cyber/ucohasMitigation> rdf:type owl:ObjectProperty ;
+                                         rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                         rdfs:range <http://purl.org/cyber/ucoCourseofAction> .
+
+
+###  http://purl.org/cyber/ucohasMotivation
+<http://purl.org/cyber/ucohasMotivation> rdf:type owl:ObjectProperty ;
+                                         rdfs:domain <http://purl.org/cyber/ucoAttacker> ;
+                                         rdfs:range <http://purl.org/cyber/ucoStatementType> .
+
+
+###  http://purl.org/cyber/ucohasOSVDB
+<http://purl.org/cyber/ucohasOSVDB> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                    rdfs:range <http://purl.org/cyber/ucoOSVDB> .
+
+
+###  http://purl.org/cyber/ucohasObservable
+<http://purl.org/cyber/ucohasObservable> rdf:type owl:ObjectProperty ;
+                                         rdfs:domain <http://purl.org/cyber/ucoAttack> ,
+                                                     <http://purl.org/cyber/ucoIndicator> ,
+                                                     <http://purl.org/cyber/ucoVulnerability> ;
+                                         rdfs:range <http://purl.org/cyber/ucoObservable> .
+
+
+###  http://purl.org/cyber/ucohasObservedMeans
+<http://purl.org/cyber/ucohasObservedMeans> rdf:type owl:ObjectProperty ;
+                                            rdfs:subPropertyOf owl:topObjectProperty ;
+                                            rdfs:domain <http://purl.org/cyber/ucoAttacker> ;
+                                            rdfs:range <http://purl.org/cyber/ucoMeans> .
+
+
+###  http://purl.org/cyber/ucohasParameterObservables
+<http://purl.org/cyber/ucohasParameterObservables> rdf:type owl:ObjectProperty ;
+                                                   rdfs:domain <http://purl.org/cyber/ucoCourseofAction> ;
+                                                   rdfs:range <http://purl.org/cyber/ucoConsequence> .
+
+
+###  http://purl.org/cyber/ucohasProduct
+<http://purl.org/cyber/ucohasProduct> rdf:type owl:ObjectProperty ;
+                                      rdfs:domain <http://purl.org/cyber/ucoSystem> ;
+                                      rdfs:range <http://purl.org/cyber/ucoProduct> .
+
+
+###  http://purl.org/cyber/ucohasRelatedCOA
+<http://purl.org/cyber/ucohasRelatedCOA> rdf:type owl:ObjectProperty ;
+                                         rdfs:domain <http://purl.org/cyber/ucoCourseofAction> ;
+                                         rdfs:range <http://purl.org/cyber/ucoCourseofAction> .
+
+
+###  http://purl.org/cyber/ucohasRelatedIncident
+<http://purl.org/cyber/ucohasRelatedIncident> rdf:type owl:ObjectProperty ;
+                                              rdfs:domain <http://purl.org/cyber/ucoAttacker> ;
+                                              rdfs:range <http://purl.org/cyber/ucoIncident> .
+
+
+###  http://purl.org/cyber/ucohasRelatedIndicator
+<http://purl.org/cyber/ucohasRelatedIndicator> rdf:type owl:ObjectProperty ;
+                                               rdfs:domain <http://purl.org/cyber/ucoIndicator> ;
+                                               rdfs:range <http://purl.org/cyber/ucoIndicator> .
+
+
+###  http://purl.org/cyber/ucohasRelatedMeans
+<http://purl.org/cyber/ucohasRelatedMeans> rdf:type owl:ObjectProperty ;
+                                           rdfs:domain <http://purl.org/cyber/ucoMeans> ;
+                                           rdfs:range <http://purl.org/cyber/ucoMeans> .
+
+
+###  http://purl.org/cyber/ucohasRequestedCOA
+<http://purl.org/cyber/ucohasRequestedCOA> rdf:type owl:ObjectProperty ;
+                                           rdfs:subPropertyOf owl:topObjectProperty ;
+                                           rdfs:domain <http://purl.org/cyber/ucoAttack> ;
+                                           rdfs:range <http://purl.org/cyber/ucoCourseofAction> .
+
+
+###  http://purl.org/cyber/ucohasSoftware
+<http://purl.org/cyber/ucohasSoftware> rdf:type owl:ObjectProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoObservable> ;
+                                       rdfs:range <http://purl.org/cyber/ucoSoftware> .
+
+
+###  http://purl.org/cyber/ucohasSophistication
+<http://purl.org/cyber/ucohasSophistication> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://purl.org/cyber/ucoAttacker> ;
+                                             rdfs:range <http://purl.org/cyber/ucoStatementType> .
+
+
+###  http://purl.org/cyber/ucohasSource
+<http://purl.org/cyber/ucohasSource> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoAttack> ,
+                                                 <http://purl.org/cyber/ucoVulnerability> ;
+                                     rdfs:range <http://purl.org/cyber/ucoSource> .
+
+
+###  http://purl.org/cyber/ucohasStage
+<http://purl.org/cyber/ucohasStage> rdf:type owl:ObjectProperty ;
+                                    rdfs:domain <http://purl.org/cyber/ucoCourseofAction> ;
+                                    rdfs:range [ rdf:type owl:Class ;
+                                                 owl:oneOf ( <http://purl.org/cyber/ucoRemedy>
+                                                             <http://purl.org/cyber/ucoResponse>
+                                                           )
+                                               ] ;
+                                    rdfs:comment "hasStage is used to denote stage/phase of a particular course of action represented as nominals" .
+
+
+###  http://purl.org/cyber/ucohasStatus
+<http://purl.org/cyber/ucohasStatus> rdf:type owl:ObjectProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoCampaign> .
+
+
+###  http://purl.org/cyber/ucohasSuggestedCOA
+<http://purl.org/cyber/ucohasSuggestedCOA> rdf:type owl:ObjectProperty ;
+                                           rdfs:domain <http://purl.org/cyber/ucoIndicator> ;
+                                           rdfs:range <http://purl.org/cyber/ucoCourseofAction> .
+
+
+###  http://purl.org/cyber/ucohasTakenCOA
+<http://purl.org/cyber/ucohasTakenCOA> rdf:type owl:ObjectProperty ;
+                                       rdfs:subPropertyOf owl:topObjectProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoAttack> ;
+                                       rdfs:range <http://purl.org/cyber/ucoCourseofAction> .
+
+
+###  http://purl.org/cyber/ucohasTerms
+<http://purl.org/cyber/ucohasTerms> rdf:type owl:ObjectProperty ,
+                                             owl:FunctionalProperty ;
+                                    rdfs:domain <http://purl.org/cyber/ucoWeb> ;
+                                    rdfs:range <http://purl.org/cyber/ucoOtherTechnicalTerms> .
+
+
+###  http://purl.org/cyber/ucohasType
+<http://purl.org/cyber/ucohasType> rdf:type owl:ObjectProperty ;
+                                   rdfs:domain <http://purl.org/cyber/ucoAttacker> ;
+                                   rdfs:range <http://purl.org/cyber/ucoStatementType> .
+
+
+###  http://purl.org/cyber/ucohasVulnerability
+<http://purl.org/cyber/ucohasVulnerability> rdf:type owl:ObjectProperty ;
+                                            rdfs:domain <http://purl.org/cyber/ucoExploitTarget> ,
+                                                        <http://purl.org/cyber/ucoMeans> ,
+                                                        <http://purl.org/cyber/ucoProduct> ;
+                                            rdfs:range <http://purl.org/cyber/ucoVulnerability> .
+
+
+###  http://purl.org/cyber/ucohasWeakness
+<http://purl.org/cyber/ucohasWeakness> rdf:type owl:ObjectProperty ;
+                                       rdfs:subPropertyOf owl:topObjectProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoExploitTarget> ;
+                                       rdfs:range <http://purl.org/cyber/ucoCWE> .
+
+
+###  http://purl.org/cyber/ucoisLaunchedBy
+<http://purl.org/cyber/ucoisLaunchedBy> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <http://purl.org/cyber/ucoAttack> ,
+                                                    <http://purl.org/cyber/ucoCampaign> ;
+                                        rdfs:range <http://purl.org/cyber/ucoAttacker> .
+
+
+###  http://purl.org/cyber/ucoisResultOf
+<http://purl.org/cyber/ucoisResultOf> rdf:type owl:ObjectProperty ;
+                                      owl:inverseOf <http://purl.org/cyber/ucoresultsIn> ;
+                                      rdf:type owl:IrreflexiveProperty ;
+                                      rdfs:domain <http://purl.org/cyber/ucoConsequence> ;
+                                      rdfs:range <http://purl.org/cyber/ucoMeans> .
+
+
+###  http://purl.org/cyber/ucoisUnderAttack
+<http://purl.org/cyber/ucoisUnderAttack> rdf:type owl:ObjectProperty ,
+                                                  owl:IrreflexiveProperty ;
+                                         rdfs:domain <http://purl.org/cyber/ucoSystem> ;
+                                         rdfs:range <http://purl.org/cyber/ucoAttack> ,
+                                                    <http://purl.org/cyber/ucoConsequence> .
+
+
+###  http://purl.org/cyber/ucoresultsIn
+<http://purl.org/cyber/ucoresultsIn> rdf:type owl:ObjectProperty ,
+                                              owl:IrreflexiveProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoMeans> ;
+                                     rdfs:range <http://purl.org/cyber/ucoConsequence> .
+
+
+###  http://purl.org/cyber/ucousesAttacks
+<http://purl.org/cyber/ucousesAttacks> rdf:type owl:ObjectProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoCampaign> ;
+                                       rdfs:range <http://purl.org/cyber/ucoAttack> .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/cyber/ucoanomolousDataOutFlow
+<http://purl.org/cyber/ucoanomolousDataOutFlow> rdf:type owl:DatatypeProperty ;
+                                                rdfs:domain <http://purl.org/cyber/ucoNetworkState> ;
+                                                rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/ucochgGid
+<http://purl.org/cyber/ucochgGid> rdf:type owl:DatatypeProperty ;
+                                  rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                  rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/ucochgPPid
+<http://purl.org/cyber/ucochgPPid> rdf:type owl:DatatypeProperty ;
+                                   rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                   rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/ucochgSUid
+<http://purl.org/cyber/ucochgSUid> rdf:type owl:DatatypeProperty ;
+                                   rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                   rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/ucochgUid
+<http://purl.org/cyber/ucochgUid> rdf:type owl:DatatypeProperty ;
+                                  rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                  rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/ucocommonConsequences
+<http://purl.org/cyber/ucocommonConsequences> rdf:type owl:DatatypeProperty ;
+                                              rdfs:domain <http://purl.org/cyber/ucoCWE> .
+
+
+###  http://purl.org/cyber/ucocweExtendedSummary
+<http://purl.org/cyber/ucocweExtendedSummary> rdf:type owl:DatatypeProperty ;
+                                              rdfs:domain <http://purl.org/cyber/ucoCWE> .
+
+
+###  http://purl.org/cyber/ucocweID
+<http://purl.org/cyber/ucocweID> rdf:type owl:DatatypeProperty ;
+                                 rdfs:domain <http://purl.org/cyber/ucoCWE> .
+
+
+###  http://purl.org/cyber/ucocweName
+<http://purl.org/cyber/ucocweName> rdf:type owl:DatatypeProperty ;
+                                   rdfs:domain <http://purl.org/cyber/ucoCWE> .
+
+
+###  http://purl.org/cyber/ucocweSummary
+<http://purl.org/cyber/ucocweSummary> rdf:type owl:DatatypeProperty ;
+                                      rdfs:domain <http://purl.org/cyber/ucoCWE> .
+
+
+###  http://purl.org/cyber/ucodataSize
+<http://purl.org/cyber/ucodataSize> rdf:type owl:DatatypeProperty ;
+                                    rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                    rdfs:range xsd:integer .
+
+
+###  http://purl.org/cyber/ucodescription
+<http://purl.org/cyber/ucodescription> rdf:type owl:DatatypeProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoCWE> ;
+                                       rdfs:range xsd:string .
+
+
+###  http://purl.org/cyber/ucodiscoveryTime
+<http://purl.org/cyber/ucodiscoveryTime> rdf:type owl:DatatypeProperty ;
+                                         rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                         rdfs:range xsd:dateTime .
+
+
+###  http://purl.org/cyber/ucogenerated-on-datetime
+<http://purl.org/cyber/ucogenerated-on-datetime> rdf:type owl:DatatypeProperty ;
+                                                 rdfs:subPropertyOf <http://purl.org/cyber/ucohasSeverityScore> ;
+                                                 rdfs:domain <http://purl.org/cyber/ucoVulnerability> .
+
+
+###  http://purl.org/cyber/ucohasAccessComplexity
+<http://purl.org/cyber/ucohasAccessComplexity> rdf:type owl:DatatypeProperty ;
+                                               rdfs:subPropertyOf <http://purl.org/cyber/ucohasSeverityScore> ;
+                                               rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                               rdfs:range xsd:string .
+
+
+###  http://purl.org/cyber/ucohasAccessVector
+<http://purl.org/cyber/ucohasAccessVector> rdf:type owl:DatatypeProperty ;
+                                           rdfs:subPropertyOf <http://purl.org/cyber/ucohasSeverityScore> ;
+                                           rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                           rdfs:range xsd:string .
+
+
+###  http://purl.org/cyber/ucohasAuthentication
+<http://purl.org/cyber/ucohasAuthentication> rdf:type owl:DatatypeProperty ;
+                                             rdfs:subPropertyOf <http://purl.org/cyber/ucohasSeverityScore> ;
+                                             rdfs:domain <http://purl.org/cyber/ucoVulnerability> .
+
+
+###  http://purl.org/cyber/ucohasAvailabilityImpact
+<http://purl.org/cyber/ucohasAvailabilityImpact> rdf:type owl:DatatypeProperty ;
+                                                 rdfs:subPropertyOf <http://purl.org/cyber/ucohasSeverityScore> ;
+                                                 rdfs:domain <http://purl.org/cyber/ucoVulnerability> .
+
+
+###  http://purl.org/cyber/ucohasCodeSize
+<http://purl.org/cyber/ucohasCodeSize> rdf:type owl:DatatypeProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                       rdfs:range xsd:integer .
+
+
+###  http://purl.org/cyber/ucohasConfidenceValue
+<http://purl.org/cyber/ucohasConfidenceValue> rdf:type owl:DatatypeProperty ;
+                                              rdfs:range xsd:float .
+
+
+###  http://purl.org/cyber/ucohasConfidentialityImpact
+<http://purl.org/cyber/ucohasConfidentialityImpact> rdf:type owl:DatatypeProperty ;
+                                                    rdfs:subPropertyOf <http://purl.org/cyber/ucohasSeverityScore> ;
+                                                    rdfs:domain <http://purl.org/cyber/ucoVulnerability> .
+
+
+###  http://purl.org/cyber/ucohasDataSize
+<http://purl.org/cyber/ucohasDataSize> rdf:type owl:DatatypeProperty ;
+                                       rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                       rdfs:range xsd:integer .
+
+
+###  http://purl.org/cyber/ucohasIntegrityImpact
+<http://purl.org/cyber/ucohasIntegrityImpact> rdf:type owl:DatatypeProperty ;
+                                              rdfs:subPropertyOf <http://purl.org/cyber/ucohasSeverityScore> ;
+                                              rdfs:domain <http://purl.org/cyber/ucoVulnerability> .
+
+
+###  http://purl.org/cyber/ucohasLibSize
+<http://purl.org/cyber/ucohasLibSize> rdf:type owl:DatatypeProperty ;
+                                      rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                      rdfs:range xsd:integer .
+
+
+###  http://purl.org/cyber/ucohasMACAddress
+<http://purl.org/cyber/ucohasMACAddress> rdf:type owl:DatatypeProperty ,
+                                                  owl:FunctionalProperty ;
+                                         rdfs:range xsd:string .
+
+
+###  http://purl.org/cyber/ucohasSeverityScore
+<http://purl.org/cyber/ucohasSeverityScore> rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/cyber/ucohasSource
+<http://purl.org/cyber/ucohasSource> rdf:type owl:DatatypeProperty ;
+                                     rdfs:subPropertyOf <http://purl.org/cyber/ucohasSeverityScore> .
+
+
+###  http://purl.org/cyber/ucohasTime
+<http://purl.org/cyber/ucohasTime> rdf:type owl:DatatypeProperty ;
+                                   rdfs:domain <http://purl.org/cyber/ucoAttack> ;
+                                   rdfs:range xsd:dateTime .
+
+
+###  http://purl.org/cyber/ucohasTitle
+<http://purl.org/cyber/ucohasTitle> rdf:type owl:DatatypeProperty ;
+                                    rdfs:domain <http://purl.org/cyber/ucoAttacker> ,
+                                                <http://purl.org/cyber/ucoCampaign> ,
+                                                <http://purl.org/cyber/ucoConsequence> ,
+                                                <http://purl.org/cyber/ucoCourseofAction> ,
+                                                <http://purl.org/cyber/ucoIndicator> ,
+                                                <http://purl.org/cyber/ucoMeans> ,
+                                                <http://purl.org/cyber/ucoVulnerability> ;
+                                    rdfs:range xsd:string .
+
+
+###  http://purl.org/cyber/ucohasVendor
+<http://purl.org/cyber/ucohasVendor> rdf:type owl:DatatypeProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoProduct> ;
+                                     rdfs:range xsd:string .
+
+
+###  http://purl.org/cyber/ucohasVulnerabilityTerm
+<http://purl.org/cyber/ucohasVulnerabilityTerm> rdf:type owl:DatatypeProperty ;
+                                                rdfs:domain <http://purl.org/cyber/ucoWeb> ;
+                                                rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/ucoisNew
+<http://purl.org/cyber/ucoisNew> rdf:type owl:DatatypeProperty ;
+                                 rdfs:domain <http://purl.org/cyber/ucoHardware> ,
+                                             <http://purl.org/cyber/ucoKernelModule> ;
+                                 rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/ucolastModifiedDateTime
+<http://purl.org/cyber/ucolastModifiedDateTime> rdf:type owl:DatatypeProperty ;
+                                                rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                                rdfs:range xsd:dateTime .
+
+
+###  http://purl.org/cyber/uconewDestIP
+<http://purl.org/cyber/uconewDestIP> rdf:type owl:DatatypeProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoNetworkState> ;
+                                     rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/uconewPortsOpened
+<http://purl.org/cyber/uconewPortsOpened> rdf:type owl:DatatypeProperty ;
+                                          rdfs:domain <http://purl.org/cyber/ucoNetworkState> ;
+                                          rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/uconumChildProcesses
+<http://purl.org/cyber/uconumChildProcesses> rdf:type owl:DatatypeProperty ;
+                                             rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                             rdfs:range xsd:integer .
+
+
+###  http://purl.org/cyber/uconumOpenFiles
+<http://purl.org/cyber/uconumOpenFiles> rdf:type owl:DatatypeProperty ;
+                                        rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                        rdfs:range xsd:integer .
+
+
+###  http://purl.org/cyber/uconumProcessesRunning
+<http://purl.org/cyber/uconumProcessesRunning> rdf:type owl:DatatypeProperty ;
+                                               rdfs:domain <http://purl.org/cyber/ucoSystem> ;
+                                               rdfs:range xsd:integer .
+
+
+###  http://purl.org/cyber/ucoopensPort
+<http://purl.org/cyber/ucoopensPort> rdf:type owl:DatatypeProperty ;
+                                     rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                     rdfs:range xsd:integer .
+
+
+###  http://purl.org/cyber/ucopublishedDateTime
+<http://purl.org/cyber/ucopublishedDateTime> rdf:type owl:DatatypeProperty ;
+                                             rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                             rdfs:range xsd:dateTime .
+
+
+###  http://purl.org/cyber/ucoscore
+<http://purl.org/cyber/ucoscore> rdf:type owl:DatatypeProperty ;
+                                 rdfs:subPropertyOf <http://purl.org/cyber/ucohasSeverityScore> ;
+                                 rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                 rdfs:range xsd:float .
+
+
+###  http://purl.org/cyber/ucoselfDist
+<http://purl.org/cyber/ucoselfDist> rdf:type owl:DatatypeProperty ;
+                                    rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                    rdfs:range xsd:integer .
+
+
+###  http://purl.org/cyber/ucoshowsInfectionSigns
+<http://purl.org/cyber/ucoshowsInfectionSigns> rdf:type owl:DatatypeProperty ;
+                                               rdfs:domain <http://purl.org/cyber/ucoProcess> ;
+                                               rdfs:range xsd:boolean .
+
+
+###  http://purl.org/cyber/ucosummary
+<http://purl.org/cyber/ucosummary> rdf:type owl:DatatypeProperty ;
+                                   rdfs:domain <http://purl.org/cyber/ucoVulnerability> ;
+                                   rdfs:range xsd:string .
+
+
+###  http://purl.org/cyber/ucotimeOfIntroduction
+<http://purl.org/cyber/ucotimeOfIntroduction> rdf:type owl:DatatypeProperty ;
+                                              rdfs:domain <http://purl.org/cyber/ucoCWE> ;
+                                              rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://capec.mitre.org/capec_v1#Indicator
+cap:Indicator rdf:type owl:Class ;
+              owl:equivalentClass <http://purl.org/cyber/ucoIndicator> ;
+              rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://capec.mitre.org/capec_v1#Observable
+cap:Observable rdf:type owl:Class ;
+               owl:equivalentClass cbx:Observable ;
+               rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://capec.mitre.org/capec_v1#Weakness
+cap:Weakness rdf:type owl:Class ;
+             owl:equivalentClass <http://purl.org/cyber/ucoCWE> ;
+             rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://cybox.mitre.org/cybox_v1#Observable
+cbx:Observable rdf:type owl:Class ;
+               owl:equivalentClass <http://purl.org/cyber/ucoObservable> ;
+               rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoAddress
+<http://purl.org/cyber/ucoAddress> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoAtError
+<http://purl.org/cyber/ucoAtError> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://purl.org/cyber/ucoLogicExploit> .
+
+
+###  http://purl.org/cyber/ucoAttack
+<http://purl.org/cyber/ucoAttack> rdf:type owl:Class ;
+                                  owl:equivalentClass <http://purl.org/cyber/ucoIncident> ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty <http://purl.org/cyber/ucohasConsequence> ;
+                                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass <http://purl.org/cyber/ucoConsequence>
+                                                      ] ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty <http://purl.org/cyber/ucohasMeans> ;
+                                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass <http://purl.org/cyber/ucoMeans>
+                                                      ] ;
+                                  rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                  rdfs:comment """An attack (noun) is the use of an exploit(s) by an adversary to take advantage of a weakness(s) with the intent of achieving a negative technical impact(s).
+
+Source: https://capec.mitre.org/about/glossary.html#Attack
+
+From the bove definition, \"the use of an exploit(s)\" is means, \"an adversary\" is attacker, and \"negative technical impact(s)\" is consequence.""" .
+
+[ rdf:type owl:Axiom ;
+   owl:annotatedSource <http://purl.org/cyber/ucoAttack> ;
+   owl:annotatedProperty rdfs:comment ;
+   owl:annotatedTarget """An attack (noun) is the use of an exploit(s) by an adversary to take advantage of a weakness(s) with the intent of achieving a negative technical impact(s).
+
+Source: https://capec.mitre.org/about/glossary.html#Attack
+
+From the bove definition, \"the use of an exploit(s)\" is means, \"an adversary\" is attacker, and \"negative technical impact(s)\" is consequence.""" ;
+   rdfs:comment """An attack (noun) is the use of an exploit(s) by an adversary to take advantage of a weakness(s) with the intent of achieving a negative technical impact(s).
+
+Source: https://capec.mitre.org/about/glossary.html#Attack
+
+From the bove definition, \"the use of an exploit(s)\" is means, \"an adversary\" is attacker, and \"to take advantage of... with the intent of achieving a negative technical impact(s)\" is consequence."""
+ ] .
+
+
+###  http://purl.org/cyber/ucoAttackPattern
+<http://purl.org/cyber/ucoAttackPattern> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoAttacker
+<http://purl.org/cyber/ucoAttacker> rdf:type owl:Class ;
+                                    owl:equivalentClass <http://purl.org/cyber/ucoThreatActor> ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                    rdfs:comment """EquivalentClass: ThreatActor
+ThreatActors are characterizations of malicious actors (or adversaries) representing a cyber attack threat including presumed intent and historically observed behavior.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf""" .
+
+
+###  http://purl.org/cyber/ucoBackdoor
+<http://purl.org/cyber/ucoBackdoor> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoMaliciousCodeExecution> ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                      owl:someValuesFrom <http://purl.org/cyber/ucoRemoteAccess>
+                                                    ] .
+
+
+###  http://purl.org/cyber/ucoBaseGroup
+<http://purl.org/cyber/ucoBaseGroup> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoBotnetAttack
+<http://purl.org/cyber/ucoBotnetAttack> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://purl.org/cyber/ucoConsequence> ;
+                                        rdfs:seeAlso "http://dbpedia.org/resource/Botnet"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoBoundaryCondition
+<http://purl.org/cyber/ucoBoundaryCondition> rdf:type owl:Class ;
+                                             rdfs:subClassOf <http://purl.org/cyber/ucoInputValidationError> ;
+                                             rdfs:seeAlso "http://dbpedia.org/resource/Off-by-one_error"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoBufferOverFlow
+<http://purl.org/cyber/ucoBufferOverFlow> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://purl.org/cyber/ucoMeans> ,
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                            owl:someValuesFrom <http://purl.org/cyber/ucoDenialOfService>
+                                                          ] ;
+                                          rdfs:seeAlso "http://dbpedia.org/resource/Buffer_overflow"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoCCE
+<http://purl.org/cyber/ucoCCE> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoCVE
+<http://purl.org/cyber/ucoCVE> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                               rdfs:comment """The details of the CVE class are in another ontology yet to be imported.
+CVE is not equal to Vulnerability because Vulnerability also refers to OSVDB_ID""" .
+
+
+###  http://purl.org/cyber/ucoCVSSScoreType
+<http://purl.org/cyber/ucoCVSSScoreType> rdf:type owl:Class ;
+                                         owl:equivalentClass [ rdf:type owl:Class ;
+                                                               owl:unionOf ( <http://purl.org/cyber/ucoBaseGroup>
+                                                                             <http://purl.org/cyber/ucoEnvironmentalGroup>
+                                                                             <http://purl.org/cyber/ucoTemporalGroup>
+                                                                           )
+                                                             ] ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoCWE
+<http://purl.org/cyber/ucoCWE> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoCampaign
+<http://purl.org/cyber/ucoCampaign> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty <http://purl.org/cyber/ucousesAttacks> ;
+                                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                      owl:onClass <http://purl.org/cyber/ucoAttack>
+                                                    ] ;
+                                    rdfs:comment """Campaigns are instances of ThreatActors pursuing an intent, as observed through sets of Incidents and/or TTP, potentially across organizations.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf""" .
+
+
+###  http://purl.org/cyber/ucoConfidenceType
+<http://purl.org/cyber/ucoConfidenceType> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoConfigurationError
+<http://purl.org/cyber/ucoConfigurationError> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://purl.org/cyber/ucoMeans> ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                                owl:someValuesFrom <http://purl.org/cyber/ucoDenialOfService>
+                                                              ] .
+
+
+###  http://purl.org/cyber/ucoConsequence
+<http://purl.org/cyber/ucoConsequence> rdf:type owl:Class ;
+                                       owl:equivalentClass <http://purl.org/cyber/ucoObservable> ;
+                                       rdfs:subClassOf <http://purl.org/cyber/ucoMeansOrConsequence> .
+
+
+###  http://purl.org/cyber/ucoCourseofAction
+<http://purl.org/cyber/ucoCourseofAction> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                          rdfs:comment """CoursesOfAction are specific measures to be taken to address threat whether they are corrective or preventative to address ExploitTargets, or responsive to counter or mitigate the potential impacts of Incidents.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf""" .
+
+
+###  http://purl.org/cyber/ucoDataCorruption
+<http://purl.org/cyber/ucoDataCorruption> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://purl.org/cyber/ucoLossOfIntegrity> .
+
+
+###  http://purl.org/cyber/ucoDenialOfService
+<http://purl.org/cyber/ucoDenialOfService> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://purl.org/cyber/ucoConsequence> ;
+                                           rdfs:seeAlso "http://dbpedia.org/resource/Denial-of-service_attack"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoDirectoryExposure
+<http://purl.org/cyber/ucoDirectoryExposure> rdf:type owl:Class ;
+                                             rdfs:subClassOf <http://purl.org/cyber/ucoLossOfConf> .
+
+
+###  http://purl.org/cyber/ucoDistributedCode
+<http://purl.org/cyber/ucoDistributedCode> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://purl.org/cyber/ucoMaliciousCodeExecution> ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                             owl:someValuesFrom <http://purl.org/cyber/ucoBotnetAttack>
+                                                           ] .
+
+
+###  http://purl.org/cyber/ucoDomainExpert
+<http://purl.org/cyber/ucoDomainExpert> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://purl.org/cyber/ucoSource> .
+
+
+###  http://purl.org/cyber/ucoEnvironmentalGroup
+<http://purl.org/cyber/ucoEnvironmentalGroup> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoExICMPEchoReq
+<http://purl.org/cyber/ucoExICMPEchoReq> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoMeans> .
+
+
+###  http://purl.org/cyber/ucoExIPPacketSize
+<http://purl.org/cyber/ucoExIPPacketSize> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://purl.org/cyber/ucoMeans> .
+
+
+###  http://purl.org/cyber/ucoExceptionCondition
+<http://purl.org/cyber/ucoExceptionCondition> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://purl.org/cyber/ucoLogicExploit> ;
+                                              rdfs:seeAlso "http://dbpedia.org/resource/Exception_handling"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoExcessForks
+<http://purl.org/cyber/ucoExcessForks> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://purl.org/cyber/ucoDenialOfService> .
+
+
+###  http://purl.org/cyber/ucoExploit
+<http://purl.org/cyber/ucoExploit> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoExploitTarget
+<http://purl.org/cyber/ucoExploitTarget> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                         rdfs:comment """ExploitTargets are vulnerabilities or weaknesses in software, systems, networks or configurations that are targeted for exploitation by the TTP of a ThreatActor.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf""" .
+
+
+###  http://purl.org/cyber/ucoFile
+<http://purl.org/cyber/ucoFile> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                rdfs:comment """A computer file is a resource for storing information, which is available to a computer program and is usually based on some kind of durable storage. A file is \"durable\" in the sense that it remains available for other programs to use after the program that created it has finished executing. Computer files can be considered as the modern counterpart of paper documents which traditionally are kept in office and library files, and this is the source of the term.
+
+http://dbpedia.org/page/Computer_file"""^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoHardware
+<http://purl.org/cyber/ucoHardware> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                    rdfs:seeAlso "http://dbpedia.org/resource/Computer_hardware"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoIDPS
+<http://purl.org/cyber/ucoIDPS> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://purl.org/cyber/ucoSource> .
+
+
+###  http://purl.org/cyber/ucoIPAddress
+<http://purl.org/cyber/ucoIPAddress> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://purl.org/cyber/ucoAddress> ;
+                                     rdfs:seeAlso "http://dbpedia.org/resource/IP_address"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoIPFrag
+<http://purl.org/cyber/ucoIPFrag> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://purl.org/cyber/ucoMeans> ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                    owl:someValuesFrom <http://purl.org/cyber/ucoDenialOfService>
+                                                  ] ;
+                                  rdfs:seeAlso "http://dbpedia.org/resource/IP_fragmentation_attacks"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoIPv4Address
+<http://purl.org/cyber/ucoIPv4Address> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://purl.org/cyber/ucoIPAddress> .
+
+
+###  http://purl.org/cyber/ucoIPv6Address
+<http://purl.org/cyber/ucoIPv6Address> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://purl.org/cyber/ucoIPAddress> .
+
+
+###  http://purl.org/cyber/ucoIncident
+<http://purl.org/cyber/ucoIncident> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                    rdfs:comment """Incidents are discrete instances of Indicators affecting an organization along with information discovered or decided during an incident response investigation.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf""" .
+
+
+###  http://purl.org/cyber/ucoIndicator
+<http://purl.org/cyber/ucoIndicator> rdf:type owl:Class ;
+                                     rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoInputValidationError
+<http://purl.org/cyber/ucoInputValidationError> rdf:type owl:Class ;
+                                                rdfs:subClassOf <http://purl.org/cyber/ucoMeans> ,
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                                  owl:someValuesFrom <http://purl.org/cyber/ucoLossOfConf>
+                                                                ] .
+
+
+###  http://purl.org/cyber/ucoKernelModule
+<http://purl.org/cyber/ucoKernelModule> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://purl.org/cyber/ucoSoftware> ;
+                                        rdfs:seeAlso "http://dbpedia.org/resource/Loadable_kernel_module"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoKillChain
+<http://purl.org/cyber/ucoKillChain> rdf:type owl:Class ;
+                                     owl:equivalentClass stx:KillChain ;
+                                     rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoKillChainPhase
+<http://purl.org/cyber/ucoKillChainPhase> rdf:type owl:Class ;
+                                          owl:equivalentClass stx:KillChainPhase ;
+                                          rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoLogic
+<http://purl.org/cyber/ucoLogic> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://purl.org/cyber/ucoTriggeredCode> .
+
+
+###  http://purl.org/cyber/ucoLogicExploit
+<http://purl.org/cyber/ucoLogicExploit> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://purl.org/cyber/ucoLogic> .
+
+
+###  http://purl.org/cyber/ucoLossOfConf
+<http://purl.org/cyber/ucoLossOfConf> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://purl.org/cyber/ucoConsequence> .
+
+
+###  http://purl.org/cyber/ucoLossOfIntegrity
+<http://purl.org/cyber/ucoLossOfIntegrity> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://purl.org/cyber/ucoConsequence> .
+
+
+###  http://purl.org/cyber/ucoMACAddress
+<http://purl.org/cyber/ucoMACAddress> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://purl.org/cyber/ucoAddress> .
+
+
+###  http://purl.org/cyber/ucoMalformedInput
+<http://purl.org/cyber/ucoMalformedInput> rdf:type owl:Class ;
+                                          rdfs:subClassOf <http://purl.org/cyber/ucoInputValidationError> ;
+                                          rdfs:seeAlso "http://sw.opencyc.org/concept/Mx4rwQShKJwpEbGdrcN5Y29ycA"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoMaliciousCodeExecution
+<http://purl.org/cyber/ucoMaliciousCodeExecution> rdf:type owl:Class ;
+                                                  rdfs:subClassOf <http://purl.org/cyber/ucoMeans> ;
+                                                  rdfs:seeAlso "http://dbpedia.org/resource/Arbitrary_code_execution"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoMalware
+<http://purl.org/cyber/ucoMalware> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoMeans
+<http://purl.org/cyber/ucoMeans> rdf:type owl:Class ;
+                                 owl:equivalentClass <http://purl.org/cyber/ucoTTP> ,
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty <http://purl.org/cyber/ucobehaviour> ;
+                                                       owl:someValuesFrom [ rdf:type owl:Class ;
+                                                                            owl:unionOf ( <http://purl.org/cyber/ucoAttackPattern>
+                                                                                          <http://purl.org/cyber/ucoExploit>
+                                                                                          <http://purl.org/cyber/ucoMalware>
+                                                                                        )
+                                                                          ]
+                                                     ] ;
+                                 rdfs:subClassOf <http://purl.org/cyber/ucoMeansOrConsequence> ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                   owl:someValuesFrom <http://purl.org/cyber/ucoConsequence>
+                                                 ] .
+
+
+###  http://purl.org/cyber/ucoMeansOrConsequence
+<http://purl.org/cyber/ucoMeansOrConsequence> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoMemoryConsumption
+<http://purl.org/cyber/ucoMemoryConsumption> rdf:type owl:Class ;
+                                             rdfs:subClassOf <http://purl.org/cyber/ucoDenialOfService> .
+
+
+###  http://purl.org/cyber/ucoMitnickAttack
+<http://purl.org/cyber/ucoMitnickAttack> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoConsequence> ;
+                                         rdfs:seeAlso "http://dbpedia.org/resource/The_Art_of_Intrusion"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoNetFlood
+<http://purl.org/cyber/ucoNetFlood> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoDenialOfService> ;
+                                    rdfs:seeAlso "http://dbpedia.org/describe/?url=http%3A%2F%2Fsw.opencyc.org%2F2008%2F06%2F10%2Fconcept%2Fen%2FTribeFloodNet_DenialOfServiceProgram&sid=7707"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoNetworkState
+<http://purl.org/cyber/ucoNetworkState> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoOSVDB
+<http://purl.org/cyber/ucoOSVDB> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoObservable
+<http://purl.org/cyber/ucoObservable> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                      rdfs:comment """Observables are the “base” construct within the STIX architecture. Observables are stateful properties or measurable events pertinent to the operation of computers and networks. Information about a file (name, hash, size, etc.), a registry key value, a service being started, or an HTTP request being sent are all simple examples of observables. STIX leverages CybOX for its representation of Observables.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf""" .
+
+
+###  http://purl.org/cyber/ucoOperatingSystem
+<http://purl.org/cyber/ucoOperatingSystem> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://purl.org/cyber/ucoSoftware> ;
+                                           rdfs:seeAlso "http://dbpedia.org/ontology/operatingSystem"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoOtherTechnicalTerms
+<http://purl.org/cyber/ucoOtherTechnicalTerms> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoParisiticCode
+<http://purl.org/cyber/ucoParisiticCode> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoMaliciousCodeExecution> ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                           owl:someValuesFrom <http://purl.org/cyber/ucoLossOfIntegrity>
+                                                         ] .
+
+
+###  http://purl.org/cyber/ucoPingOfDeath
+<http://purl.org/cyber/ucoPingOfDeath> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://purl.org/cyber/ucoDenialOfService> ;
+                                       rdfs:seeAlso "http://dbpedia.org/resource/Ping_of_death"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoPingScan
+<http://purl.org/cyber/ucoPingScan> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoProbe> .
+
+
+###  http://purl.org/cyber/ucoPrivilegeEsc
+<http://purl.org/cyber/ucoPrivilegeEsc> rdf:type owl:Class ;
+                                        rdfs:subClassOf <http://purl.org/cyber/ucoLossOfConf> .
+
+
+###  http://purl.org/cyber/ucoProbe
+<http://purl.org/cyber/ucoProbe> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://purl.org/cyber/ucoMeans> ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                   owl:someValuesFrom <http://purl.org/cyber/ucoDirectoryExposure>
+                                                 ] ,
+                                                 [ rdf:type owl:Restriction ;
+                                                   owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                   owl:someValuesFrom <http://purl.org/cyber/ucoMitnickAttack>
+                                                 ] .
+
+
+###  http://purl.org/cyber/ucoProcess
+<http://purl.org/cyber/ucoProcess> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                   rdfs:seeAlso "http://dbpedia.org/resource/Category:Process_(computing)"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoProduct
+<http://purl.org/cyber/ucoProduct> rdf:type owl:Class ;
+                                   owl:equivalentClass [ rdf:type owl:Class ;
+                                                         owl:unionOf ( <http://purl.org/cyber/ucoHardware>
+                                                                       <http://purl.org/cyber/ucoSoftware>
+                                                                     )
+                                                       ] ;
+                                   rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoRSTProbe
+<http://purl.org/cyber/ucoRSTProbe> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoProbe> .
+
+
+###  http://purl.org/cyber/ucoRaceCondition
+<http://purl.org/cyber/ucoRaceCondition> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoLogicExploit> ;
+                                         rdfs:seeAlso "http://dbpedia.org/resource/Race_condition"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoRemoteAccess
+<http://purl.org/cyber/ucoRemoteAccess> rdf:type owl:Class ;
+                                        owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                              owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                              owl:someValuesFrom <http://purl.org/cyber/ucoPrivilegeEsc>
+                                                            ] ;
+                                        rdfs:subClassOf <http://purl.org/cyber/ucoConsequence> ;
+                                        rdfs:seeAlso "http://en.wikipedia.org/wiki/Remote_Access_Trojans_(RATs)"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoRootkit
+<http://purl.org/cyber/ucoRootkit> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://purl.org/cyber/ucoMaliciousCodeExecution> ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                     owl:someValuesFrom <http://purl.org/cyber/ucoDenialOfService>
+                                                   ] ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                     owl:someValuesFrom <http://purl.org/cyber/ucoLossOfConf>
+                                                   ] ;
+                                   rdfs:seeAlso "http://dbpedia.org/resource/Rootkit"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoSelfPropagatingCode
+<http://purl.org/cyber/ucoSelfPropagatingCode> rdf:type owl:Class ;
+                                               rdfs:subClassOf <http://purl.org/cyber/ucoMaliciousCodeExecution> ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                                 owl:someValuesFrom <http://purl.org/cyber/ucoLossOfConf>
+                                                               ] .
+
+
+###  http://purl.org/cyber/ucoSerialError
+<http://purl.org/cyber/ucoSerialError> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://purl.org/cyber/ucoLogicExploit> .
+
+
+###  http://purl.org/cyber/ucoSoftware
+<http://purl.org/cyber/ucoSoftware> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                    rdfs:seeAlso "http://dbpedia.org/ontology/Software"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoSource
+<http://purl.org/cyber/ucoSource> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoStatementType
+<http://purl.org/cyber/ucoStatementType> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoSynFlood
+<http://purl.org/cyber/ucoSynFlood> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoMeans> ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                      owl:someValuesFrom <http://purl.org/cyber/ucoNetFlood>
+                                                    ] .
+
+
+###  http://purl.org/cyber/ucoSynScan
+<http://purl.org/cyber/ucoSynScan> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://purl.org/cyber/ucoProbe> .
+
+
+###  http://purl.org/cyber/ucoSysCrash
+<http://purl.org/cyber/ucoSysCrash> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoDenialOfService> ;
+                                    rdfs:seeAlso "http://dbpedia.org/resource/Fatal_system_error"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoSystem
+<http://purl.org/cyber/ucoSystem> rdf:type owl:Class ;
+                                  rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                  rdfs:seeAlso "http://dbpedia.org/resource/Computer"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoTCPConnect
+<http://purl.org/cyber/ucoTCPConnect> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://purl.org/cyber/ucoProbe> .
+
+
+###  http://purl.org/cyber/ucoTCPPortScan
+<http://purl.org/cyber/ucoTCPPortScan> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://purl.org/cyber/ucoProbe> ,
+                                                       [ rdf:type owl:Restriction ;
+                                                         owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                         owl:someValuesFrom <http://purl.org/cyber/ucoDirectoryExposure>
+                                                       ] .
+
+
+###  http://purl.org/cyber/ucoTTP
+<http://purl.org/cyber/ucoTTP> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                               rdfs:comment """Tactics, Techniques and Procedures (TTP) are representations of the behavior or modus operandi of cyber adversaries.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf""" .
+
+
+###  http://purl.org/cyber/ucoTemporalGroup
+<http://purl.org/cyber/ucoTemporalGroup> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/cyber/ucoThreatActor
+<http://purl.org/cyber/ucoThreatActor> rdf:type owl:Class ;
+                                       rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                       rdfs:comment """ThreatActors are characterizations of malicious actors (or adversaries) representing a cyber attack threat including presumed intent and historically observed behavior.
+
+Source: https://stix.mitre.org/about/documents/STIX_Whitepaper_v1.1.pdf""" .
+
+
+###  http://purl.org/cyber/ucoTime
+<http://purl.org/cyber/ucoTime> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://purl.org/cyber/ucoTriggeredCode> .
+
+
+###  http://purl.org/cyber/ucoTriggeredCode
+<http://purl.org/cyber/ucoTriggeredCode> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoMaliciousCodeExecution> ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                           owl:someValuesFrom <http://purl.org/cyber/ucoLossOfConf>
+                                                         ] ,
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                           owl:someValuesFrom <http://purl.org/cyber/ucoLossOfIntegrity>
+                                                         ] .
+
+
+###  http://purl.org/cyber/ucoTrojans
+<http://purl.org/cyber/ucoTrojans> rdf:type owl:Class ;
+                                   rdfs:subClassOf <http://purl.org/cyber/ucoMaliciousCodeExecution> ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                     owl:someValuesFrom <http://purl.org/cyber/ucoLossOfConf>
+                                                   ] ,
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                     owl:someValuesFrom <http://purl.org/cyber/ucoRemoteAccess>
+                                                   ] .
+
+
+###  http://purl.org/cyber/ucoUCOThing
+<http://purl.org/cyber/ucoUCOThing> rdf:type owl:Class .
+
+
+###  http://purl.org/cyber/ucoUnauthRoot
+<http://purl.org/cyber/ucoUnauthRoot> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://purl.org/cyber/ucoPrivilegeEsc> .
+
+
+###  http://purl.org/cyber/ucoUnauthUser
+<http://purl.org/cyber/ucoUnauthUser> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://purl.org/cyber/ucoPrivilegeEsc> .
+
+
+###  http://purl.org/cyber/ucoUserEnumeration
+<http://purl.org/cyber/ucoUserEnumeration> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://purl.org/cyber/ucoMeans> ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty <http://purl.org/cyber/ucoresultsIn> ;
+                                                             owl:someValuesFrom <http://purl.org/cyber/ucoPrivilegeEsc>
+                                                           ] .
+
+
+###  http://purl.org/cyber/ucoVirus
+<http://purl.org/cyber/ucoVirus> rdf:type owl:Class ;
+                                 rdfs:subClassOf <http://purl.org/cyber/ucoSelfPropagatingCode> ;
+                                 rdfs:seeAlso "http://dbpedia.org/resource/Computer_virus"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoVulnerability
+<http://purl.org/cyber/ucoVulnerability> rdf:type owl:Class ;
+                                         rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> ;
+                                         rdfs:seeAlso "http://dbpedia.org/resource/Vulnerability_(computing)"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoWeb
+<http://purl.org/cyber/ucoWeb> rdf:type owl:Class ;
+                               rdfs:subClassOf <http://purl.org/cyber/ucoSource> .
+
+
+###  http://purl.org/cyber/ucoWebBrowser
+<http://purl.org/cyber/ucoWebBrowser> rdf:type owl:Class ;
+                                      rdfs:subClassOf <http://purl.org/cyber/ucoSoftware> ;
+                                      rdfs:seeAlso "http://dbpedia.org/class/yago/WebBrowser"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucoWorm
+<http://purl.org/cyber/ucoWorm> rdf:type owl:Class ;
+                                rdfs:subClassOf <http://purl.org/cyber/ucoSelfPropagatingCode> ;
+                                rdfs:seeAlso "http://dbpedia.org/resource/Computer_worm"^^xsd:anyURI .
+
+
+###  http://purl.org/cyber/ucorstProbe
+<http://purl.org/cyber/ucorstProbe> rdf:type owl:Class ;
+                                    rdfs:subClassOf <http://purl.org/cyber/ucoProbe> .
+
+
+###  http://purl.org/stix/KillChain
+stx:KillChain rdf:type owl:Class ;
+              rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+###  http://purl.org/stix/KillChainPhase
+stx:KillChainPhase rdf:type owl:Class ;
+                   rdfs:subClassOf <http://purl.org/cyber/ucoUCOThing> .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://purl.org/cyber/ucoHigh
+<http://purl.org/cyber/ucoHigh> rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/cyber/ucoLow
+<http://purl.org/cyber/ucoLow> rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/cyber/ucoMedium
+<http://purl.org/cyber/ucoMedium> rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/cyber/ucoNone
+<http://purl.org/cyber/ucoNone> rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/cyber/ucoRemedy
+<http://purl.org/cyber/ucoRemedy> rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/cyber/ucoResponse
+<http://purl.org/cyber/ucoResponse> rdf:type owl:NamedIndividual .
+
+
+###  http://purl.org/cyber/ucoUnknown
+<http://purl.org/cyber/ucoUnknown> rdf:type owl:NamedIndividual .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

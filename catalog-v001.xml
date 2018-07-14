@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1531584774531" name="http://ffrdc.ebiquity.umbc.edu/ns/ontology/" uri="uco_1_5.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1531584774531" name="http://www.w3.org/2002/07/owl" uri="uco_1_5_rdf.owl"/>
+    </group>
+</catalog>
