@@ -1,25 +1,22 @@
-@prefix : <http://purl.org/cyber/stix#> .
+@prefix : <http://purl.org/stix#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-@prefix stx: <http://purl.org/cyber/stix#> .
+@prefix stx: <http://purl.org/stix#> .
 @prefix uco: <http://purl.org/cyber#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix misp: <http://purl.org/cyber/misp#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-@prefix capec: <http://purl.org/cyber/capec#> .
-@base <http://purl.org/cyber/stix> .
+#@base <http://purl.org/stix> .
 
-<http://purl.org/cyber/stix> rdf:type owl:Ontology ;
-                              owl:versionIRI <http://purl.org/cyber/stix> ;
-                              owl:imports <http://ffrdc.ebiquity.umbc.edu/ns/ontology/> ;
-                              rdfs:comment "An OWL ontology for representing cybersecurity information using the STIX 2 data model." .
+<http://purl.org/stix> rdf:type owl:Ontology ;
+                         owl:imports <http://ffrdc.ebiquity.umbc.edu/ns/ontology/> ;
+                         rdfs:comment "An OWL ontology for representing cybersecurity information using the STIX 2 data model." .
 
 #################################################################
 #    Object Properties
 #################################################################
 
-###  http://purl.org/cyber/stix#attributed-to
+###  http://purl.org/stix#attributed-to
 stx:attributed-to rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf stx:stixObjectProperty ;
                   owl:inverseOf stx:attribution-of ;
@@ -37,7 +34,7 @@ stx:attributed-to rdf:type owl:ObjectProperty ;
                              ] .
 
 
-###  http://purl.org/cyber/stix#attribution-of
+###  http://purl.org/stix#attribution-of
 stx:attribution-of rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf stx:stixObjectProperty ;
                    rdfs:domain [ rdf:type owl:Class ;
@@ -54,13 +51,13 @@ stx:attribution-of rdf:type owl:ObjectProperty ;
                               ] .
 
 
-###  http://purl.org/cyber/stix#author-of
+###  http://purl.org/stix#author-of
 stx:author-of rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf stx:stixObjectProperty ;
               owl:inverseOf stx:authored-by .
 
 
-###  http://purl.org/cyber/stix#authored-by
+###  http://purl.org/stix#authored-by
 stx:authored-by rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf stx:stixObjectProperty ;
                 rdfs:domain [ rdf:type owl:Class ;
@@ -71,25 +68,21 @@ stx:authored-by rdf:type owl:ObjectProperty ;
                 rdfs:range stx:threat-actor .
 
 
-###  http://purl.org/cyber/stix#belongs-to
+###  http://purl.org/stix#belongs-to
 stx:belongs-to rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf stx:stixObjectProperty ;
-               rdfs:domain stx:StixObservables .
+               rdfs:domain stx:observable-objects ;
+               rdfs:range stx:ASN .
 
 
-###  http://purl.org/cyber/stix#capec_property
-stx:capec_property rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf stx:stixObjectProperty .
-
-
-###  http://purl.org/cyber/stix#commonObjectProperies
+###  http://purl.org/stix#commonObjectProperies
 stx:commonObjectProperies rdf:type owl:ObjectProperty ;
                           rdfs:subPropertyOf stx:stixObjectProperty ;
                           rdfs:domain stx:StixThing ;
                           rdfs:comment "Common properties and behavior across all STIX Domain Objects and STIX Relationship Objects" .
 
 
-###  http://purl.org/cyber/stix#created_by_ref
+###  http://purl.org/stix#created_by_ref
 stx:created_by_ref rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf stx:stixObjectProperty ;
                    owl:inverseOf stx:creator-of ;
@@ -102,7 +95,7 @@ stx:created_by_ref rdf:type owl:ObjectProperty ;
                    rdfs:range stx:identity .
 
 
-###  http://purl.org/cyber/stix#creator-of
+###  http://purl.org/stix#creator-of
 stx:creator-of rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf stx:stixObjectProperty ;
                rdfs:domain stx:identity ;
@@ -114,20 +107,21 @@ stx:creator-of rdf:type owl:ObjectProperty ;
                           ] .
 
 
-###  http://purl.org/cyber/stix#definition
+###  http://purl.org/stix#definition
 stx:definition rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf stx:stixObjectProperty ;
-               rdfs:domain stx:marking-definition .
+               rdfs:domain stx:marking-definition ;
+               rdfs:range stx:marking-object .
 
 
-###  http://purl.org/cyber/stix#derivedFrom
+###  http://purl.org/stix#derivedFrom
 stx:derivedFrom rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf stx:stixObjectProperty ;
                 rdfs:domain stx:StixThing ;
                 rdfs:range stx:StixThing .
 
 
-###  http://purl.org/cyber/stix#duplicateOf
+###  http://purl.org/stix#duplicateOf
 stx:duplicateOf rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf stx:stixObjectProperty ;
                 rdf:type owl:TransitiveProperty ;
@@ -135,12 +129,12 @@ stx:duplicateOf rdf:type owl:ObjectProperty ;
                 rdfs:range stx:StixThing .
 
 
-###  http://purl.org/cyber/stix#exploited-by
+###  http://purl.org/stix#exploited-by
 stx:exploited-by rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf stx:stixObjectProperty .
 
 
-###  http://purl.org/cyber/stix#exploits
+###  http://purl.org/stix#exploits
 stx:exploits rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf stx:stixObjectProperty ;
              rdfs:domain [ rdf:type owl:Class ;
@@ -153,7 +147,7 @@ stx:exploits rdf:type owl:ObjectProperty ;
              rdfs:range stx:vulnerability .
 
 
-###  http://purl.org/cyber/stix#external-reference
+###  http://purl.org/stix#external-reference
 stx:external-reference rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf stx:commonObjectProperies ;
                        owl:inverseOf stx:external-reference-of ;
@@ -161,7 +155,7 @@ stx:external-reference rdf:type owl:ObjectProperty ;
                        rdfs:range stx:external-reference .
 
 
-###  http://purl.org/cyber/stix#external-reference-of
+###  http://purl.org/stix#external-reference-of
 stx:external-reference-of rdf:type owl:ObjectProperty ;
                           rdfs:subPropertyOf stx:stixObjectProperty ;
                           owl:inverseOf stx:external_references ;
@@ -169,12 +163,12 @@ stx:external-reference-of rdf:type owl:ObjectProperty ;
                           rdfs:range stx:StixThing .
 
 
-###  http://purl.org/cyber/stix#external_references
+###  http://purl.org/stix#external_references
 stx:external_references rdf:type owl:ObjectProperty ;
                         rdfs:subPropertyOf stx:stixObjectProperty .
 
 
-###  http://purl.org/cyber/stix#granular_marking
+###  http://purl.org/stix#granular_marking
 stx:granular_marking rdf:type owl:ObjectProperty ;
                      rdfs:subPropertyOf stx:commonObjectProperies ;
                      rdfs:domain stx:StixThing ;
@@ -182,17 +176,18 @@ stx:granular_marking rdf:type owl:ObjectProperty ;
                      rdfs:comment "a GranularMarking that apply to this object" .
 
 
-###  http://purl.org/cyber/stix#hasHash
+###  http://purl.org/stix#hasHash
 stx:hasHash rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf stx:stixObjectProperty ;
             rdfs:domain [ rdf:type owl:Class ;
                           owl:unionOf ( stx:external-reference
                                         stx:file
                                       )
-                        ] .
+                        ] ;
+            rdfs:range stx:Hash .
 
 
-###  http://purl.org/cyber/stix#hasPhase
+###  http://purl.org/stix#hasPhase
 stx:hasPhase rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf stx:stixObjectProperty ;
              owl:inverseOf stx:phaseOf ;
@@ -200,13 +195,13 @@ stx:hasPhase rdf:type owl:ObjectProperty ;
              rdfs:range stx:kill-chain-phase .
 
 
-###  http://purl.org/cyber/stix#has_sighting
+###  http://purl.org/stix#has_sighting
 stx:has_sighting rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf stx:stixObjectProperty ;
                  owl:inverseOf stx:sighting_of_ref .
 
 
-###  http://purl.org/cyber/stix#impersonates
+###  http://purl.org/stix#impersonates
 stx:impersonates rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf stx:stixObjectProperty ;
                  rdfs:domain stx:threat-actor ;
@@ -214,13 +209,13 @@ stx:impersonates rdf:type owl:ObjectProperty ;
                  rdfs:comment "This Relationship describes that the Threat Actor impersonates the related Identity. For example, an  impersonates Relationship from the gh0st Threat Actor to the ACME Corp. Identity means that the actor known as gh0st impersonates ACME Corp." .
 
 
-###  http://purl.org/cyber/stix#indicated_by
+###  http://purl.org/stix#indicated_by
 stx:indicated_by rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf stx:stixObjectProperty ;
                  owl:inverseOf stx:indicates .
 
 
-###  http://purl.org/cyber/stix#indicates
+###  http://purl.org/stix#indicates
 stx:indicates rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf stx:stixObjectProperty ;
               rdfs:domain stx:indicator ;
@@ -231,14 +226,14 @@ stx:indicates rdf:type owl:ObjectProperty ;
                          ] .
 
 
-###  http://purl.org/cyber/stix#kill_chain_phases
+###  http://purl.org/stix#kill_chain_phases
 stx:kill_chain_phases rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf stx:stixObjectProperty ;
                       rdfs:domain stx:malware ;
                       rdfs:range stx:kill-chain-phase .
 
 
-###  http://purl.org/cyber/stix#mitigated_by
+###  http://purl.org/stix#mitigated_by
 stx:mitigated_by rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf stx:stixObjectProperty ;
                  owl:inverseOf stx:mitigates ;
@@ -250,7 +245,7 @@ stx:mitigated_by rdf:type owl:ObjectProperty ;
                  rdfs:range stx:course-of-action .
 
 
-###  http://purl.org/cyber/stix#mitigates
+###  http://purl.org/stix#mitigates
 stx:mitigates rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf stx:stixObjectProperty ;
               rdfs:domain stx:course-of-action ;
@@ -261,14 +256,14 @@ stx:mitigates rdf:type owl:ObjectProperty ;
                          ] .
 
 
-###  http://purl.org/cyber/stix#object
+###  http://purl.org/stix#object
 stx:object rdf:type owl:ObjectProperty ;
            rdfs:subPropertyOf stx:stixObjectProperty ;
            rdfs:domain stx:StixThing ;
            rdfs:range stx:StixThing .
 
 
-###  http://purl.org/cyber/stix#object_marking
+###  http://purl.org/stix#object_marking
 stx:object_marking rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf stx:commonObjectProperies ;
                    rdfs:domain stx:StixThing ;
@@ -276,26 +271,26 @@ stx:object_marking rdf:type owl:ObjectProperty ;
                    rdfs:comment "a marking-definition object to be applied to this object" .
 
 
-###  http://purl.org/cyber/stix#objects
+###  http://purl.org/stix#objects
 stx:objects rdf:type owl:ObjectProperty ;
-            rdfs:range stx:StixObservables .
+            rdfs:range stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#opinionAbout
+###  http://purl.org/stix#opinionAbout
 stx:opinionAbout rdf:type owl:ObjectProperty ;
                  rdfs:subPropertyOf stx:stixObjectProperty ;
                  rdfs:domain stx:StixThing ;
                  rdfs:range stx:opinion .
 
 
-###  http://purl.org/cyber/stix#phaseOf
+###  http://purl.org/stix#phaseOf
 stx:phaseOf rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf stx:stixObjectProperty ;
             rdfs:domain stx:kill-chain-phase ;
             rdfs:range stx:kill-chain .
 
 
-###  http://purl.org/cyber/stix#relatedTo
+###  http://purl.org/stix#relatedTo
 stx:relatedTo rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf stx:stixObjectProperty ;
               rdf:type owl:TransitiveProperty ;
@@ -303,56 +298,56 @@ stx:relatedTo rdf:type owl:ObjectProperty ;
               rdfs:range stx:StixThing .
 
 
-###  http://purl.org/cyber/stix#resolvesTo
+###  http://purl.org/stix#resolvesTo
 stx:resolvesTo rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf stx:stixObjectProperty ;
                rdfs:domain stx:IpAddr ;
-               rdfs:range stx:mac-addr .
+               rdfs:range stx:MacAddr .
 
 
-###  http://purl.org/cyber/stix#sighting_of_ref
+###  http://purl.org/stix#sighting_of_ref
 stx:sighting_of_ref rdf:type owl:ObjectProperty ;
                     rdfs:subPropertyOf stx:stixObjectProperty ;
                     rdfs:domain stx:sighting ;
                     rdfs:range [ rdf:type owl:Class ;
                                  owl:unionOf ( stx:Adversary
-                                               stx:StixObservables
                                                stx:TTP
                                                stx:indicator
+                                               stx:observable-objects
                                              )
                                ] .
 
 
-###  http://purl.org/cyber/stix#source_of
+###  http://purl.org/stix#source_of
 stx:source_of rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf stx:stixObjectProperty .
 
 
-###  http://purl.org/cyber/stix#source_ref
+###  http://purl.org/stix#source_ref
 stx:source_ref rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf stx:stixObjectProperty ;
                rdfs:domain stx:relationship ;
-               rdfs:range stx:StixDomainObject .
+               rdfs:range stx:SDO .
 
 
-###  http://purl.org/cyber/stix#stixObjectProperty
+###  http://purl.org/stix#stixObjectProperty
 stx:stixObjectProperty rdf:type owl:ObjectProperty .
 
 
-###  http://purl.org/cyber/stix#target_of
+###  http://purl.org/stix#target_of
 stx:target_of rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf stx:stixObjectProperty ;
               owl:inverseOf stx:target_ref .
 
 
-###  http://purl.org/cyber/stix#target_ref
+###  http://purl.org/stix#target_ref
 stx:target_ref rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf stx:stixObjectProperty ;
                rdfs:domain stx:relationship ;
-               rdfs:range stx:StixDomainObject .
+               rdfs:range stx:SDO .
 
 
-###  http://purl.org/cyber/stix#targeted-by
+###  http://purl.org/stix#targeted-by
 stx:targeted-by rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf stx:stixObjectProperty ;
                 owl:inverseOf stx:targets ;
@@ -368,7 +363,7 @@ stx:targeted-by rdf:type owl:ObjectProperty ;
                            ] .
 
 
-###  http://purl.org/cyber/stix#targets
+###  http://purl.org/stix#targets
 stx:targets rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf stx:stixObjectProperty ;
             rdfs:domain [ rdf:type owl:Class ;
@@ -383,7 +378,7 @@ stx:targets rdf:type owl:ObjectProperty ;
                        ] .
 
 
-###  http://purl.org/cyber/stix#used-by
+###  http://purl.org/stix#used-by
 stx:used-by rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf stx:stixObjectProperty ;
             owl:inverseOf stx:uses ;
@@ -395,7 +390,7 @@ stx:used-by rdf:type owl:ObjectProperty ;
                        ] .
 
 
-###  http://purl.org/cyber/stix#uses
+###  http://purl.org/stix#uses
 stx:uses rdf:type owl:ObjectProperty ;
          rdfs:subPropertyOf stx:stixObjectProperty ;
          rdfs:domain [ rdf:type owl:Class ;
@@ -406,7 +401,7 @@ stx:uses rdf:type owl:ObjectProperty ;
          rdfs:range stx:TTP .
 
 
-###  http://purl.org/cyber/stix#variant-of
+###  http://purl.org/stix#variant-of
 stx:variant-of rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf stx:stixObjectProperty ;
                rdf:type owl:TransitiveProperty ;
@@ -415,79 +410,11 @@ stx:variant-of rdf:type owl:ObjectProperty ;
                rdfs:comment "This variantOf relation is used to document that one piece of Malware is a variant of another piece of Malware. For example, TorrentLocker is a variant of CryptoLocker." .
 
 
-###  http://purl.org/cyber/stix#x-capec_skill_of
-stx:x-capec_skill_of rdf:type owl:ObjectProperty ;
-                     rdfs:subPropertyOf stx:capec_property ;
-                     owl:inverseOf stx:x_capec_skill ;
-                     rdfs:domain stx:CapecSkill .
-
-
-###  http://purl.org/cyber/stix#x_capec_consequence_of
-stx:x_capec_consequence_of rdf:type owl:ObjectProperty ;
-                           rdfs:subPropertyOf stx:capec_property ;
-                           owl:inverseOf stx:x_capec_consequences ;
-                           rdfs:domain stx:CapecConsequence .
-
-
-###  http://purl.org/cyber/stix#x_capec_consequences
-stx:x_capec_consequences rdf:type owl:ObjectProperty ;
-                         rdfs:subPropertyOf stx:capec_property ;
-                         rdfs:range stx:CapecConsequence .
-
-
-###  http://purl.org/cyber/stix#x_capec_skill
-stx:x_capec_skill rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf stx:capec_property ;
-                  rdfs:range stx:CapecSkill .
-
-
 #################################################################
 #    Data properties
 #################################################################
 
-###  http://purl.org/cyber/stix#MD5
-stx:MD5 rdf:type owl:DatatypeProperty ;
-        rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-1
-stx:SHA-1 rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-224
-stx:SHA-224 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-256
-stx:SHA-256 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-384
-stx:SHA-384 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-512-hash
-stx:SHA-512-hash rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf stx:stixDataProperty .
-
-
-###  http://purl.org/cyber/stix#Url
-stx:Url rdf:type owl:DatatypeProperty ;
-        rdfs:subPropertyOf stx:stixDataProperty .
-
-
-###  http://purl.org/cyber/stix#aliases
-stx:aliases rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:stixDataProperty ;
-            rdfs:domain stx:Adversary ;
-            rdfs:range xsd:string .
-
-
-###  http://purl.org/cyber/stix#attack-motivation
+###  http://purl.org/stix#attack-motivation
 stx:attack-motivation rdf:type owl:DatatypeProperty ;
                       rdfs:subPropertyOf stx:property-label ;
                       rdfs:domain [ rdf:type owl:Class ;
@@ -530,7 +457,7 @@ stx:attack-motivation rdf:type owl:DatatypeProperty ;
                                  ] .
 
 
-###  http://purl.org/cyber/stix#attack-resource-level
+###  http://purl.org/stix#attack-resource-level
 stx:attack-resource-level rdf:type owl:DatatypeProperty ;
                           rdfs:subPropertyOf stx:property-label ;
                           rdfs:domain [ rdf:type owl:Class ;
@@ -562,77 +489,56 @@ stx:attack-resource-level rdf:type owl:DatatypeProperty ;
                           rdfs:comment "Attack Resource Level is an open vocabulary that captures the general level of resources that a threat actor, intrusion set, or campaign might have access to. It ranges from individual, a person acting alone, to government, the resources of a national government." .
 
 
-###  http://purl.org/cyber/stix#body
+###  http://purl.org/stix#body
 stx:body rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf stx:emailProperty ;
          rdfs:domain stx:email-message .
 
 
-###  http://purl.org/cyber/stix#commonDataProperty
+###  http://purl.org/stix#commonDataProperty
 stx:commonDataProperty rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf stx:stixDataProperty ;
                        rdfs:domain stx:StixThing ;
                        rdfs:comment "a collection of data properties that can be used with any stix object" .
 
 
-###  http://purl.org/cyber/stix#confidence
+###  http://purl.org/stix#confidence
 stx:confidence rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf stx:stixDataProperty ;
                rdfs:domain stx:opinion .
 
 
-###  http://purl.org/cyber/stix#country
-stx:country rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:stixDataProperty ;
-            rdfs:domain stx:location ;
-            rdfs:range xsd:string .
-
-
-###  http://purl.org/cyber/stix#cpe
+###  http://purl.org/stix#cpe
 stx:cpe rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf stx:stixDataProperty ;
         rdfs:domain stx:Software .
 
 
-###  http://purl.org/cyber/stix#created
+###  http://purl.org/stix#created
 stx:created rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:commonDataProperty ;
             rdfs:domain stx:StixThing ;
             rdfs:comment "The created property represents the time at which the first version of this object was created. The timstamp value MUST be precise to the nearest millisecond." .
 
 
-###  http://purl.org/cyber/stix#definition-type
+###  http://purl.org/stix#definition-type
 stx:definition-type rdf:type owl:DatatypeProperty ;
                     rdfs:subPropertyOf stx:stixDataProperty ;
                     rdfs:domain stx:marking-definition .
 
 
-###  http://purl.org/cyber/stix#description
+###  http://purl.org/stix#description
 stx:description rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#emailProperty
+###  http://purl.org/stix#emailProperty
 stx:emailProperty rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf stx:stixDataProperty ;
                   rdfs:domain stx:email-message .
 
 
-###  http://purl.org/cyber/stix#goals
-stx:goals rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf stx:stixDataProperty ;
-          rdfs:domain stx:Adversary ;
-          rdfs:range xsd:string .
-
-
-###  http://purl.org/cyber/stix#hash
-stx:hash rdf:type owl:DatatypeProperty ;
-         rdfs:subPropertyOf stx:stixDataProperty ;
-         rdfs:domain stx:file ;
-         rdfs:range xsd:string .
-
-
-###  http://purl.org/cyber/stix#hash-algorithm
+###  http://purl.org/stix#hash-algorithm
 stx:hash-algorithm rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf stx:property-label ;
                    rdfs:domain stx:StixThing ;
@@ -683,7 +589,13 @@ stx:hash-algorithm rdf:type owl:DatatypeProperty ;
                               ] .
 
 
-###  http://purl.org/cyber/stix#id
+###  http://purl.org/stix#hashType
+stx:hashType rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf stx:stixDataProperty ;
+             rdfs:domain stx:Hash .
+
+
+###  http://purl.org/stix#id
 stx:id rdf:type owl:DatatypeProperty ;
        rdfs:subPropertyOf stx:commonDataProperty ;
        rdfs:domain stx:StixThing ;
@@ -691,7 +603,7 @@ stx:id rdf:type owl:DatatypeProperty ;
        rdfs:comment "The id property universally and uniquely identifies this object." .
 
 
-###  http://purl.org/cyber/stix#identity-class
+###  http://purl.org/stix#identity-class
 stx:identity-class rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf stx:property-label ;
                    rdfs:domain stx:identity ;
@@ -715,7 +627,7 @@ stx:identity-class rdf:type owl:DatatypeProperty ;
                               ] .
 
 
-###  http://purl.org/cyber/stix#indicator-label
+###  http://purl.org/stix#indicator-label
 stx:indicator-label rdf:type owl:DatatypeProperty ;
                     rdfs:subPropertyOf stx:property-label ;
                     rdfs:domain stx:indicator ;
@@ -743,7 +655,7 @@ stx:indicator-label rdf:type owl:DatatypeProperty ;
                     rdfs:comment "Indicator labels is an open vocabulary used to categorize Indicators. It is intended to be high-level to promote consistent practices. Indicator labels should not be used to capture information that can be better captured via related Malware or Attack Pattern objects. It is better to link an Indicator to a Malware object describing Poison Ivy rather than simply labeling it with \"poison-ivy\"." .
 
 
-###  http://purl.org/cyber/stix#industry-sector
+###  http://purl.org/stix#industry-sector
 stx:industry-sector rdf:type owl:DatatypeProperty ;
                     rdfs:subPropertyOf stx:property-label ;
                     rdfs:domain stx:identity ;
@@ -834,29 +746,29 @@ stx:industry-sector rdf:type owl:DatatypeProperty ;
                     rdfs:comment "Industry sector is an open vocabulary that describes industrial and commercial sectors. It is intended to be holistic; it has been derived from several other lists and is not limited to \"critical infrastructure\" sectors." .
 
 
-###  http://purl.org/cyber/stix#is_multipart
+###  http://purl.org/stix#is_multipart
 stx:is_multipart rdf:type owl:DatatypeProperty ;
                  rdfs:subPropertyOf stx:emailProperty ;
                  rdfs:domain stx:email-message .
 
 
-###  http://purl.org/cyber/stix#kill_chain_name
+###  http://purl.org/stix#kill_chain_name
 stx:kill_chain_name rdf:type owl:DatatypeProperty ;
                     rdfs:subPropertyOf stx:stixDataProperty ;
                     rdfs:domain stx:kill-chain-phase .
 
 
-###  http://purl.org/cyber/stix#label
+###  http://purl.org/stix#label
 stx:label rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf stx:commonDataProperty .
 
 
-###  http://purl.org/cyber/stix#language
+###  http://purl.org/stix#language
 stx:language rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#malware-label
+###  http://purl.org/stix#malware-label
 stx:malware-label rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf stx:property-label ;
                   rdfs:domain stx:malware ;
@@ -905,49 +817,49 @@ stx:malware-label rdf:type owl:DatatypeProperty ;
                   rdfs:comment "Malware label is an open vocabulary that represents different types and functions of malware. Malware labels are not mutually exclusive; a malware instance can be both spyware and a screen capture tool." .
 
 
-###  http://purl.org/cyber/stix#mimeType
+###  http://purl.org/stix#mimeType
 stx:mimeType rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf stx:stixDataProperty ;
              rdfs:comment "The value of this property MUST be a valid MIME type as specified in the IANA Media Types registry [Media Types]." .
 
 
-###  http://purl.org/cyber/stix#modified
+###  http://purl.org/stix#modified
 stx:modified rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf stx:commonDataProperty ;
              rdfs:domain stx:StixThing ;
              rdfs:comment "The modified property represents the time that this particular version of the object was created. The timstamp value MUST be precise to the nearest millisecond." .
 
 
-###  http://purl.org/cyber/stix#name
+###  http://purl.org/stix#name
 stx:name rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf stx:stixDataProperty ;
          rdfs:domain stx:StixThing .
 
 
-###  http://purl.org/cyber/stix#opinion
+###  http://purl.org/stix#opinion
 stx:opinion rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#path
+###  http://purl.org/stix#path
 stx:path rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf stx:stixDataProperty ;
          rdfs:domain stx:file .
 
 
-###  http://purl.org/cyber/stix#payload_bin
+###  http://purl.org/stix#payload_bin
 stx:payload_bin rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf stx:stixDataProperty ;
                 rdfs:domain stx:artifact .
 
 
-###  http://purl.org/cyber/stix#phase_name
+###  http://purl.org/stix#phase_name
 stx:phase_name rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf stx:stixDataProperty ;
                rdfs:domain stx:kill-chain-phase .
 
 
-###  http://purl.org/cyber/stix#platform
+###  http://purl.org/stix#platform
 stx:platform rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf stx:stixDataProperty ;
              rdfs:domain stx:TTP ;
@@ -971,24 +883,24 @@ stx:platform rdf:type owl:DatatypeProperty ;
                         ] .
 
 
-###  http://purl.org/cyber/stix#property-label
+###  http://purl.org/stix#property-label
 stx:property-label rdf:type owl:DatatypeProperty ;
                    rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#published
+###  http://purl.org/stix#published
 stx:published rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#relationship_type
+###  http://purl.org/stix#relationship_type
 stx:relationship_type rdf:type owl:DatatypeProperty ;
                       rdfs:subPropertyOf stx:stixDataProperty ;
                       rdfs:domain stx:relationship ;
                       rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#report-label
+###  http://purl.org/stix#report-label
 stx:report-label rdf:type owl:DatatypeProperty ;
                  rdfs:subPropertyOf stx:property-label ;
                  rdfs:domain stx:report ;
@@ -1028,7 +940,7 @@ stx:report-label rdf:type owl:DatatypeProperty ;
                  rdfs:comment "Report label is an open vocabulary to describe the primary purpose or subject of a report. For example, a report that contains malware and indicators for that malware should have a report label of malware to capture that the malware is the primary purpose. Report labels are not mutually exclusive: a Report can be both a malware report and a tool report. Just because a report contains objects of a type does not mean that the report should include that label.  If the objects are there to simply provide evidence or context for other objects, it is not necessary to include them in the label." .
 
 
-###  http://purl.org/cyber/stix#revoked
+###  http://purl.org/stix#revoked
 stx:revoked rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:commonDataProperty ;
             rdfs:domain stx:StixThing ;
@@ -1036,52 +948,55 @@ stx:revoked rdf:type owl:DatatypeProperty ;
             rdfs:comment "The revoked property indicates whether the object has been revoked." .
 
 
-###  http://purl.org/cyber/stix#size
+###  http://purl.org/stix#size
 stx:size rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf stx:stixDataProperty ;
          rdfs:domain stx:file ;
          rdfs:range xsd:int .
 
 
-###  http://purl.org/cyber/stix#skillDescription
+###  http://purl.org/stix#skillDescription
 stx:skillDescription rdf:type owl:DatatypeProperty ;
-                     rdfs:subPropertyOf stx:stixDataProperty .
+                     rdfs:subPropertyOf stx:stixDataProperty ;
+                     rdfs:domain stx:CapecSkill .
 
 
-###  http://purl.org/cyber/stix#skillLevel
+###  http://purl.org/stix#skillLevel
 stx:skillLevel rdf:type owl:DatatypeProperty ;
-               rdfs:subPropertyOf stx:stixDataProperty .
+               rdfs:subPropertyOf stx:stixDataProperty ;
+               rdfs:domain stx:CapecSkill .
 
 
-###  http://purl.org/cyber/stix#spec_version
+###  http://purl.org/stix#spec_version
 stx:spec_version rdf:type owl:DatatypeProperty ;
                  rdfs:subPropertyOf stx:stixDataProperty ;
                  rdfs:domain stx:bundle ;
                  rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#statement
+###  http://purl.org/stix#statement
 stx:statement rdf:type owl:DatatypeProperty ;
-              rdfs:subPropertyOf stx:stixDataProperty .
+              rdfs:subPropertyOf stx:stixDataProperty ;
+              rdfs:domain stx:marking-statement .
 
 
-###  http://purl.org/cyber/stix#stixDataProperty
+###  http://purl.org/stix#stixDataProperty
 stx:stixDataProperty rdf:type owl:DatatypeProperty ;
                      rdfs:domain stx:StixThing .
 
 
-###  http://purl.org/cyber/stix#stixName
+###  http://purl.org/stix#stixName
 stx:stixName rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#subject
+###  http://purl.org/stix#subject
 stx:subject rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:emailProperty ;
             rdfs:domain stx:email-message .
 
 
-###  http://purl.org/cyber/stix#threat-actor-label
+###  http://purl.org/stix#threat-actor-label
 stx:threat-actor-label rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf stx:property-label ;
                        rdfs:domain stx:threat-actor ;
@@ -1124,7 +1039,7 @@ stx:threat-actor-label rdf:type owl:DatatypeProperty ;
                        rdfs:comment "Threat actor label is an open vocabulary used to describe what type of threat actor the individual or group is. For example, some threat actors are competitors who try to steal information, while others are activists who act in support of a social or political cause. Actor labels are not mutually exclusive: a threat actor can be both a disgruntled insider and a spy." .
 
 
-###  http://purl.org/cyber/stix#threat-actor-role
+###  http://purl.org/stix#threat-actor-role
 stx:threat-actor-role rdf:type owl:DatatypeProperty ;
                       rdfs:subPropertyOf stx:property-label ;
                       rdfs:domain stx:threat-actor ;
@@ -1155,7 +1070,7 @@ stx:threat-actor-role rdf:type owl:DatatypeProperty ;
                       rdfs:comment "Threat actor role is an open vocabulary that is used to describe the different roles that a threat actor can play. For example, some threat actors author malware or operate botnets while other actors actually carry out attacks directly." .
 
 
-###  http://purl.org/cyber/stix#threat-actor-sophistication
+###  http://purl.org/stix#threat-actor-sophistication
 stx:threat-actor-sophistication rdf:type owl:DatatypeProperty ;
                                 rdfs:subPropertyOf stx:property-label ;
                                 rdfs:domain stx:threat-actor ;
@@ -1186,12 +1101,12 @@ stx:threat-actor-sophistication rdf:type owl:DatatypeProperty ;
                                 rdfs:comment "Threat actor sophistication vocabulary captures the skill level of a threat actor. It ranges from \"none\", which describes a complete novice, to \"strategic\", which describes an attacker who is able to influence supply chains to introduce vulnerabilities. This vocabulary is separate from resource level because an innovative, highly-skilled threat actor may have access to very few resources while a minimal-level actor might have the resources of an organized crime ring." .
 
 
-###  http://purl.org/cyber/stix#tlp
+###  http://purl.org/stix#tlp
 stx:tlp rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#tool-label
+###  http://purl.org/stix#tool-label
 stx:tool-label rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf stx:property-label ;
                rdfs:domain stx:tool ;
@@ -1222,7 +1137,7 @@ stx:tool-label rdf:type owl:DatatypeProperty ;
                rdfs:comment "Tool labels describe the categories of tools that can be used to perform attacks." .
 
 
-###  http://purl.org/cyber/stix#type
+###  http://purl.org/stix#type
 stx:type rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf stx:commonDataProperty ;
          rdfs:domain stx:StixThing ;
@@ -1230,28 +1145,33 @@ stx:type rdf:type owl:DatatypeProperty ;
          rdfs:comment "The type property identifies the type of STIX Object (SDO, Relationship Object, etc). The value of the type field MUST be one of the types defined by a STIX Object (e.g., indicator)." .
 
 
-###  http://purl.org/cyber/stix#user_id
+###  http://purl.org/stix#url
+stx:url rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf stx:stixDataProperty .
+
+
+###  http://purl.org/stix#user_id
 stx:user_id rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:stixDataProperty ;
             rdfs:domain stx:UserAgent ;
             rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#value
+###  http://purl.org/stix#value
 stx:value rdf:type owl:DatatypeProperty ;
           rdfs:subPropertyOf stx:stixDataProperty ;
           rdfs:domain stx:StixThing ;
           rdfs:range rdfs:Literal .
 
 
-###  http://purl.org/cyber/stix#vendor
+###  http://purl.org/stix#vendor
 stx:vendor rdf:type owl:DatatypeProperty ;
            rdfs:subPropertyOf stx:stixDataProperty ;
            rdfs:domain stx:Software ;
            rdfs:comment "Specifies the name of the vendor of the software" .
 
 
-###  http://purl.org/cyber/stix#version
+###  http://purl.org/stix#version
 stx:version rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:stixDataProperty ;
             rdfs:domain [ rdf:type owl:Class ;
@@ -1263,7 +1183,7 @@ stx:version rdf:type owl:DatatypeProperty ;
             rdfs:comment "Specifies the version of the software" .
 
 
-###  http://purl.org/cyber/stix#x-mitre-contributor
+###  http://purl.org/stix#x-mitre-contributor
 stx:x-mitre-contributor rdf:type owl:DatatypeProperty ;
                         rdfs:subPropertyOf stx:x-mitre-property ;
                         rdfs:domain [ rdf:type owl:Class ;
@@ -1275,12 +1195,12 @@ stx:x-mitre-contributor rdf:type owl:DatatypeProperty ;
                                     ] .
 
 
-###  http://purl.org/cyber/stix#x-mitre-property
+###  http://purl.org/stix#x-mitre-property
 stx:x-mitre-property rdf:type owl:DatatypeProperty ;
                      rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#x_mitre_alias
+###  http://purl.org/stix#x_mitre_alias
 stx:x_mitre_alias rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf stx:x-mitre-property ;
                   rdfs:domain [ rdf:type owl:Class ;
@@ -1290,77 +1210,77 @@ stx:x_mitre_alias rdf:type owl:DatatypeProperty ;
                               ] .
 
 
-###  http://purl.org/cyber/stix#x_mitre_data_source
+###  http://purl.org/stix#x_mitre_data_source
 stx:x_mitre_data_source rdf:type owl:DatatypeProperty ;
                         rdfs:subPropertyOf stx:x-mitre-property ;
                         rdfs:domain stx:attack-pattern ;
                         rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_mitre_defense_bypassed
+###  http://purl.org/stix#x_mitre_defense_bypassed
 stx:x_mitre_defense_bypassed rdf:type owl:DatatypeProperty ;
                              rdfs:subPropertyOf stx:x-mitre-property ;
                              rdfs:domain stx:attack-pattern ;
                              rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_mitre_deprecated
+###  http://purl.org/stix#x_mitre_deprecated
 stx:x_mitre_deprecated rdf:type owl:DatatypeProperty ;
                        rdfs:subPropertyOf stx:x-mitre-property ;
                        rdfs:domain stx:attack-pattern ;
                        rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_mitre_effective_permission
+###  http://purl.org/stix#x_mitre_effective_permission
 stx:x_mitre_effective_permission rdf:type owl:DatatypeProperty ;
                                  rdfs:subPropertyOf stx:x-mitre-property ;
                                  rdfs:domain stx:attack-pattern ;
                                  rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_mitre_network_requirements
+###  http://purl.org/stix#x_mitre_network_requirements
 stx:x_mitre_network_requirements rdf:type owl:DatatypeProperty ;
                                  rdfs:subPropertyOf stx:x-mitre-property ;
                                  rdfs:domain stx:attack-pattern ;
                                  rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_mitre_permissions_required
+###  http://purl.org/stix#x_mitre_permissions_required
 stx:x_mitre_permissions_required rdf:type owl:DatatypeProperty ;
                                  rdfs:subPropertyOf stx:x-mitre-property ;
                                  rdfs:domain stx:attack-pattern ;
                                  rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_mitre_platform
+###  http://purl.org/stix#x_mitre_platform
 stx:x_mitre_platform rdf:type owl:DatatypeProperty ;
                      rdfs:subPropertyOf stx:x-mitre-property ;
                      rdfs:domain stx:attack-pattern ;
                      rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_mitre_remote_support
+###  http://purl.org/stix#x_mitre_remote_support
 stx:x_mitre_remote_support rdf:type owl:DatatypeProperty ;
                            rdfs:subPropertyOf stx:x-mitre-property ;
                            rdfs:domain stx:attack-pattern ;
                            rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_mitre_system_requirement
+###  http://purl.org/stix#x_mitre_system_requirement
 stx:x_mitre_system_requirement rdf:type owl:DatatypeProperty ;
                                rdfs:subPropertyOf stx:x-mitre-property ;
                                rdfs:domain stx:attack-pattern ;
                                rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_mitre_tactic_type
+###  http://purl.org/stix#x_mitre_tactic_type
 stx:x_mitre_tactic_type rdf:type owl:DatatypeProperty ;
                         rdfs:subPropertyOf stx:x-mitre-property ;
                         rdfs:domain stx:attack-pattern ;
                         rdfs:range xsd:string .
 
 
-###  http://purl.org/cyber/stix#x_resources_required
+###  http://purl.org/stix#x_resources_required
 stx:x_resources_required rdf:type owl:DatatypeProperty ;
                          rdfs:subPropertyOf stx:x-mitre-property ;
                          rdfs:domain stx:attack-pattern ;
@@ -1371,201 +1291,260 @@ stx:x_resources_required rdf:type owl:DatatypeProperty ;
 #    Classes
 #################################################################
 
-###  http://purl.org/cyber/stix#Adversary
+###  http://purl.org/stix#ASN
+stx:ASN rdf:type owl:Class ;
+        rdfs:subClassOf stx:observable-objects .
+
+
+###  http://purl.org/stix#Addr
+stx:Addr rdf:type owl:Class ;
+         rdfs:subClassOf stx:observable-objects .
+
+
+###  http://purl.org/stix#Adversary
 stx:Adversary rdf:type owl:Class ;
-              rdfs:subClassOf stx:StixDomainObject .
+              rdfs:subClassOf stx:SDO .
 
 
-###  http://purl.org/cyber/stix#CapecConsequence
-stx:CapecConsequence rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixCapecObject .
+###  http://purl.org/stix#CapecObject
+stx:CapecObject rdf:type owl:Class ;
+                rdfs:subClassOf stx:Other .
 
 
-###  http://purl.org/cyber/stix#CapecSkill
+###  http://purl.org/stix#CapecSkill
 stx:CapecSkill rdf:type owl:Class ;
-               rdfs:subClassOf stx:StixCapecObject .
+               rdfs:subClassOf stx:CapecObject .
 
 
-###  http://purl.org/cyber/stix#FileName
+###  http://purl.org/stix#EmailAddress
+stx:EmailAddress rdf:type owl:Class ;
+                 rdfs:subClassOf stx:observable-objects .
+
+
+###  http://purl.org/stix#Endpoint
+stx:Endpoint rdf:type owl:Class ;
+             rdfs:subClassOf stx:observable-objects .
+
+
+###  http://purl.org/stix#FileName
 stx:FileName rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables .
+             rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#FilePath
+###  http://purl.org/stix#FilePath
 stx:FilePath rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables .
+             rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#IpAddr
+###  http://purl.org/stix#Hash
+stx:Hash rdf:type owl:Class ;
+         rdfs:subClassOf stx:observable-objects .
+
+
+###  http://purl.org/stix#HashMD5
+stx:HashMD5 rdf:type owl:Class ;
+            rdfs:subClassOf stx:Hash .
+
+
+###  http://purl.org/stix#HashSHA-1
+stx:HashSHA-1 rdf:type owl:Class ;
+              rdfs:subClassOf stx:Hash .
+
+
+###  http://purl.org/stix#HashSHA-224
+stx:HashSHA-224 rdf:type owl:Class ;
+                rdfs:subClassOf stx:Hash .
+
+
+###  http://purl.org/stix#HashSHA-256
+stx:HashSHA-256 rdf:type owl:Class ;
+                rdfs:subClassOf stx:Hash .
+
+
+###  http://purl.org/stix#HashSHA-384
+stx:HashSHA-384 rdf:type owl:Class ;
+                rdfs:subClassOf stx:Hash .
+
+
+###  http://purl.org/stix#HashSHA-512
+stx:HashSHA-512 rdf:type owl:Class ;
+                rdfs:subClassOf stx:Hash .
+
+
+###  http://purl.org/stix#IpAddr
 stx:IpAddr rdf:type owl:Class ;
-           rdfs:subClassOf stx:StixObservables .
+           rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#NetworkTraffic
+###  http://purl.org/stix#Ipv6Addr
+stx:Ipv6Addr rdf:type owl:Class ;
+             rdfs:subClassOf stx:Addr .
+
+
+###  http://purl.org/stix#MacAddr
+stx:MacAddr rdf:type owl:Class ;
+            rdfs:subClassOf stx:observable-objects .
+
+
+###  http://purl.org/stix#NetworkTraffic
 stx:NetworkTraffic rdf:type owl:Class ;
-                   rdfs:subClassOf stx:StixObservables .
+                   rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#Port
+###  http://purl.org/stix#Other
+stx:Other rdf:type owl:Class ;
+          rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/stix#Port
 stx:Port rdf:type owl:Class ;
-         rdfs:subClassOf stx:StixObservables .
+         rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#Process
+###  http://purl.org/stix#Process
 stx:Process rdf:type owl:Class ;
-            rdfs:subClassOf stx:StixObservables .
+            rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#Protocol
+###  http://purl.org/stix#Protocol
 stx:Protocol rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables .
+             rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#Software
+###  http://purl.org/stix#RelativeTimeExpression
+stx:RelativeTimeExpression rdf:type owl:Class ;
+                           rdfs:subClassOf stx:Time .
+
+
+###  http://purl.org/stix#SDO
+stx:SDO rdf:type owl:Class ;
+        rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/stix#SRO
+stx:SRO rdf:type owl:Class ;
+        rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/stix#Software
 stx:Software rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables .
+             rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#StixCapecObject
-stx:StixCapecObject rdf:type owl:Class ;
-                    rdfs:subClassOf stx:StixThing .
-
-
-###  http://purl.org/cyber/stix#StixDomainObject
-stx:StixDomainObject rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixThing .
-
-
-###  http://purl.org/cyber/stix#StixMispObject
-stx:StixMispObject rdf:type owl:Class ;
-                   rdfs:subClassOf stx:StixThing .
-
-
-###  http://purl.org/cyber/stix#StixObservables
-stx:StixObservables rdf:type owl:Class ;
-                    rdfs:subClassOf stx:StixThing ;
-                    rdfs:comment "The ObservableType is a complex type representing a description of a single cyber observable."^^xsd:string .
-
-
-###  http://purl.org/cyber/stix#StixOtherObject
-stx:StixOtherObject rdf:type owl:Class ;
-                    rdfs:subClassOf stx:StixThing .
-
-
-###  http://purl.org/cyber/stix#StixRelationshipObject
-stx:StixRelationshipObject rdf:type owl:Class ;
-                           rdfs:subClassOf stx:StixThing .
-
-
-###  http://purl.org/cyber/stix#StixThing
+###  http://purl.org/stix#StixThing
 stx:StixThing rdf:type owl:Class .
 
 
-###  http://purl.org/cyber/stix#TTP
+###  http://purl.org/stix#TTP
 stx:TTP rdf:type owl:Class ;
-        rdfs:subClassOf stx:StixDomainObject ;
+        rdfs:subClassOf stx:SDO ;
         rdfs:comment "TPP is a Tactic, Technique, or Procedure, i.e., behaviors and resources that attackers use to carry out their attacks" .
 
 
-###  http://purl.org/cyber/stix#URLPath
+###  http://purl.org/stix#Time
+stx:Time rdf:type owl:Class ;
+         rdfs:subClassOf stx:Other .
+
+
+###  http://purl.org/stix#TimeExpression
+stx:TimeExpression rdf:type owl:Class ;
+                   rdfs:subClassOf stx:Time .
+
+
+###  http://purl.org/stix#URLPath
 stx:URLPath rdf:type owl:Class ;
-            rdfs:subClassOf stx:StixObservables .
+            rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#Url
-stx:Url rdf:type owl:Class ;
-        rdfs:subClassOf stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#UserAccount
+###  http://purl.org/stix#UserAccount
 stx:UserAccount rdf:type owl:Class ;
-                rdfs:subClassOf stx:StixObservables ;
+                rdfs:subClassOf stx:observable-objects ;
                 rdfs:comment "The User Account Object represents an instance of any type of user account, including but not limited to operating system, device, messaging service, and social media platform accounts." .
 
 
-###  http://purl.org/cyber/stix#UserAgent
+###  http://purl.org/stix#UserAgent
 stx:UserAgent rdf:type owl:Class ;
-              rdfs:subClassOf stx:StixObservables .
+              rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#artifact
+###  http://purl.org/stix#X
+stx:X rdf:type owl:Class ;
+      rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/stix#artifact
 stx:artifact rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables ;
+             rdfs:subClassOf stx:observable-objects ;
              rdfs:comment """The Artifact Object permits capturing an array of bytes (8-bits), as a base64-encoded string, or linking to a file-like payload. The size of the base64-encoded data captured in the payload_bin property MUST be less than or equal to 10MB.
 
 One of payload_bin or url MUST be provided. It is incumbent on object creators to ensure that the URL is accessible for downstream consumers. If a URL is provided, then the hashes property MUST contain the hash of the URL contents.""" .
 
 
-###  http://purl.org/cyber/stix#attack-pattern
+###  http://purl.org/stix#attack-pattern
 stx:attack-pattern rdf:type owl:Class ;
                    rdfs:subClassOf stx:TTP .
 
 
-###  http://purl.org/cyber/stix#bundle
+###  http://purl.org/stix#bundle
 stx:bundle rdf:type owl:Class ;
-           rdfs:subClassOf stx:StixOtherObject ;
+           rdfs:subClassOf stx:Other ;
            rdfs:comment "A Bundle is a collection of arbitrary STIX Objects and Marking Definitions grouped together in a single container. A Bundle does not have any semantic meaning and Objects are not considered related by virtue of being in the same Bundle. Bundle is not STIX Object, so it does not have any of the Common Properties other than the type and id properties. Bundle is transient and implementations should not assume that other implementations will treat it as a persistent object." .
 
 
-###  http://purl.org/cyber/stix#campaign
+###  http://purl.org/stix#campaign
 stx:campaign rdf:type owl:Class ;
              rdfs:subClassOf stx:Adversary ;
              rdfs:comment "The CampaignType characterizes  a single cyber threat Campaign."^^xsd:string .
 
 
-###  http://purl.org/cyber/stix#course-of-action
+###  http://purl.org/stix#course-of-action
 stx:course-of-action rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixDomainObject .
+                     rdfs:subClassOf stx:SDO .
 
 
-###  http://purl.org/cyber/stix#definition-object
-stx:definition-object rdf:type owl:Class ;
-                      rdfs:subClassOf stx:StixOtherObject .
-
-
-###  http://purl.org/cyber/stix#domain-name
+###  http://purl.org/stix#domain-name
 stx:domain-name rdf:type owl:Class ;
-                rdfs:subClassOf stx:StixObservables .
+                rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#email-addr
+###  http://purl.org/stix#email-addr
 stx:email-addr rdf:type owl:Class ;
-               rdfs:subClassOf stx:StixObservables .
+               rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#email-message
+###  http://purl.org/stix#email-message
 stx:email-message rdf:type owl:Class ;
-                  rdfs:subClassOf stx:StixObservables .
+                  rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#external-reference
+###  http://purl.org/stix#external-reference
 stx:external-reference rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixOtherObject .
+                       rdfs:subClassOf stx:Other .
 
 
-###  http://purl.org/cyber/stix#file
+###  http://purl.org/stix#file
 stx:file rdf:type owl:Class ;
-         rdfs:subClassOf stx:StixObservables .
+         rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#granular-marking
+###  http://purl.org/stix#granular-marking
 stx:granular-marking rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixOtherObject .
+                     rdfs:subClassOf stx:Other .
 
 
-###  http://purl.org/cyber/stix#identity
+###  http://purl.org/stix#identity
 stx:identity rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixDomainObject ;
+             rdfs:subClassOf stx:SDO ;
              rdfs:comment "The Identity field characterizes the identity of this entry"^^xsd:string .
 
 
-###  http://purl.org/cyber/stix#indicator
+###  http://purl.org/stix#indicator
 stx:indicator rdf:type owl:Class ;
-              rdfs:subClassOf stx:StixDomainObject ;
+              rdfs:subClassOf stx:SDO ;
               rdfs:comment "Indicators contain a pattern that can be used to detect suspicious or malicious cyber activity. For example, an Indicator may be used to represent a set of malicious domains and use the STIX Patterning Language to specify these domains." .
 
 
-###  http://purl.org/cyber/stix#individual
+###  http://purl.org/stix#individual
 stx:individual rdf:type owl:Class ;
                owl:equivalentClass [ owl:intersectionOf ( stx:identity
                                                           [ rdf:type owl:Restriction ;
@@ -1583,74 +1562,86 @@ stx:individual rdf:type owl:Class ;
                rdfs:subClassOf stx:identity .
 
 
-###  http://purl.org/cyber/stix#intrusion-set
+###  http://purl.org/stix#intrusion-set
 stx:intrusion-set rdf:type owl:Class ;
                   rdfs:subClassOf stx:Adversary .
 
 
-###  http://purl.org/cyber/stix#ipv4-addr
+###  http://purl.org/stix#ipv4-addr
 stx:ipv4-addr rdf:type owl:Class ;
-              rdfs:subClassOf stx:IpAddr .
+              rdfs:subClassOf stx:Addr ,
+                              stx:IpAddr .
 
 
-###  http://purl.org/cyber/stix#ipv6-addr
+###  http://purl.org/stix#ipv6-addr
 stx:ipv6-addr rdf:type owl:Class ;
               rdfs:subClassOf stx:IpAddr .
 
 
-###  http://purl.org/cyber/stix#kill-chain
+###  http://purl.org/stix#kill-chain
 stx:kill-chain rdf:type owl:Class ;
-               rdfs:subClassOf stx:StixOtherObject .
+               rdfs:subClassOf stx:Other .
 
 
-###  http://purl.org/cyber/stix#kill-chain-phase
+###  http://purl.org/stix#kill-chain-phase
 stx:kill-chain-phase rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixOtherObject .
+                     rdfs:subClassOf stx:Other .
 
 
-###  http://purl.org/cyber/stix#location
+###  http://purl.org/stix#location
 stx:location rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables ,
-                             stx:identity .
+             rdfs:subClassOf stx:identity ,
+                             stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#mac-addr
-stx:mac-addr rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#malware
+###  http://purl.org/stix#malware
 stx:malware rdf:type owl:Class ;
-            rdfs:subClassOf stx:StixDomainObject ,
+            rdfs:subClassOf stx:SDO ,
                             stx:TTP .
 
 
-###  http://purl.org/cyber/stix#marking-definition
+###  http://purl.org/stix#marking-definition
 stx:marking-definition rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixOtherObject .
+                       rdfs:subClassOf stx:Other .
 
 
-###  http://purl.org/cyber/stix#mutex
+###  http://purl.org/stix#marking-object
+stx:marking-object rdf:type owl:Class ;
+                   rdfs:subClassOf stx:Other .
+
+
+###  http://purl.org/stix#marking-statement
+stx:marking-statement rdf:type owl:Class ;
+                      rdfs:subClassOf stx:marking-object .
+
+
+###  http://purl.org/stix#mutex
 stx:mutex rdf:type owl:Class ;
-          rdfs:subClassOf stx:StixObservables .
+          rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#note
+###  http://purl.org/stix#note
 stx:note rdf:type owl:Class ;
-         rdfs:subClassOf stx:StixDomainObject .
+         rdfs:subClassOf stx:SDO .
 
 
-###  http://purl.org/cyber/stix#observed-data
+###  http://purl.org/stix#observable-objects
+stx:observable-objects rdf:type owl:Class ;
+                       rdfs:subClassOf stx:StixThing ;
+                       rdfs:comment "The ObservableType is a complex type representing a description of a single cyber observable."^^xsd:string .
+
+
+###  http://purl.org/stix#observed-data
 stx:observed-data rdf:type owl:Class ;
-                  rdfs:subClassOf stx:StixOtherObject .
+                  rdfs:subClassOf stx:Other .
 
 
-###  http://purl.org/cyber/stix#opinion
+###  http://purl.org/stix#opinion
 stx:opinion rdf:type owl:Class ;
-            rdfs:subClassOf stx:StixDomainObject .
+            rdfs:subClassOf stx:SDO .
 
 
-###  http://purl.org/cyber/stix#organization
+###  http://purl.org/stix#organization
 stx:organization rdf:type owl:Class ;
                  owl:equivalentClass [ owl:intersectionOf ( stx:identity
                                                             [ rdf:type owl:Restriction ;
@@ -1668,212 +1659,222 @@ stx:organization rdf:type owl:Class ;
                  rdfs:subClassOf stx:identity .
 
 
-###  http://purl.org/cyber/stix#relationship
+###  http://purl.org/stix#relationship
 stx:relationship rdf:type owl:Class ;
-                 rdfs:subClassOf stx:StixRelationshipObject .
+                 rdfs:subClassOf stx:SRO .
 
 
-###  http://purl.org/cyber/stix#report
+###  http://purl.org/stix#report
 stx:report rdf:type owl:Class ;
-           rdfs:subClassOf stx:StixDomainObject ;
+           rdfs:subClassOf stx:SDO ;
            rdfs:comment "Reports are collections of threat intelligence focused on one or more topics, such as a description of a threat actor, malware, or attack technique, including context and related details. They are used to group related threat intelligence together so that it can be published as a comprehensive cyber threat story." .
 
 
-###  http://purl.org/cyber/stix#sighting
+###  http://purl.org/stix#sighting
 stx:sighting rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixRelationshipObject .
+             rdfs:subClassOf stx:SRO .
 
 
-###  http://purl.org/cyber/stix#threat-actor
+###  http://purl.org/stix#threat-actor
 stx:threat-actor rdf:type owl:Class ;
                  rdfs:subClassOf stx:Adversary .
 
 
-###  http://purl.org/cyber/stix#tool
+###  http://purl.org/stix#tlp-marking
+stx:tlp-marking rdf:type owl:Class ;
+                rdfs:subClassOf stx:marking-object .
+
+
+###  http://purl.org/stix#tool
 stx:tool rdf:type owl:Class ;
-         rdfs:subClassOf stx:StixDomainObject ,
+         rdfs:subClassOf stx:SDO ,
                          stx:TTP .
 
 
-###  http://purl.org/cyber/stix#vulnerability
+###  http://purl.org/stix#url
+stx:url rdf:type owl:Class ;
+        rdfs:subClassOf stx:observable-objects .
+
+
+###  http://purl.org/stix#vulnerability
 stx:vulnerability rdf:type owl:Class ;
-                  rdfs:subClassOf stx:StixDomainObject ;
+                  rdfs:subClassOf stx:SDO ;
                   rdfs:comment "The Vulnerability field identifies and characterizes a Vulnerability as a potential ExploitTarget."^^xsd:string .
 
 
-###  http://purl.org/cyber/stix#windows-registry-key
+###  http://purl.org/stix#windows-registry-key
 stx:windows-registry-key rdf:type owl:Class ;
-                         rdfs:subClassOf stx:StixObservables .
+                         rdfs:subClassOf stx:observable-objects .
 
 
-###  http://purl.org/cyber/stix#x-example-com-customobject
+###  http://purl.org/stix#x-example-com-customobject
 stx:x-example-com-customobject rdf:type owl:Class ;
-                               rdfs:subClassOf stx:StixMispObject .
+                               rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-AS
+###  http://purl.org/stix#x-misp-object-AS
 stx:x-misp-object-AS rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixMispObject .
+                     rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-btc
+###  http://purl.org/stix#x-misp-object-btc
 stx:x-misp-object-btc rdf:type owl:Class ;
-                      rdfs:subClassOf stx:StixMispObject .
+                      rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-campaign-id
+###  http://purl.org/stix#x-misp-object-campaign-id
 stx:x-misp-object-campaign-id rdf:type owl:Class ;
-                              rdfs:subClassOf stx:StixMispObject .
+                              rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-campaign-name
+###  http://purl.org/stix#x-misp-object-campaign-name
 stx:x-misp-object-campaign-name rdf:type owl:Class ;
-                                rdfs:subClassOf stx:StixMispObject .
+                                rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-comment
+###  http://purl.org/stix#x-misp-object-comment
 stx:x-misp-object-comment rdf:type owl:Class ;
-                          rdfs:subClassOf stx:StixMispObject .
+                          rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-datetime
+###  http://purl.org/stix#x-misp-object-datetime
 stx:x-misp-object-datetime rdf:type owl:Class ;
-                           rdfs:subClassOf stx:StixMispObject .
+                           rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-email-attachment
+###  http://purl.org/stix#x-misp-object-email-attachment
 stx:x-misp-object-email-attachment rdf:type owl:Class ;
-                                   rdfs:subClassOf stx:StixMispObject .
+                                   rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-github-repository
+###  http://purl.org/stix#x-misp-object-github-repository
 stx:x-misp-object-github-repository rdf:type owl:Class ;
-                                    rdfs:subClassOf stx:StixMispObject .
+                                    rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-github-username
+###  http://purl.org/stix#x-misp-object-github-username
 stx:x-misp-object-github-username rdf:type owl:Class ;
-                                  rdfs:subClassOf stx:StixMispObject .
+                                  rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-hex
+###  http://purl.org/stix#x-misp-object-hex
 stx:x-misp-object-hex rdf:type owl:Class ;
-                      rdfs:subClassOf stx:StixMispObject .
+                      rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-jabber-id
+###  http://purl.org/stix#x-misp-object-jabber-id
 stx:x-misp-object-jabber-id rdf:type owl:Class ;
-                            rdfs:subClassOf stx:StixMispObject .
+                            rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-mobile-application-id
+###  http://purl.org/stix#x-misp-object-mobile-application-id
 stx:x-misp-object-mobile-application-id rdf:type owl:Class ;
-                                        rdfs:subClassOf stx:StixMispObject .
+                                        rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-named-pipe
+###  http://purl.org/stix#x-misp-object-named-pipe
 stx:x-misp-object-named-pipe rdf:type owl:Class ;
-                             rdfs:subClassOf stx:StixMispObject .
+                             rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-other
+###  http://purl.org/stix#x-misp-object-other
 stx:x-misp-object-other rdf:type owl:Class ;
-                        rdfs:subClassOf stx:StixMispObject .
+                        rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-pattern-in-file
+###  http://purl.org/stix#x-misp-object-pattern-in-file
 stx:x-misp-object-pattern-in-file rdf:type owl:Class ;
-                                  rdfs:subClassOf stx:StixMispObject .
+                                  rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-pattern-in-memory
+###  http://purl.org/stix#x-misp-object-pattern-in-memory
 stx:x-misp-object-pattern-in-memory rdf:type owl:Class ;
-                                    rdfs:subClassOf stx:StixMispObject .
+                                    rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-pattern-in-traffic
+###  http://purl.org/stix#x-misp-object-pattern-in-traffic
 stx:x-misp-object-pattern-in-traffic rdf:type owl:Class ;
-                                     rdfs:subClassOf stx:StixMispObject .
+                                     rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-pdb
+###  http://purl.org/stix#x-misp-object-pdb
 stx:x-misp-object-pdb rdf:type owl:Class ;
-                      rdfs:subClassOf stx:StixMispObject .
+                      rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-prtn
+###  http://purl.org/stix#x-misp-object-prtn
 stx:x-misp-object-prtn rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixMispObject .
+                       rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-sigma
+###  http://purl.org/stix#x-misp-object-sigma
 stx:x-misp-object-sigma rdf:type owl:Class ;
-                        rdfs:subClassOf stx:StixMispObject .
+                        rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-snort
+###  http://purl.org/stix#x-misp-object-snort
 stx:x-misp-object-snort rdf:type owl:Class ;
-                        rdfs:subClassOf stx:StixMispObject .
+                        rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-text
+###  http://purl.org/stix#x-misp-object-text
 stx:x-misp-object-text rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixMispObject .
+                       rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-threat-actor
+###  http://purl.org/stix#x-misp-object-threat-actor
 stx:x-misp-object-threat-actor rdf:type owl:Class ;
-                               rdfs:subClassOf stx:StixMispObject .
+                               rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-user-agent
+###  http://purl.org/stix#x-misp-object-user-agent
 stx:x-misp-object-user-agent rdf:type owl:Class ;
-                             rdfs:subClassOf stx:StixMispObject .
+                             rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-whois-creation-date
+###  http://purl.org/stix#x-misp-object-whois-creation-date
 stx:x-misp-object-whois-creation-date rdf:type owl:Class ;
-                                      rdfs:subClassOf stx:StixMispObject .
+                                      rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-whois-registrant-email
+###  http://purl.org/stix#x-misp-object-whois-registrant-email
 stx:x-misp-object-whois-registrant-email rdf:type owl:Class ;
-                                         rdfs:subClassOf stx:StixMispObject .
+                                         rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-whois-registrant-name
+###  http://purl.org/stix#x-misp-object-whois-registrant-name
 stx:x-misp-object-whois-registrant-name rdf:type owl:Class ;
-                                        rdfs:subClassOf stx:StixMispObject .
+                                        rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-whois-registrant-phone
+###  http://purl.org/stix#x-misp-object-whois-registrant-phone
 stx:x-misp-object-whois-registrant-phone rdf:type owl:Class ;
-                                         rdfs:subClassOf stx:StixMispObject .
+                                         rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-whois-registrar
+###  http://purl.org/stix#x-misp-object-whois-registrar
 stx:x-misp-object-whois-registrar rdf:type owl:Class ;
-                                  rdfs:subClassOf stx:StixMispObject .
+                                  rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-windows-scheduled-task
+###  http://purl.org/stix#x-misp-object-windows-scheduled-task
 stx:x-misp-object-windows-scheduled-task rdf:type owl:Class ;
-                                         rdfs:subClassOf stx:StixMispObject .
+                                         rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-windows-service-name
+###  http://purl.org/stix#x-misp-object-windows-service-name
 stx:x-misp-object-windows-service-name rdf:type owl:Class ;
-                                       rdfs:subClassOf stx:StixMispObject .
+                                       rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x-misp-object-yara
+###  http://purl.org/stix#x-misp-object-yara
 stx:x-misp-object-yara rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixMispObject .
+                       rdfs:subClassOf stx:X .
 
 
-###  http://purl.org/cyber/stix#x509-certificate
+###  http://purl.org/stix#x509-certificate
 stx:x509-certificate rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixObservables .
+                     rdfs:subClassOf stx:observable-objects .
 
 
 ###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

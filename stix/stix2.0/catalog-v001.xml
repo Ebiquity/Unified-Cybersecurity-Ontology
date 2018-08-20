@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <uri id="Imports Wizard Entry" name="http://purl.org/uco/ns#" uri="http://purl.org/uco"/>
+    <uri id="Imports Wizard Entry" name="http://ffrdc.ebiquity.umbc.edu/ns/ontology/" uri="http://purl.org/cyber"/>
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base=""/>
+</catalog>
