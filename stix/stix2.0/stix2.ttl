@@ -1386,6 +1386,42 @@ stx:CapecSkill rdf:type owl:Class ;
                rdfs:subClassOf stx:StixCapecObject .
 
 
+###  http://purl.org/cyber/stix#CrimeSyndicate
+stx:CrimeSyndicate rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty stx:label ;
+                                                                owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                     owl:oneOf [ rdf:type rdf:List ;
+                                                                                                 rdf:first "crime-syndicate" ;
+                                                                                                 rdf:rest rdf:nil
+                                                                                               ]
+                                                                                   ]
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
+                   rdfs:subClassOf stx:threat-actor .
+
+
+###  http://purl.org/cyber/stix#Criminal
+stx:Criminal rdf:type owl:Class ;
+             owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty stx:label ;
+                                                          owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                               owl:oneOf [ rdf:type rdf:List ;
+                                                                                           rdf:first "criminal" ;
+                                                                                           rdf:rest rdf:nil
+                                                                                         ]
+                                                                             ]
+                                                        ]
+                                                      ) ;
+                                   rdf:type owl:Class
+                                 ] ;
+             rdfs:subClassOf stx:threat-actor .
+
+
 ###  http://purl.org/cyber/stix#FileName
 stx:FileName rdf:type owl:Class ;
              rdfs:subClassOf stx:StixObservables .
@@ -1399,6 +1435,24 @@ stx:FilePath rdf:type owl:Class ;
 ###  http://purl.org/cyber/stix#IpAddr
 stx:IpAddr rdf:type owl:Class ;
            rdfs:subClassOf stx:StixObservables .
+
+
+###  http://purl.org/cyber/stix#NationState
+stx:NationState rdf:type owl:Class ;
+                owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty stx:label ;
+                                                             owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                  owl:oneOf [ rdf:type rdf:List ;
+                                                                                              rdf:first "nation-state" ;
+                                                                                              rdf:rest rdf:nil
+                                                                                            ]
+                                                                                ]
+                                                           ]
+                                                         ) ;
+                                      rdf:type owl:Class
+                                    ] ;
+                rdfs:subClassOf stx:threat-actor .
 
 
 ###  http://purl.org/cyber/stix#NetworkTraffic
@@ -1424,6 +1478,24 @@ stx:Protocol rdf:type owl:Class ;
 ###  http://purl.org/cyber/stix#Software
 stx:Software rdf:type owl:Class ;
              rdfs:subClassOf stx:StixObservables .
+
+
+###  http://purl.org/cyber/stix#Spy
+stx:Spy rdf:type owl:Class ;
+        owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty stx:label ;
+                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                          owl:oneOf [ rdf:type rdf:List ;
+                                                                                      rdf:first "spy" ;
+                                                                                      rdf:rest rdf:nil
+                                                                                    ]
+                                                                        ]
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] ;
+        rdfs:subClassOf stx:threat-actor .
 
 
 ###  http://purl.org/cyber/stix#StixCapecObject
@@ -1465,6 +1537,24 @@ stx:StixThing rdf:type owl:Class .
 stx:TTP rdf:type owl:Class ;
         rdfs:subClassOf stx:StixDomainObject ;
         rdfs:comment "TPP is a Tactic, Technique, or Procedure, i.e., behaviors and resources that attackers use to carry out their attacks" .
+
+
+###  http://purl.org/cyber/stix#Terrorist
+stx:Terrorist rdf:type owl:Class ;
+              owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+                                                         [ rdf:type owl:Restriction ;
+                                                           owl:onProperty stx:label ;
+                                                           owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                owl:oneOf [ rdf:type rdf:List ;
+                                                                                            rdf:first "terrorist" ;
+                                                                                            rdf:rest rdf:nil
+                                                                                          ]
+                                                                              ]
+                                                         ]
+                                                       ) ;
+                                    rdf:type owl:Class
+                                  ] ;
+              rdfs:subClassOf stx:threat-actor .
 
 
 ###  http://purl.org/cyber/stix#URLPath
