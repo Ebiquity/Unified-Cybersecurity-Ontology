@@ -1,1 +1,215 @@
-# coming soon
+@prefix : <http://purl.org/cyber/misp#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix stx: <http://purl.org/cyber/stix#> .
+@prefix uco: <http://purl.org/cyber#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix misp: <http://purl.org/cyber/misp#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix capec: <http://purl.org/cyber/capec#> .
+@base <http://purl.org/cyber/misp> .
+
+<http://purl.org/cyber/misp> rdf:type owl:Ontology ;
+                              owl:versionIRI <http://purl.org/cyber/misp> ;
+                              rdfs:comment "An OWL ontology for representing cybersecurity information using subset of the MISP (Malware Information Sharing Platform) data model used in STIX 2.0. See https://github.com/MISP/" .
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/cyber/misp#comment
+misp:comment rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/cyber/misp#timestamp
+misp:timestamp rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/cyber/misp#toIds
+misp:toIds rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/cyber/misp#value
+misp:value rdf:type owl:DatatypeProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/cyber/misp#AS
+misp:AS rdf:type owl:Class ;
+        rdfs:subClassOf misp:MispThing ;
+        rdfs:comment "Autonomous system" ;
+        rdfs:label "Autonomous system" .
+
+
+###  http://purl.org/cyber/misp#Btc
+misp:Btc rdf:type owl:Class ;
+         rdfs:subClassOf misp:MispThing ;
+         rdfs:label "Bitcoin Address" .
+
+
+###  http://purl.org/cyber/misp#CampaignId
+misp:CampaignId rdf:type owl:Class ;
+                rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#CampaignName
+misp:CampaignName rdf:type owl:Class ;
+                  rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#Comment
+misp:Comment rdf:type owl:Class ;
+             rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#Datetime
+misp:Datetime rdf:type owl:Class ;
+              rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#EmailAttachment
+misp:EmailAttachment rdf:type owl:Class ;
+                     rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#GithubRepository
+misp:GithubRepository rdf:type owl:Class ;
+                      rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#GithubUsername
+misp:GithubUsername rdf:type owl:Class ;
+                    rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#Hex
+misp:Hex rdf:type owl:Class ;
+         rdfs:subClassOf misp:MispThing ;
+         rdfs:label "A value in hexadecimal format" .
+
+
+###  http://purl.org/cyber/misp#Jabber
+misp:Jabber rdf:type owl:Class ;
+            rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#MispThing
+misp:MispThing rdf:type owl:Class .
+
+
+###  http://purl.org/cyber/misp#MobileApplication
+misp:MobileApplication rdf:type owl:Class ;
+                       rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#NamedPipe
+misp:NamedPipe rdf:type owl:Class ;
+               rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#Other
+misp:Other rdf:type owl:Class ;
+           rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#PatternInFile
+misp:PatternInFile rdf:type owl:Class ;
+                   rdfs:subClassOf misp:MispThing ;
+                   rdfs:label "Pattern in file that identifies the malware" .
+
+
+###  http://purl.org/cyber/misp#PatternInMemory
+misp:PatternInMemory rdf:type owl:Class ;
+                     rdfs:subClassOf misp:MispThing ;
+                     rdfs:comment "Pattern in memory dump that identifies the malware" .
+
+
+###  http://purl.org/cyber/misp#PatternInTraffic
+misp:PatternInTraffic rdf:type owl:Class ;
+                      rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#Pdb
+misp:Pdb rdf:type owl:Class ;
+         rdfs:subClassOf misp:MispThing ;
+         rdfs:comment "Microsoft Program database (PDB) path information" .
+
+
+###  http://purl.org/cyber/misp#Prtn
+misp:Prtn rdf:type owl:Class ;
+          rdfs:subClassOf misp:MispThing ;
+          rdfs:comment "Premium-Rate Telephone Number" .
+
+
+###  http://purl.org/cyber/misp#Sigma
+misp:Sigma rdf:type owl:Class ;
+           rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#Snort
+misp:Snort rdf:type owl:Class ;
+           rdfs:subClassOf misp:MispThing ;
+           rdfs:comment "An IDS rule in Snort rule-format" .
+
+
+###  http://purl.org/cyber/misp#Text
+misp:Text rdf:type owl:Class ;
+          rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#ThreatActor
+misp:ThreatActor rdf:type owl:Class ;
+                 rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#UserAgent
+misp:UserAgent rdf:type owl:Class ;
+               rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#WhoisCreationDate
+misp:WhoisCreationDate rdf:type owl:Class ;
+                       rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#WhoisRegistrantEmail
+misp:WhoisRegistrantEmail rdf:type owl:Class ;
+                          rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#WhoisRegistrantName
+misp:WhoisRegistrantName rdf:type owl:Class ;
+                         rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#WhoisRegistrantPhone
+misp:WhoisRegistrantPhone rdf:type owl:Class ;
+                          rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#WhoisRegistrar
+misp:WhoisRegistrar rdf:type owl:Class ;
+                    rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#WindowsScheduledTask
+misp:WindowsScheduledTask rdf:type owl:Class ;
+                          rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#WindowsServiceName
+misp:WindowsServiceName rdf:type owl:Class ;
+                        rdfs:subClassOf misp:MispThing .
+
+
+###  http://purl.org/cyber/misp#Yara
+misp:Yara rdf:type owl:Class ;
+          rdfs:subClassOf misp:MispThing ;
+          rdfs:comment "Yara signature" .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi

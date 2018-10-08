@@ -12,218 +12,178 @@
 
 <http://purl.org/cyber/stix> rdf:type owl:Ontology ;
                               owl:versionIRI <http://purl.org/cyber/stix> ;
-                              owl:imports <http://ffrdc.ebiquity.umbc.edu/ns/ontology/> ;
                               rdfs:comment "An OWL ontology for representing cybersecurity information using the STIX 2 data model." .
 
 #################################################################
 #    Object Properties
 #################################################################
 
-###  http://purl.org/cyber/stix#attributed-to
-stx:attributed-to rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf stx:stixObjectProperty ;
-                  owl:inverseOf stx:attribution-of ;
+###  http://purl.org/cyber/stix#ExternalReference
+stx:ExternalReference rdf:type owl:ObjectProperty ;
+                      owl:inverseOf stx:externalReferenceOf ;
+                      rdfs:domain stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#attributedTo
+stx:attributedTo rdf:type owl:ObjectProperty ;
+                 owl:inverseOf stx:attributionOf ;
+                 rdfs:domain [ rdf:type owl:Class ;
+                               owl:unionOf ( stx:Campaign
+                                             stx:IntrusionSet
+                                             stx:ThreatActor
+                                           )
+                             ] ;
+                 rdfs:range [ rdf:type owl:Class ;
+                              owl:unionOf ( stx:Identity
+                                            stx:IntrusionSet
+                                            stx:ThreatActor
+                                          )
+                            ] .
+
+
+###  http://purl.org/cyber/stix#attributionOf
+stx:attributionOf rdf:type owl:ObjectProperty ;
                   rdfs:domain [ rdf:type owl:Class ;
-                                owl:unionOf ( stx:campaign
-                                              stx:intrusion-set
-                                              stx:threat-actor
+                                owl:unionOf ( stx:Identity
+                                              stx:IntrusionSet
+                                              stx:ThreatActor
                                             )
                               ] ;
                   rdfs:range [ rdf:type owl:Class ;
-                               owl:unionOf ( stx:identity
-                                             stx:intrusion-set
-                                             stx:threat-actor
+                               owl:unionOf ( stx:Campaign
+                                             stx:IntrusionSet
+                                             stx:ThreatActor
                                            )
                              ] .
 
 
-###  http://purl.org/cyber/stix#attribution-of
-stx:attribution-of rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf stx:stixObjectProperty ;
-                   rdfs:domain [ rdf:type owl:Class ;
-                                 owl:unionOf ( stx:identity
-                                               stx:intrusion-set
-                                               stx:threat-actor
-                                             )
-                               ] ;
-                   rdfs:range [ rdf:type owl:Class ;
-                                owl:unionOf ( stx:campaign
-                                              stx:intrusion-set
-                                              stx:threat-actor
-                                            )
-                              ] .
+###  http://purl.org/cyber/stix#authorOf
+stx:authorOf rdf:type owl:ObjectProperty ;
+             owl:inverseOf stx:authoredBy .
 
 
-###  http://purl.org/cyber/stix#author-of
-stx:author-of rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf stx:stixObjectProperty ;
-              owl:inverseOf stx:authored-by .
+###  http://purl.org/cyber/stix#authoredBy
+stx:authoredBy rdf:type owl:ObjectProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( stx:Malware
+                                           stx:Tool
+                                         )
+                           ] ;
+               rdfs:range stx:ThreatActor .
 
 
-###  http://purl.org/cyber/stix#authored-by
-stx:authored-by rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf stx:stixObjectProperty ;
-                rdfs:domain [ rdf:type owl:Class ;
-                              owl:unionOf ( stx:malware
-                                            stx:tool
-                                          )
-                            ] ;
-                rdfs:range stx:threat-actor .
+###  http://purl.org/cyber/stix#belongsTo
+stx:belongsTo rdf:type owl:ObjectProperty ;
+              rdfs:domain stx:StixObservables .
 
 
-###  http://purl.org/cyber/stix#belongs-to
-stx:belongs-to rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf stx:stixObjectProperty ;
-               rdfs:domain stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#capec_property
-stx:capec_property rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf stx:stixObjectProperty .
-
-
-###  http://purl.org/cyber/stix#commonObjectProperies
-stx:commonObjectProperies rdf:type owl:ObjectProperty ;
-                          rdfs:subPropertyOf stx:stixObjectProperty ;
-                          rdfs:domain stx:StixThing ;
-                          rdfs:comment "Common properties and behavior across all STIX Domain Objects and STIX Relationship Objects" .
-
-
-###  http://purl.org/cyber/stix#created_by_ref
-stx:created_by_ref rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf stx:stixObjectProperty ;
-                   owl:inverseOf stx:creator-of ;
-                   rdfs:domain [ rdf:type owl:Class ;
-                                 owl:unionOf ( stx:campaign
-                                               stx:intrusion-set
-                                               stx:threat-actor
-                                             )
-                               ] ;
-                   rdfs:range stx:identity .
-
-
-###  http://purl.org/cyber/stix#creator-of
-stx:creator-of rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf stx:stixObjectProperty ;
-               rdfs:domain stx:identity ;
-               rdfs:range [ rdf:type owl:Class ;
-                            owl:unionOf ( stx:campaign
-                                          stx:intrusion-set
-                                          stx:threat-actor
+###  http://purl.org/cyber/stix#createdBy
+stx:createdBy rdf:type owl:ObjectProperty ;
+              owl:inverseOf stx:creatorOf ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( stx:Campaign
+                                          stx:IntrusionSet
+                                          stx:ThreatActor
                                         )
-                          ] .
+                          ] ;
+              rdfs:range stx:Identity .
+
+
+###  http://purl.org/cyber/stix#creatorOf
+stx:creatorOf rdf:type owl:ObjectProperty ;
+              rdfs:domain stx:Identity ;
+              rdfs:range [ rdf:type owl:Class ;
+                           owl:unionOf ( stx:Campaign
+                                         stx:IntrusionSet
+                                         stx:ThreatActor
+                                       )
+                         ] .
 
 
 ###  http://purl.org/cyber/stix#definition
 stx:definition rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf stx:stixObjectProperty ;
-               rdfs:domain stx:marking-definition .
+               rdfs:domain stx:MarkingDefinition .
 
 
 ###  http://purl.org/cyber/stix#derivedFrom
 stx:derivedFrom rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf stx:stixObjectProperty ;
                 rdfs:domain stx:StixThing ;
                 rdfs:range stx:StixThing .
 
 
 ###  http://purl.org/cyber/stix#duplicateOf
-stx:duplicateOf rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf stx:stixObjectProperty ;
-                rdf:type owl:TransitiveProperty ;
+stx:duplicateOf rdf:type owl:ObjectProperty ,
+                         owl:TransitiveProperty ;
                 rdfs:domain stx:StixThing ;
                 rdfs:range stx:StixThing .
 
 
-###  http://purl.org/cyber/stix#exploited-by
-stx:exploited-by rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf stx:stixObjectProperty .
+###  http://purl.org/cyber/stix#exploitedBy
+stx:exploitedBy rdf:type owl:ObjectProperty ;
+                owl:inverseOf stx:exploits .
 
 
 ###  http://purl.org/cyber/stix#exploits
 stx:exploits rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf stx:stixObjectProperty ;
              rdfs:domain [ rdf:type owl:Class ;
-                           owl:unionOf ( stx:attack-pattern
-                                         stx:campaign
-                                         stx:malware
-                                         stx:threat-actor
+                           owl:unionOf ( stx:Campaign
+                                         stx:Malware
+                                         stx:ThreatActor
+                                         stx:attack-pattern
                                        )
                          ] ;
-             rdfs:range stx:vulnerability .
+             rdfs:range stx:Vulnerability .
 
 
-###  http://purl.org/cyber/stix#external-reference
-stx:external-reference rdf:type owl:ObjectProperty ;
-                       rdfs:subPropertyOf stx:commonObjectProperies ;
-                       owl:inverseOf stx:external-reference-of ;
+###  http://purl.org/cyber/stix#externalReferenceOf
+stx:externalReferenceOf rdf:type owl:ObjectProperty ;
+                        rdfs:domain stx:ExternalReference ;
+                        rdfs:range stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#granularMarkingOf
+stx:granularMarkingOf rdf:type owl:ObjectProperty ;
+                      owl:inverseOf stx:hasGranularMarking .
+
+
+###  http://purl.org/cyber/stix#hasGranularMarking
+stx:hasGranularMarking rdf:type owl:ObjectProperty ;
                        rdfs:domain stx:StixThing ;
-                       rdfs:range stx:external-reference .
-
-
-###  http://purl.org/cyber/stix#external-reference-of
-stx:external-reference-of rdf:type owl:ObjectProperty ;
-                          rdfs:subPropertyOf stx:stixObjectProperty ;
-                          owl:inverseOf stx:external_references ;
-                          rdfs:domain stx:external-reference ;
-                          rdfs:range stx:StixThing .
-
-
-###  http://purl.org/cyber/stix#external_references
-stx:external_references rdf:type owl:ObjectProperty ;
-                        rdfs:subPropertyOf stx:stixObjectProperty .
-
-
-###  http://purl.org/cyber/stix#granular_marking
-stx:granular_marking rdf:type owl:ObjectProperty ;
-                     rdfs:subPropertyOf stx:commonObjectProperies ;
-                     rdfs:domain stx:StixThing ;
-                     rdfs:range stx:granular-marking ;
-                     rdfs:comment "a GranularMarking that apply to this object" .
+                       rdfs:range stx:GranularMarking ;
+                       rdfs:comment "a GranularMarking that apply to this object" .
 
 
 ###  http://purl.org/cyber/stix#hasHash
 stx:hasHash rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf stx:stixObjectProperty ;
             rdfs:domain [ rdf:type owl:Class ;
-                          owl:unionOf ( stx:external-reference
-                                        stx:file
+                          owl:unionOf ( stx:ExternalReference
+                                        stx:File
                                       )
                         ] .
 
 
 ###  http://purl.org/cyber/stix#hasPhase
 stx:hasPhase rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf stx:stixObjectProperty ;
              owl:inverseOf stx:phaseOf ;
-             rdfs:domain stx:kill-chain ;
-             rdfs:range stx:kill-chain-phase .
-
-
-###  http://purl.org/cyber/stix#has_sighting
-stx:has_sighting rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf stx:stixObjectProperty ;
-                 owl:inverseOf stx:sighting_of_ref .
+             rdfs:domain stx:KillChain ;
+             rdfs:range stx:KillChainPhase .
 
 
 ###  http://purl.org/cyber/stix#impersonates
 stx:impersonates rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf stx:stixObjectProperty ;
-                 rdfs:domain stx:threat-actor ;
-                 rdfs:range stx:identity ;
+                 rdfs:domain stx:ThreatActor ;
+                 rdfs:range stx:Identity ;
                  rdfs:comment "This Relationship describes that the Threat Actor impersonates the related Identity. For example, an  impersonates Relationship from the gh0st Threat Actor to the ACME Corp. Identity means that the actor known as gh0st impersonates ACME Corp." .
 
 
-###  http://purl.org/cyber/stix#indicated_by
-stx:indicated_by rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf stx:stixObjectProperty ;
-                 owl:inverseOf stx:indicates .
+###  http://purl.org/cyber/stix#indicatedBy
+stx:indicatedBy rdf:type owl:ObjectProperty ;
+                owl:inverseOf stx:indicates .
 
 
 ###  http://purl.org/cyber/stix#indicates
 stx:indicates rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf stx:stixObjectProperty ;
-              rdfs:domain stx:indicator ;
+              rdfs:domain stx:Indicator ;
               rdfs:range [ rdf:type owl:Class ;
                            owl:unionOf ( stx:Adversary
                                          stx:TTP
@@ -231,173 +191,187 @@ stx:indicates rdf:type owl:ObjectProperty ;
                          ] .
 
 
-###  http://purl.org/cyber/stix#kill_chain_phases
-stx:kill_chain_phases rdf:type owl:ObjectProperty ;
-                      rdfs:subPropertyOf stx:stixObjectProperty ;
-                      rdfs:domain stx:malware ;
-                      rdfs:range stx:kill-chain-phase .
+###  http://purl.org/cyber/stix#killChainPhase
+stx:killChainPhase rdf:type owl:ObjectProperty ;
+                   owl:inverseOf stx:killChainPhaseOf ;
+                   rdfs:domain stx:Malware .
 
 
-###  http://purl.org/cyber/stix#mitigated_by
-stx:mitigated_by rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf stx:stixObjectProperty ;
-                 owl:inverseOf stx:mitigates ;
-                 rdfs:domain [ rdf:type owl:Class ;
-                               owl:unionOf ( stx:TTP
-                                             stx:vulnerability
-                                           )
-                             ] ;
-                 rdfs:range stx:course-of-action .
+###  http://purl.org/cyber/stix#killChainPhaseOf
+stx:killChainPhaseOf rdf:type owl:ObjectProperty ;
+                     rdfs:range stx:Malware .
+
+
+###  http://purl.org/cyber/stix#mitigatedBy
+stx:mitigatedBy rdf:type owl:ObjectProperty ;
+                owl:inverseOf stx:mitigates ;
+                rdfs:domain [ rdf:type owl:Class ;
+                              owl:unionOf ( stx:TTP
+                                            stx:Vulnerability
+                                          )
+                            ] ;
+                rdfs:range stx:CourseOfAction .
 
 
 ###  http://purl.org/cyber/stix#mitigates
 stx:mitigates rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf stx:stixObjectProperty ;
-              rdfs:domain stx:course-of-action ;
+              rdfs:domain stx:CourseOfAction ;
               rdfs:range [ rdf:type owl:Class ;
                            owl:unionOf ( stx:TTP
-                                         stx:vulnerability
+                                         stx:Vulnerability
                                        )
                          ] .
 
 
 ###  http://purl.org/cyber/stix#object
 stx:object rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf stx:stixObjectProperty ;
            rdfs:domain stx:StixThing ;
            rdfs:range stx:StixThing .
 
 
-###  http://purl.org/cyber/stix#object_marking
-stx:object_marking rdf:type owl:ObjectProperty ;
-                   rdfs:subPropertyOf stx:commonObjectProperies ;
-                   rdfs:domain stx:StixThing ;
-                   rdfs:range stx:marking-definition ;
-                   rdfs:comment "a marking-definition object to be applied to this object" .
+###  http://purl.org/cyber/stix#objectMarking
+stx:objectMarking rdf:type owl:ObjectProperty ;
+                  owl:inverseOf stx:objectMarkingOf ;
+                  rdfs:domain stx:StixThing ;
+                  rdfs:range stx:MarkingDefinition ;
+                  rdfs:comment "a marking-definition object to be applied to this object" .
 
 
-###  http://purl.org/cyber/stix#objects
-stx:objects rdf:type owl:ObjectProperty ;
-            rdfs:range stx:StixObservables .
+###  http://purl.org/cyber/stix#objectMarkingOf
+stx:objectMarkingOf rdf:type owl:ObjectProperty .
 
 
 ###  http://purl.org/cyber/stix#opinionAbout
 stx:opinionAbout rdf:type owl:ObjectProperty ;
-                 rdfs:subPropertyOf stx:stixObjectProperty ;
                  rdfs:domain stx:StixThing ;
                  rdfs:range stx:opinion .
 
 
+###  http://purl.org/cyber/stix#owner
+stx:owner rdf:type owl:ObjectProperty ;
+          rdfs:domain stx:StixThing ;
+          rdfs:range stx:Owner .
+
+
+###  http://purl.org/cyber/stix#ownerOf
+stx:ownerOf rdf:type owl:ObjectProperty ;
+            rdfs:domain stx:Owner ;
+            rdfs:range stx:StixThing .
+
+
 ###  http://purl.org/cyber/stix#phaseOf
 stx:phaseOf rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf stx:stixObjectProperty ;
-            rdfs:domain stx:kill-chain-phase ;
-            rdfs:range stx:kill-chain .
+            rdfs:domain stx:KillChainPhase ;
+            rdfs:range stx:KillChain .
+
+
+###  http://purl.org/cyber/stix#provenance
+stx:provenance rdf:type owl:ObjectProperty ;
+               rdfs:domain stx:StixThing .
 
 
 ###  http://purl.org/cyber/stix#relatedTo
-stx:relatedTo rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf stx:stixObjectProperty ;
-              rdf:type owl:TransitiveProperty ;
+stx:relatedTo rdf:type owl:ObjectProperty ,
+                       owl:TransitiveProperty ;
               rdfs:domain stx:StixThing ;
               rdfs:range stx:StixThing .
 
 
 ###  http://purl.org/cyber/stix#resolvesTo
 stx:resolvesTo rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf stx:stixObjectProperty ;
                rdfs:domain stx:IpAddr ;
-               rdfs:range stx:mac-addr .
+               rdfs:range stx:macAddr .
 
 
-###  http://purl.org/cyber/stix#sighting_of_ref
-stx:sighting_of_ref rdf:type owl:ObjectProperty ;
-                    rdfs:subPropertyOf stx:stixObjectProperty ;
-                    rdfs:domain stx:sighting ;
-                    rdfs:range [ rdf:type owl:Class ;
-                                 owl:unionOf ( stx:Adversary
-                                               stx:StixObservables
-                                               stx:TTP
-                                               stx:indicator
-                                             )
-                               ] .
+###  http://purl.org/cyber/stix#sightedBy
+stx:sightedBy rdf:type owl:ObjectProperty ;
+              owl:inverseOf stx:sightingOf ;
+              rdfs:domain [ rdf:type owl:Class ;
+                            owl:unionOf ( stx:Adversary
+                                          stx:Indicator
+                                          stx:StixObservables
+                                          stx:TTP
+                                        )
+                          ] ;
+              rdfs:range stx:Sighting .
 
 
-###  http://purl.org/cyber/stix#source_of
-stx:source_of rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf stx:stixObjectProperty .
+###  http://purl.org/cyber/stix#sightingOf
+stx:sightingOf rdf:type owl:ObjectProperty ;
+               rdfs:domain stx:Sighting ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( stx:Adversary
+                                          stx:Indicator
+                                          stx:StixObservables
+                                          stx:TTP
+                                        )
+                          ] .
 
 
-###  http://purl.org/cyber/stix#source_ref
-stx:source_ref rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf stx:stixObjectProperty ;
-               rdfs:domain stx:relationship ;
-               rdfs:range stx:StixDomainObject .
+###  http://purl.org/cyber/stix#source
+stx:source rdf:type owl:ObjectProperty ;
+           owl:inverseOf stx:sourceOf ;
+           rdfs:domain stx:Relationship ;
+           rdfs:range stx:StixDomainObject .
 
 
-###  http://purl.org/cyber/stix#stixObjectProperty
-stx:stixObjectProperty rdf:type owl:ObjectProperty .
+###  http://purl.org/cyber/stix#sourceOf
+stx:sourceOf rdf:type owl:ObjectProperty .
 
 
-###  http://purl.org/cyber/stix#target_of
-stx:target_of rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf stx:stixObjectProperty ;
-              owl:inverseOf stx:target_ref .
+###  http://purl.org/cyber/stix#target
+stx:target rdf:type owl:ObjectProperty ;
+           owl:inverseOf stx:targetOf ;
+           rdfs:domain stx:Relationship ;
+           rdfs:range stx:StixDomainObject .
 
 
-###  http://purl.org/cyber/stix#target_ref
-stx:target_ref rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf stx:stixObjectProperty ;
-               rdfs:domain stx:relationship ;
-               rdfs:range stx:StixDomainObject .
+###  http://purl.org/cyber/stix#targetOf
+stx:targetOf rdf:type owl:ObjectProperty .
 
 
-###  http://purl.org/cyber/stix#targeted-by
-stx:targeted-by rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf stx:stixObjectProperty ;
-                owl:inverseOf stx:targets ;
-                rdfs:domain [ rdf:type owl:Class ;
-                              owl:unionOf ( stx:identity
-                                            stx:vulnerability
-                                          )
-                            ] ;
-                rdfs:range [ rdf:type owl:Class ;
-                             owl:unionOf ( stx:Adversary
-                                           stx:TTP
+###  http://purl.org/cyber/stix#targetedBy
+stx:targetedBy rdf:type owl:ObjectProperty ;
+               owl:inverseOf stx:targets ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( stx:Identity
+                                           stx:Vulnerability
                                          )
-                           ] .
+                           ] ;
+               rdfs:range [ rdf:type owl:Class ;
+                            owl:unionOf ( stx:Adversary
+                                          stx:TTP
+                                        )
+                          ] .
 
 
 ###  http://purl.org/cyber/stix#targets
 stx:targets rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf stx:stixObjectProperty ;
             rdfs:domain [ rdf:type owl:Class ;
                           owl:unionOf ( stx:Adversary
                                         stx:TTP
                                       )
                         ] ;
             rdfs:range [ rdf:type owl:Class ;
-                         owl:unionOf ( stx:identity
-                                       stx:vulnerability
+                         owl:unionOf ( stx:Identity
+                                       stx:Vulnerability
                                      )
                        ] .
 
 
-###  http://purl.org/cyber/stix#used-by
-stx:used-by rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf stx:stixObjectProperty ;
-            owl:inverseOf stx:uses ;
-            rdfs:domain stx:TTP ;
-            rdfs:range [ rdf:type owl:Class ;
-                         owl:unionOf ( stx:Adversary
-                                       stx:TTP
-                                     )
-                       ] .
+###  http://purl.org/cyber/stix#usedBy
+stx:usedBy rdf:type owl:ObjectProperty ;
+           owl:inverseOf stx:uses ;
+           rdfs:domain stx:TTP ;
+           rdfs:range [ rdf:type owl:Class ;
+                        owl:unionOf ( stx:Adversary
+                                      stx:TTP
+                                    )
+                      ] .
 
 
 ###  http://purl.org/cyber/stix#uses
 stx:uses rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf stx:stixObjectProperty ;
          rdfs:domain [ rdf:type owl:Class ;
                        owl:unionOf ( stx:Adversary
                                      stx:TTP
@@ -406,166 +380,35 @@ stx:uses rdf:type owl:ObjectProperty ;
          rdfs:range stx:TTP .
 
 
-###  http://purl.org/cyber/stix#variant-of
-stx:variant-of rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf stx:stixObjectProperty ;
-               rdf:type owl:TransitiveProperty ;
-               rdfs:domain stx:malware ;
-               rdfs:range stx:malware ;
-               rdfs:comment "This variantOf relation is used to document that one piece of Malware is a variant of another piece of Malware. For example, TorrentLocker is a variant of CryptoLocker." .
-
-
-###  http://purl.org/cyber/stix#x-capec_skill_of
-stx:x-capec_skill_of rdf:type owl:ObjectProperty ;
-                     rdfs:subPropertyOf stx:capec_property ;
-                     owl:inverseOf stx:x_capec_skill ;
-                     rdfs:domain stx:CapecSkill .
-
-
-###  http://purl.org/cyber/stix#x_capec_consequence_of
-stx:x_capec_consequence_of rdf:type owl:ObjectProperty ;
-                           rdfs:subPropertyOf stx:capec_property ;
-                           owl:inverseOf stx:x_capec_consequences ;
-                           rdfs:domain stx:CapecConsequence .
-
-
-###  http://purl.org/cyber/stix#x_capec_consequences
-stx:x_capec_consequences rdf:type owl:ObjectProperty ;
-                         rdfs:subPropertyOf stx:capec_property ;
-                         rdfs:range stx:CapecConsequence .
-
-
-###  http://purl.org/cyber/stix#x_capec_skill
-stx:x_capec_skill rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf stx:capec_property ;
-                  rdfs:range stx:CapecSkill .
+###  http://purl.org/cyber/stix#variant
+stx:variant rdf:type owl:ObjectProperty ,
+                     owl:SymmetricProperty ,
+                     owl:TransitiveProperty ;
+            rdfs:domain stx:Malware ;
+            rdfs:range stx:Malware ;
+            rdfs:comment "This variantOf relation is used to document that one piece of Malware is a variant of another piece of Malware. For example, TorrentLocker is a variant of CryptoLocker." .
 
 
 #################################################################
 #    Data properties
 #################################################################
 
-###  http://purl.org/cyber/stix#MD5
-stx:MD5 rdf:type owl:DatatypeProperty ;
-        rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-1
-stx:SHA-1 rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-224
-stx:SHA-224 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-256
-stx:SHA-256 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-384
-stx:SHA-384 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
-
-
-###  http://purl.org/cyber/stix#SHA-512-hash
-stx:SHA-512-hash rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf stx:stixDataProperty .
-
-
-###  http://purl.org/cyber/stix#Url
-stx:Url rdf:type owl:DatatypeProperty ;
+###  http://purl.org/cyber/stix#URL
+stx:URL rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#aliases
-stx:aliases rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:stixDataProperty ;
-            rdfs:domain stx:Adversary ;
-            rdfs:range xsd:string .
-
-
-###  http://purl.org/cyber/stix#attack-motivation
-stx:attack-motivation rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf stx:property-label ;
-                      rdfs:domain [ rdf:type owl:Class ;
-                                    owl:unionOf ( stx:intrusion-set
-                                                  stx:threat-actor
-                                                )
-                                  ] ;
-                      rdfs:range [ rdf:type rdfs:Datatype ;
-                                   owl:oneOf [ rdf:type rdf:List ;
-                                               rdf:first "accidental" ;
-                                               rdf:rest [ rdf:type rdf:List ;
-                                                          rdf:first "coercion" ;
-                                                          rdf:rest [ rdf:type rdf:List ;
-                                                                     rdf:first "dominance" ;
-                                                                     rdf:rest [ rdf:type rdf:List ;
-                                                                                rdf:first "ideology" ;
-                                                                                rdf:rest [ rdf:type rdf:List ;
-                                                                                           rdf:first "notoriety" ;
-                                                                                           rdf:rest [ rdf:type rdf:List ;
-                                                                                                      rdf:first "organizational-gain" ;
-                                                                                                      rdf:rest [ rdf:type rdf:List ;
-                                                                                                                 rdf:first "personal-gain" ;
-                                                                                                                 rdf:rest [ rdf:type rdf:List ;
-                                                                                                                            rdf:first "personal-satisfaction" ;
-                                                                                                                            rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                       rdf:first "revenge" ;
-                                                                                                                                       rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                  rdf:first "unpredictable" ;
-                                                                                                                                                  rdf:rest rdf:nil
-                                                                                                                                                ]
-                                                                                                                                     ]
-                                                                                                                          ]
-                                                                                                               ]
-                                                                                                    ]
-                                                                                         ]
-                                                                              ]
-                                                                   ]
-                                                        ]
-                                             ]
-                                 ] .
-
-
-###  http://purl.org/cyber/stix#attack-resource-level
-stx:attack-resource-level rdf:type owl:DatatypeProperty ;
-                          rdfs:subPropertyOf stx:property-label ;
-                          rdfs:domain [ rdf:type owl:Class ;
-                                        owl:unionOf ( stx:intrusion-set
-                                                      stx:threat-actor
-                                                    )
-                                      ] ;
-                          rdfs:range [ rdf:type rdfs:Datatype ;
-                                       owl:oneOf [ rdf:type rdf:List ;
-                                                   rdf:first "club" ;
-                                                   rdf:rest [ rdf:type rdf:List ;
-                                                              rdf:first "contest" ;
-                                                              rdf:rest [ rdf:type rdf:List ;
-                                                                         rdf:first "government" ;
-                                                                         rdf:rest [ rdf:type rdf:List ;
-                                                                                    rdf:first "individual" ;
-                                                                                    rdf:rest [ rdf:type rdf:List ;
-                                                                                               rdf:first "organization" ;
-                                                                                               rdf:rest [ rdf:type rdf:List ;
-                                                                                                          rdf:first "team" ;
-                                                                                                          rdf:rest rdf:nil
-                                                                                                        ]
-                                                                                             ]
-                                                                                  ]
-                                                                       ]
-                                                            ]
-                                                 ]
-                                     ] ;
-                          rdfs:comment "Attack Resource Level is an open vocabulary that captures the general level of resources that a threat actor, intrusion set, or campaign might have access to. It ranges from individual, a person acting alone, to government, the resources of a national government." .
+###  http://purl.org/cyber/stix#alias
+stx:alias rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf stx:stixDataProperty ;
+          rdfs:domain stx:Adversary ;
+          rdfs:range xsd:string .
 
 
 ###  http://purl.org/cyber/stix#body
 stx:body rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf stx:emailProperty ;
-         rdfs:domain stx:email-message .
+         rdfs:domain stx:EmailMessage .
 
 
 ###  http://purl.org/cyber/stix#commonDataProperty
@@ -584,7 +427,7 @@ stx:confidence rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/cyber/stix#country
 stx:country rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:stixDataProperty ;
-            rdfs:domain stx:location ;
+            rdfs:domain stx:Location ;
             rdfs:range xsd:string .
 
 
@@ -601,10 +444,10 @@ stx:created rdf:type owl:DatatypeProperty ;
             rdfs:comment "The created property represents the time at which the first version of this object was created. The timstamp value MUST be precise to the nearest millisecond." .
 
 
-###  http://purl.org/cyber/stix#definition-type
-stx:definition-type rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf stx:stixDataProperty ;
-                    rdfs:domain stx:marking-definition .
+###  http://purl.org/cyber/stix#definitionType
+stx:definitionType rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf stx:stixDataProperty ;
+                   rdfs:domain stx:MarkingDefinition .
 
 
 ###  http://purl.org/cyber/stix#description
@@ -615,7 +458,7 @@ stx:description rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/cyber/stix#emailProperty
 stx:emailProperty rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf stx:stixDataProperty ;
-                  rdfs:domain stx:email-message .
+                  rdfs:domain stx:EmailMessage .
 
 
 ###  http://purl.org/cyber/stix#goals
@@ -628,59 +471,8 @@ stx:goals rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/cyber/stix#hash
 stx:hash rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf stx:stixDataProperty ;
-         rdfs:domain stx:file ;
+         rdfs:domain stx:File ;
          rdfs:range xsd:string .
-
-
-###  http://purl.org/cyber/stix#hash-algorithm
-stx:hash-algorithm rdf:type owl:DatatypeProperty ;
-                   rdfs:subPropertyOf stx:property-label ;
-                   rdfs:domain stx:StixThing ;
-                   rdfs:range [ rdf:type rdfs:Datatype ;
-                                owl:oneOf [ rdf:type rdf:List ;
-                                            rdf:first "MD5" ;
-                                            rdf:rest [ rdf:type rdf:List ;
-                                                       rdf:first "MD6" ;
-                                                       rdf:rest [ rdf:type rdf:List ;
-                                                                  rdf:first "RIPEMD-160" ;
-                                                                  rdf:rest [ rdf:type rdf:List ;
-                                                                             rdf:first "SHA-1" ;
-                                                                             rdf:rest [ rdf:type rdf:List ;
-                                                                                        rdf:first "SHA-224" ;
-                                                                                        rdf:rest [ rdf:type rdf:List ;
-                                                                                                   rdf:first "SHA-256" ;
-                                                                                                   rdf:rest [ rdf:type rdf:List ;
-                                                                                                              rdf:first "SHA-384" ;
-                                                                                                              rdf:rest [ rdf:type rdf:List ;
-                                                                                                                         rdf:first "SHA-512" ;
-                                                                                                                         rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                    rdf:first "SHA3-224" ;
-                                                                                                                                    rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                               rdf:first "SHA3-256" ;
-                                                                                                                                               rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                          rdf:first "SHA3-384" ;
-                                                                                                                                                          rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                     rdf:first "SHA3-512" ;
-                                                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                rdf:first "SSDEEP" ;
-                                                                                                                                                                                rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                           rdf:first "WHIRLPOOL" ;
-                                                                                                                                                                                           rdf:rest rdf:nil
-                                                                                                                                                                                         ]
-                                                                                                                                                                              ]
-                                                                                                                                                                   ]
-                                                                                                                                                        ]
-                                                                                                                                             ]
-                                                                                                                                  ]
-                                                                                                                       ]
-                                                                                                            ]
-                                                                                                 ]
-                                                                                      ]
-                                                                           ]
-                                                                ]
-                                                     ]
-                                          ]
-                              ] .
 
 
 ###  http://purl.org/cyber/stix#id
@@ -691,159 +483,16 @@ stx:id rdf:type owl:DatatypeProperty ;
        rdfs:comment "The id property universally and uniquely identifies this object." .
 
 
-###  http://purl.org/cyber/stix#identity-class
-stx:identity-class rdf:type owl:DatatypeProperty ;
-                   rdfs:subPropertyOf stx:property-label ;
-                   rdfs:domain stx:identity ;
-                   rdfs:range [ rdf:type rdfs:Datatype ;
-                                owl:oneOf [ rdf:type rdf:List ;
-                                            rdf:first "class" ;
-                                            rdf:rest [ rdf:type rdf:List ;
-                                                       rdf:first "group" ;
-                                                       rdf:rest [ rdf:type rdf:List ;
-                                                                  rdf:first "individual" ;
-                                                                  rdf:rest [ rdf:type rdf:List ;
-                                                                             rdf:first "organization" ;
-                                                                             rdf:rest [ rdf:type rdf:List ;
-                                                                                        rdf:first "unknown" ;
-                                                                                        rdf:rest rdf:nil
-                                                                                      ]
-                                                                           ]
-                                                                ]
-                                                     ]
-                                          ]
-                              ] .
+###  http://purl.org/cyber/stix#isMultipart
+stx:isMultipart rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf stx:emailProperty ;
+                rdfs:domain stx:EmailMessage .
 
 
-###  http://purl.org/cyber/stix#indicator-label
-stx:indicator-label rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf stx:property-label ;
-                    rdfs:domain stx:indicator ;
-                    rdfs:range [ rdf:type rdfs:Datatype ;
-                                 owl:oneOf [ rdf:type rdf:List ;
-                                             rdf:first "anomalous-activity" ;
-                                             rdf:rest [ rdf:type rdf:List ;
-                                                        rdf:first "anonymization" ;
-                                                        rdf:rest [ rdf:type rdf:List ;
-                                                                   rdf:first "attribution" ;
-                                                                   rdf:rest [ rdf:type rdf:List ;
-                                                                              rdf:first "benign" ;
-                                                                              rdf:rest [ rdf:type rdf:List ;
-                                                                                         rdf:first "compromised" ;
-                                                                                         rdf:rest [ rdf:type rdf:List ;
-                                                                                                    rdf:first "malicious-activity" ;
-                                                                                                    rdf:rest rdf:nil
-                                                                                                  ]
-                                                                                       ]
-                                                                            ]
-                                                                 ]
-                                                      ]
-                                           ]
-                               ] ;
-                    rdfs:comment "Indicator labels is an open vocabulary used to categorize Indicators. It is intended to be high-level to promote consistent practices. Indicator labels should not be used to capture information that can be better captured via related Malware or Attack Pattern objects. It is better to link an Indicator to a Malware object describing Poison Ivy rather than simply labeling it with \"poison-ivy\"." .
-
-
-###  http://purl.org/cyber/stix#industry-sector
-stx:industry-sector rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf stx:property-label ;
-                    rdfs:domain stx:identity ;
-                    rdfs:range [ rdf:type rdfs:Datatype ;
-                                 owl:oneOf [ rdf:type rdf:List ;
-                                             rdf:first "aerospace" ;
-                                             rdf:rest [ rdf:type rdf:List ;
-                                                        rdf:first "agriculture" ;
-                                                        rdf:rest [ rdf:type rdf:List ;
-                                                                   rdf:first "automotive" ;
-                                                                   rdf:rest [ rdf:type rdf:List ;
-                                                                              rdf:first "communications" ;
-                                                                              rdf:rest [ rdf:type rdf:List ;
-                                                                                         rdf:first "construction" ;
-                                                                                         rdf:rest [ rdf:type rdf:List ;
-                                                                                                    rdf:first "defence" ;
-                                                                                                    rdf:rest [ rdf:type rdf:List ;
-                                                                                                               rdf:first "education" ;
-                                                                                                               rdf:rest [ rdf:type rdf:List ;
-                                                                                                                          rdf:first "energy" ;
-                                                                                                                          rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                     rdf:first "entertainment" ;
-                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                rdf:first "financial-services" ;
-                                                                                                                                                rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                           rdf:first "government-local" ;
-                                                                                                                                                           rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                      rdf:first "government-national" ;
-                                                                                                                                                                      rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                 rdf:first "government-public-services" ;
-                                                                                                                                                                                 rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                            rdf:first "government-regional" ;
-                                                                                                                                                                                            rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                       rdf:first "healthcare" ;
-                                                                                                                                                                                                       rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                  rdf:first "hospitality-leisure" ;
-                                                                                                                                                                                                                  rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                             rdf:first "infrastructure" ;
-                                                                                                                                                                                                                             rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                        rdf:first "insurance" ;
-                                                                                                                                                                                                                                        rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                                   rdf:first "manufacturing" ;
-                                                                                                                                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                                              rdf:first "mining" ;
-                                                                                                                                                                                                                                                              rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                                                         rdf:first "non-profit" ;
-                                                                                                                                                                                                                                                                         rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                                                                    rdf:first "pharmaceuticals" ;
-                                                                                                                                                                                                                                                                                    rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                                                                               rdf:first "retail" ;
-                                                                                                                                                                                                                                                                                               rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                                                                                          rdf:first "technology" ;
-                                                                                                                                                                                                                                                                                                          rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                                                                                                     rdf:first "telecommunications" ;
-                                                                                                                                                                                                                                                                                                                     rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                                                                                                                rdf:first "transportation" ;
-                                                                                                                                                                                                                                                                                                                                rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                                                                                                                                                                                           rdf:first "utilities" ;
-                                                                                                                                                                                                                                                                                                                                           rdf:rest rdf:nil
-                                                                                                                                                                                                                                                                                                                                         ]
-                                                                                                                                                                                                                                                                                                                              ]
-                                                                                                                                                                                                                                                                                                                   ]
-                                                                                                                                                                                                                                                                                                        ]
-                                                                                                                                                                                                                                                                                             ]
-                                                                                                                                                                                                                                                                                  ]
-                                                                                                                                                                                                                                                                       ]
-                                                                                                                                                                                                                                                            ]
-                                                                                                                                                                                                                                                 ]
-                                                                                                                                                                                                                                      ]
-                                                                                                                                                                                                                           ]
-                                                                                                                                                                                                                ]
-                                                                                                                                                                                                     ]
-                                                                                                                                                                                          ]
-                                                                                                                                                                               ]
-                                                                                                                                                                    ]
-                                                                                                                                                         ]
-                                                                                                                                              ]
-                                                                                                                                   ]
-                                                                                                                        ]
-                                                                                                             ]
-                                                                                                  ]
-                                                                                       ]
-                                                                            ]
-                                                                 ]
-                                                      ]
-                                           ]
-                               ] ;
-                    rdfs:comment "Industry sector is an open vocabulary that describes industrial and commercial sectors. It is intended to be holistic; it has been derived from several other lists and is not limited to \"critical infrastructure\" sectors." .
-
-
-###  http://purl.org/cyber/stix#is_multipart
-stx:is_multipart rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf stx:emailProperty ;
-                 rdfs:domain stx:email-message .
-
-
-###  http://purl.org/cyber/stix#kill_chain_name
-stx:kill_chain_name rdf:type owl:DatatypeProperty ;
-                    rdfs:subPropertyOf stx:stixDataProperty ;
-                    rdfs:domain stx:kill-chain-phase .
+###  http://purl.org/cyber/stix#killChainName
+stx:killChainName rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf stx:stixDataProperty ;
+                  rdfs:domain stx:KillChainPhase .
 
 
 ###  http://purl.org/cyber/stix#label
@@ -856,53 +505,9 @@ stx:language rdf:type owl:DatatypeProperty ;
              rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#malware-label
-stx:malware-label rdf:type owl:DatatypeProperty ;
-                  rdfs:subPropertyOf stx:property-label ;
-                  rdfs:domain stx:malware ;
-                  rdfs:range [ rdf:type rdfs:Datatype ;
-                               owl:oneOf [ rdf:type rdf:List ;
-                                           rdf:first "adware" ;
-                                           rdf:rest [ rdf:type rdf:List ;
-                                                      rdf:first "backdoor" ;
-                                                      rdf:rest [ rdf:type rdf:List ;
-                                                                 rdf:first "bot" ;
-                                                                 rdf:rest [ rdf:type rdf:List ;
-                                                                            rdf:first "ddos" ;
-                                                                            rdf:rest [ rdf:type rdf:List ;
-                                                                                       rdf:first "dropper" ;
-                                                                                       rdf:rest [ rdf:type rdf:List ;
-                                                                                                  rdf:first "exploit-kit" ;
-                                                                                                  rdf:rest [ rdf:type rdf:List ;
-                                                                                                             rdf:first "keylogger" ;
-                                                                                                             rdf:rest [ rdf:type rdf:List ;
-                                                                                                                        rdf:first "ransomware" ;
-                                                                                                                        rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                   rdf:first "remote-access-trojan" ;
-                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                              rdf:first "resource-exploitation" ;
-                                                                                                                                              rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                         rdf:first "rogue-security-software" ;
-                                                                                                                                                         rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                    rdf:first "rootkit" ;
-                                                                                                                                                                    rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                                               rdf:first "screen-capture" ;
-                                                                                                                                                                               rdf:rest rdf:nil
-                                                                                                                                                                             ]
-                                                                                                                                                                  ]
-                                                                                                                                                       ]
-                                                                                                                                            ]
-                                                                                                                                 ]
-                                                                                                                      ]
-                                                                                                           ]
-                                                                                                ]
-                                                                                     ]
-                                                                          ]
-                                                               ]
-                                                    ]
-                                         ]
-                             ] ;
-                  rdfs:comment "Malware label is an open vocabulary that represents different types and functions of malware. Malware labels are not mutually exclusive; a malware instance can be both spyware and a screen capture tool." .
+###  http://purl.org/cyber/stix#md5
+stx:md5 rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf stx:hash .
 
 
 ###  http://purl.org/cyber/stix#mimeType
@@ -932,19 +537,19 @@ stx:opinion rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/cyber/stix#path
 stx:path rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf stx:stixDataProperty ;
-         rdfs:domain stx:file .
+         rdfs:domain stx:File .
 
 
-###  http://purl.org/cyber/stix#payload_bin
-stx:payload_bin rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf stx:stixDataProperty ;
-                rdfs:domain stx:artifact .
-
-
-###  http://purl.org/cyber/stix#phase_name
-stx:phase_name rdf:type owl:DatatypeProperty ;
+###  http://purl.org/cyber/stix#payloadBin
+stx:payloadBin rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf stx:stixDataProperty ;
-               rdfs:domain stx:kill-chain-phase .
+               rdfs:domain stx:Artifact .
+
+
+###  http://purl.org/cyber/stix#phaseName
+stx:phaseName rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf stx:stixDataProperty ;
+              rdfs:domain stx:KillChainPhase .
 
 
 ###  http://purl.org/cyber/stix#platform
@@ -971,61 +576,16 @@ stx:platform rdf:type owl:DatatypeProperty ;
                         ] .
 
 
-###  http://purl.org/cyber/stix#property-label
-stx:property-label rdf:type owl:DatatypeProperty ;
-                   rdfs:subPropertyOf stx:stixDataProperty .
-
-
 ###  http://purl.org/cyber/stix#published
 stx:published rdf:type owl:DatatypeProperty ;
               rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#relationship_type
-stx:relationship_type rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf stx:stixDataProperty ;
-                      rdfs:domain stx:relationship ;
-                      rdfs:range xsd:string .
-
-
-###  http://purl.org/cyber/stix#report-label
-stx:report-label rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf stx:property-label ;
-                 rdfs:domain stx:report ;
-                 rdfs:range [ rdf:type rdfs:Datatype ;
-                              owl:oneOf [ rdf:type rdf:List ;
-                                          rdf:first "attack-pattern" ;
-                                          rdf:rest [ rdf:type rdf:List ;
-                                                     rdf:first "campaign" ;
-                                                     rdf:rest [ rdf:type rdf:List ;
-                                                                rdf:first "identity" ;
-                                                                rdf:rest [ rdf:type rdf:List ;
-                                                                           rdf:first "indicator" ;
-                                                                           rdf:rest [ rdf:type rdf:List ;
-                                                                                      rdf:first "malware" ;
-                                                                                      rdf:rest [ rdf:type rdf:List ;
-                                                                                                 rdf:first "observed-data" ;
-                                                                                                 rdf:rest [ rdf:type rdf:List ;
-                                                                                                            rdf:first "threat-actor" ;
-                                                                                                            rdf:rest [ rdf:type rdf:List ;
-                                                                                                                       rdf:first "threat-report" ;
-                                                                                                                       rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                  rdf:first "tool" ;
-                                                                                                                                  rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                             rdf:first "vulnerability" ;
-                                                                                                                                             rdf:rest rdf:nil
-                                                                                                                                           ]
-                                                                                                                                ]
-                                                                                                                     ]
-                                                                                                          ]
-                                                                                               ]
-                                                                                    ]
-                                                                         ]
-                                                              ]
-                                                   ]
-                                        ]
-                            ] ;
-                 rdfs:comment "Report label is an open vocabulary to describe the primary purpose or subject of a report. For example, a report that contains malware and indicators for that malware should have a report label of malware to capture that the malware is the primary purpose. Report labels are not mutually exclusive: a Report can be both a malware report and a tool report. Just because a report contains objects of a type does not mean that the report should include that label.  If the objects are there to simply provide evidence or context for other objects, it is not necessary to include them in the label." .
+###  http://purl.org/cyber/stix#relationshipType
+stx:relationshipType rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf stx:stixDataProperty ;
+                     rdfs:domain stx:Relationship ;
+                     rdfs:range xsd:string .
 
 
 ###  http://purl.org/cyber/stix#revoked
@@ -1036,10 +596,35 @@ stx:revoked rdf:type owl:DatatypeProperty ;
             rdfs:comment "The revoked property indicates whether the object has been revoked." .
 
 
+###  http://purl.org/cyber/stix#sha-1
+stx:sha-1 rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf stx:hash .
+
+
+###  http://purl.org/cyber/stix#sha-224
+stx:sha-224 rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf stx:hash .
+
+
+###  http://purl.org/cyber/stix#sha-256
+stx:sha-256 rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf stx:hash .
+
+
+###  http://purl.org/cyber/stix#sha-384
+stx:sha-384 rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf stx:hash .
+
+
+###  http://purl.org/cyber/stix#sha-512
+stx:sha-512 rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf stx:hash .
+
+
 ###  http://purl.org/cyber/stix#size
 stx:size rdf:type owl:DatatypeProperty ;
          rdfs:subPropertyOf stx:stixDataProperty ;
-         rdfs:domain stx:file ;
+         rdfs:domain stx:File ;
          rdfs:range xsd:int .
 
 
@@ -1053,11 +638,10 @@ stx:skillLevel rdf:type owl:DatatypeProperty ;
                rdfs:subPropertyOf stx:stixDataProperty .
 
 
-###  http://purl.org/cyber/stix#spec_version
-stx:spec_version rdf:type owl:DatatypeProperty ;
-                 rdfs:subPropertyOf stx:stixDataProperty ;
-                 rdfs:domain stx:bundle ;
-                 rdfs:range xsd:string .
+###  http://purl.org/cyber/stix#specVersion
+stx:specVersion rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf stx:stixDataProperty ;
+                rdfs:range xsd:string .
 
 
 ###  http://purl.org/cyber/stix#statement
@@ -1078,148 +662,12 @@ stx:stixName rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/cyber/stix#subject
 stx:subject rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:emailProperty ;
-            rdfs:domain stx:email-message .
-
-
-###  http://purl.org/cyber/stix#threat-actor-label
-stx:threat-actor-label rdf:type owl:DatatypeProperty ;
-                       rdfs:subPropertyOf stx:property-label ;
-                       rdfs:domain stx:threat-actor ;
-                       rdfs:range [ rdf:type rdfs:Datatype ;
-                                    owl:oneOf [ rdf:type rdf:List ;
-                                                rdf:first " competitor" ;
-                                                rdf:rest [ rdf:type rdf:List ;
-                                                           rdf:first " crime-syndicate" ;
-                                                           rdf:rest [ rdf:type rdf:List ;
-                                                                      rdf:first " criminal" ;
-                                                                      rdf:rest [ rdf:type rdf:List ;
-                                                                                 rdf:first " hacker" ;
-                                                                                 rdf:rest [ rdf:type rdf:List ;
-                                                                                            rdf:first " insider-accidental" ;
-                                                                                            rdf:rest [ rdf:type rdf:List ;
-                                                                                                       rdf:first " insider-disgruntled" ;
-                                                                                                       rdf:rest [ rdf:type rdf:List ;
-                                                                                                                  rdf:first " nation-state" ;
-                                                                                                                  rdf:rest [ rdf:type rdf:List ;
-                                                                                                                             rdf:first " sensationalist" ;
-                                                                                                                             rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                        rdf:first " spy" ;
-                                                                                                                                        rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                   rdf:first " terrorist" ;
-                                                                                                                                                   rdf:rest [ rdf:type rdf:List ;
-                                                                                                                                                              rdf:first "activist" ;
-                                                                                                                                                              rdf:rest rdf:nil
-                                                                                                                                                            ]
-                                                                                                                                                 ]
-                                                                                                                                      ]
-                                                                                                                           ]
-                                                                                                                ]
-                                                                                                     ]
-                                                                                          ]
-                                                                               ]
-                                                                    ]
-                                                         ]
-                                              ]
-                                  ] ;
-                       rdfs:comment "Threat actor label is an open vocabulary used to describe what type of threat actor the individual or group is. For example, some threat actors are competitors who try to steal information, while others are activists who act in support of a social or political cause. Actor labels are not mutually exclusive: a threat actor can be both a disgruntled insider and a spy." .
-
-
-###  http://purl.org/cyber/stix#threat-actor-role
-stx:threat-actor-role rdf:type owl:DatatypeProperty ;
-                      rdfs:subPropertyOf stx:property-label ;
-                      rdfs:domain stx:threat-actor ;
-                      rdfs:range [ rdf:type rdfs:Datatype ;
-                                   owl:oneOf [ rdf:type rdf:List ;
-                                               rdf:first "agent" ;
-                                               rdf:rest [ rdf:type rdf:List ;
-                                                          rdf:first "director" ;
-                                                          rdf:rest [ rdf:type rdf:List ;
-                                                                     rdf:first "independent" ;
-                                                                     rdf:rest [ rdf:type rdf:List ;
-                                                                                rdf:first "infrastructure-architect" ;
-                                                                                rdf:rest [ rdf:type rdf:List ;
-                                                                                           rdf:first "infrastructure-operator" ;
-                                                                                           rdf:rest [ rdf:type rdf:List ;
-                                                                                                      rdf:first "malware-author" ;
-                                                                                                      rdf:rest [ rdf:type rdf:List ;
-                                                                                                                 rdf:first "sponsor" ;
-                                                                                                                 rdf:rest rdf:nil
-                                                                                                               ]
-                                                                                                    ]
-                                                                                         ]
-                                                                              ]
-                                                                   ]
-                                                        ]
-                                             ]
-                                 ] ;
-                      rdfs:comment "Threat actor role is an open vocabulary that is used to describe the different roles that a threat actor can play. For example, some threat actors author malware or operate botnets while other actors actually carry out attacks directly." .
-
-
-###  http://purl.org/cyber/stix#threat-actor-sophistication
-stx:threat-actor-sophistication rdf:type owl:DatatypeProperty ;
-                                rdfs:subPropertyOf stx:property-label ;
-                                rdfs:domain stx:threat-actor ;
-                                rdfs:range [ rdf:type rdfs:Datatype ;
-                                             owl:oneOf [ rdf:type rdf:List ;
-                                                         rdf:first "advanced" ;
-                                                         rdf:rest [ rdf:type rdf:List ;
-                                                                    rdf:first "expert" ;
-                                                                    rdf:rest [ rdf:type rdf:List ;
-                                                                               rdf:first "innovator" ;
-                                                                               rdf:rest [ rdf:type rdf:List ;
-                                                                                          rdf:first "intermediate" ;
-                                                                                          rdf:rest [ rdf:type rdf:List ;
-                                                                                                     rdf:first "minimal" ;
-                                                                                                     rdf:rest [ rdf:type rdf:List ;
-                                                                                                                rdf:first "none" ;
-                                                                                                                rdf:rest [ rdf:type rdf:List ;
-                                                                                                                           rdf:first "strategic" ;
-                                                                                                                           rdf:rest rdf:nil
-                                                                                                                         ]
-                                                                                                              ]
-                                                                                                   ]
-                                                                                        ]
-                                                                             ]
-                                                                  ]
-                                                       ]
-                                           ] ;
-                                rdfs:comment "Threat actor sophistication vocabulary captures the skill level of a threat actor. It ranges from \"none\", which describes a complete novice, to \"strategic\", which describes an attacker who is able to influence supply chains to introduce vulnerabilities. This vocabulary is separate from resource level because an innovative, highly-skilled threat actor may have access to very few resources while a minimal-level actor might have the resources of an organized crime ring." .
+            rdfs:domain stx:EmailMessage .
 
 
 ###  http://purl.org/cyber/stix#tlp
 stx:tlp rdf:type owl:DatatypeProperty ;
         rdfs:subPropertyOf stx:stixDataProperty .
-
-
-###  http://purl.org/cyber/stix#tool-label
-stx:tool-label rdf:type owl:DatatypeProperty ;
-               rdfs:subPropertyOf stx:property-label ;
-               rdfs:domain stx:tool ;
-               rdfs:range [ rdf:type rdfs:Datatype ;
-                            owl:oneOf [ rdf:type rdf:List ;
-                                        rdf:first "credential-exploitation" ;
-                                        rdf:rest [ rdf:type rdf:List ;
-                                                   rdf:first "denial-of-service" ;
-                                                   rdf:rest [ rdf:type rdf:List ;
-                                                              rdf:first "exploitation" ;
-                                                              rdf:rest [ rdf:type rdf:List ;
-                                                                         rdf:first "information-gathering" ;
-                                                                         rdf:rest [ rdf:type rdf:List ;
-                                                                                    rdf:first "network-capture" ;
-                                                                                    rdf:rest [ rdf:type rdf:List ;
-                                                                                               rdf:first "remote-access" ;
-                                                                                               rdf:rest [ rdf:type rdf:List ;
-                                                                                                          rdf:first "vulnerability-scanning" ;
-                                                                                                          rdf:rest rdf:nil
-                                                                                                        ]
-                                                                                             ]
-                                                                                  ]
-                                                                       ]
-                                                            ]
-                                                 ]
-                                      ]
-                          ] ;
-               rdfs:comment "Tool labels describe the categories of tools that can be used to perform attacks." .
 
 
 ###  http://purl.org/cyber/stix#type
@@ -1255,9 +703,9 @@ stx:vendor rdf:type owl:DatatypeProperty ;
 stx:version rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:stixDataProperty ;
             rdfs:domain [ rdf:type owl:Class ;
-                          owl:unionOf ( stx:Software
-                                        stx:file
-                                        stx:x509-certificate
+                          owl:unionOf ( stx:File
+                                        stx:Software
+                                        stx:X509Certificate
                                       )
                         ] ;
             rdfs:comment "Specifies the version of the software" .
@@ -1267,10 +715,10 @@ stx:version rdf:type owl:DatatypeProperty ;
 stx:x-mitre-contributor rdf:type owl:DatatypeProperty ;
                         rdfs:subPropertyOf stx:x-mitre-property ;
                         rdfs:domain [ rdf:type owl:Class ;
-                                      owl:unionOf ( stx:attack-pattern
-                                                    stx:intrusion-set
-                                                    stx:malware
-                                                    stx:tool
+                                      owl:unionOf ( stx:IntrusionSet
+                                                    stx:Malware
+                                                    stx:Tool
+                                                    stx:attack-pattern
                                                   )
                                     ] .
 
@@ -1284,8 +732,8 @@ stx:x-mitre-property rdf:type owl:DatatypeProperty ;
 stx:x_mitre_alias rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf stx:x-mitre-property ;
                   rdfs:domain [ rdf:type owl:Class ;
-                                owl:unionOf ( stx:malware
-                                              stx:tool
+                                owl:unionOf ( stx:Malware
+                                              stx:Tool
                                             )
                               ] .
 
@@ -1376,19 +824,43 @@ stx:Adversary rdf:type owl:Class ;
               rdfs:subClassOf stx:StixDomainObject .
 
 
-###  http://purl.org/cyber/stix#CapecConsequence
-stx:CapecConsequence rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixCapecObject .
+###  http://purl.org/cyber/stix#Artifact
+stx:Artifact rdf:type owl:Class ;
+             rdfs:subClassOf stx:StixObservables ;
+             rdfs:comment """The Artifact Object permits capturing an array of bytes (8-bits), as a base64-encoded string, or linking to a file-like payload. The size of the base64-encoded data captured in the payload_bin property MUST be less than or equal to 10MB.
+
+One of payload_bin or url MUST be provided. It is incumbent on object creators to ensure that the URL is accessible for downstream consumers. If a URL is provided, then the hashes property MUST contain the hash of the URL contents.""" .
 
 
-###  http://purl.org/cyber/stix#CapecSkill
-stx:CapecSkill rdf:type owl:Class ;
-               rdfs:subClassOf stx:StixCapecObject .
+###  http://purl.org/cyber/stix#AttackPattern
+stx:AttackPattern rdf:type owl:Class ;
+                  rdfs:subClassOf stx:StixThing ;
+                  rdfs:comment "Attack Patterns are a type of TTP that describe ways that adversaries attempt to compromise targets. Attack Patterns are used to help categorize attacks, generalize specific attacks to the patterns that they follow, and provide detailed information about how attacks are performed. An example of an attack pattern is \"spear phishing\": a common type of attack where an attacker sends a carefully crafted e-mail message to a party with the intent of getting them to click a link or open an attachment to deliver malware. Attack Patterns can also be more specific; spear phishing as practiced by a particular threat actor (e.g., they might generally say that the target won a contest) can also be an Attack Pattern. The Attack Pattern SDO contains textual descriptions of the pattern along with references to externally-defined taxonomies of attacks such as CAPEC [CAPEC]. Relationships from Attack Pattern can be used to relate it to what it targets (Vulnerabilities and Identities) and which tools and malware use it (Tool and Malware)." .
+
+
+###  http://purl.org/cyber/stix#Campaign
+stx:Campaign rdf:type owl:Class ;
+             rdfs:subClassOf stx:Adversary ;
+             rdfs:comment """A Campaign is a grouping of adversarial behaviors that describes a set of malicious activities or attacks (sometimes called waves) that occur over a period of time against a specific set of targets. Campaigns usually have well defined objectives and may be part of an Intrusion Set. 
+
+Campaigns are often attributed to an intrusion set and threat actors. The threat actors may reuse known infrastructure from the intrusion set or may set up new infrastructure specific for conducting that campaign.
+
+Campaigns can be characterized by their objectives and the incidents they cause, people or resources they target, and the resources (infrastructure, intelligence, Malware, Tools, etc.) they use.
+
+For example, a Campaign could be used to describe a crime syndicate's attack using a specific variant of malware and new C2 servers against the executives of ACME Bank during the summer of 2016 in order to gain secret information about an upcoming merger with another bank."""^^xsd:string .
+
+
+###  http://purl.org/cyber/stix#CourseOfAction
+stx:CourseOfAction rdf:type owl:Class ;
+                   rdfs:subClassOf stx:StixDomainObject ;
+                   rdfs:comment """A Course of Action is an action taken either to prevent an attack or to respond to an attack that is in progress. It may describe technical, automatable responses (applying patches, reconfiguring firewalls) but can also describe higher level actions like employee training or policy changes. For example, a course of action to mitigate a vulnerability could describe applying the patch that fixes it.
+
+The Course of Action SDO contains a textual description of the action; a reserved action property also serves as placeholder for future inclusion of machine automatable courses of action. Relationships from the Course of Action can be used to link it to the Vulnerabilities or behaviors (Tool, Malware, Attack Pattern) that it mitigates."""^^xsd:string .
 
 
 ###  http://purl.org/cyber/stix#CrimeSyndicate
 stx:CrimeSyndicate rdf:type owl:Class ;
-                   owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+                   owl:equivalentClass [ owl:intersectionOf ( stx:ThreatActor
                                                               [ rdf:type owl:Restriction ;
                                                                 owl:onProperty stx:label ;
                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
@@ -1401,12 +873,12 @@ stx:CrimeSyndicate rdf:type owl:Class ;
                                                             ) ;
                                          rdf:type owl:Class
                                        ] ;
-                   rdfs:subClassOf stx:threat-actor .
+                   rdfs:subClassOf stx:ThreatActor .
 
 
 ###  http://purl.org/cyber/stix#Criminal
 stx:Criminal rdf:type owl:Class ;
-             owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+             owl:equivalentClass [ owl:intersectionOf ( stx:ThreatActor
                                                         [ rdf:type owl:Restriction ;
                                                           owl:onProperty stx:label ;
                                                           owl:someValuesFrom [ rdf:type rdfs:Datatype ;
@@ -1419,7 +891,43 @@ stx:Criminal rdf:type owl:Class ;
                                                       ) ;
                                    rdf:type owl:Class
                                  ] ;
-             rdfs:subClassOf stx:threat-actor .
+             rdfs:subClassOf stx:ThreatActor .
+
+
+###  http://purl.org/cyber/stix#DefinitionObject
+stx:DefinitionObject rdf:type owl:Class ;
+                     rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#DomainName
+stx:DomainName rdf:type owl:Class ;
+               rdfs:subClassOf stx:StixObservables ;
+               rdfs:comment "The Domain Name represents the properties of a network domain name."@en .
+
+
+###  http://purl.org/cyber/stix#EmailAddr
+stx:EmailAddr rdf:type owl:Class ;
+              rdfs:subClassOf stx:StixObservables ;
+              rdfs:comment "The Email Address Object represents a single email address."@en .
+
+
+###  http://purl.org/cyber/stix#EmailMessage
+stx:EmailMessage rdf:type owl:Class ;
+                 rdfs:subClassOf stx:StixObservables ;
+                 rdfs:comment """The Email Message Object represents an instance of an email message, corresponding to the internet message format described in [RFC5322] and related RFCs.
+
+Header field values that have been encoded as described in section 2 of [RFC2047] MUST be decoded before inclusion in Email Message Object properties. For example, this is some text MUST be used instead of =?iso-8859-1?q?this=20is=20some=20text?=. Any characters in the encoded value which cannot be decoded into Unicode SHOULD be replaced with the 'REPLACEMENT CHARACTER' (U+FFFD). If it is necessary to capture the header value as observed, this can be achieved by referencing an Artifact Object through the raw_email_ref property."""@en .
+
+
+###  http://purl.org/cyber/stix#ExternalReference
+stx:ExternalReference rdf:type owl:Class ;
+                      rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#File
+stx:File rdf:type owl:Class ;
+         rdfs:subClassOf stx:StixObservables ;
+         rdfs:comment "The File Object represents the properties of a file. A File Object MUST contain at least one of hashes or name."@en .
 
 
 ###  http://purl.org/cyber/stix#FileName
@@ -1432,14 +940,107 @@ stx:FilePath rdf:type owl:Class ;
              rdfs:subClassOf stx:StixObservables .
 
 
+###  http://purl.org/cyber/stix#GranularMarking
+stx:GranularMarking rdf:type owl:Class ;
+                    rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#Identity
+stx:Identity rdf:type owl:Class ;
+             rdfs:subClassOf stx:StixDomainObject ;
+             rdfs:comment """Identities can represent actual individuals, organizations, or groups (e.g., ACME, Inc.) as well as classes of individuals, organizations, or groups (e.g., the finance sector).
+
+The Identity SDO can capture basic identifying information, contact information, and the sectors that the Identity belongs to. Identity is used in STIX to represent, among other things, targets of attacks, information sources, object creators, and threat actor identities."""^^xsd:string .
+
+
+###  http://purl.org/cyber/stix#Indicator
+stx:Indicator rdf:type owl:Class ;
+              rdfs:subClassOf stx:StixDomainObject ;
+              rdfs:comment """Indicators contain a pattern that can be used to detect suspicious or malicious cyber activity. For example, an Indicator may be used to represent a set of malicious domains and use the STIX Patterning Language (STIX™ Version 2.0. Part 5: STIX Patterning) to specify these domains.
+
+The Indicator SDO contains a simple textual description, the Kill Chain Phases that it detects behavior in, a time window for when the Indicator is valid or useful, and a required pattern property to capture a structured detection pattern. Conforming STIX implementations MUST support the STIX Patterning Language as defined in STIX™ Version 2.0. Part 5: STIX Patterning. While each structured pattern language has different syntax and potentially different  semantics, in general an Indicator is considered to have \"matched\" (or been \"sighted\") when the conditions specified in the structured pattern are satisfied in whatever context they are evaluated in.
+
+ Relationships from the Indicator can describe the malicious or suspicious behavior that it directly detects (Malware, Tool, and Attack Pattern) as well as the Campaigns, Intrusion Sets, and Threat Actors that it might indicate the presence of."""^^xsd:string .
+
+
+###  http://purl.org/cyber/stix#Individual
+stx:Individual rdf:type owl:Class ;
+               rdfs:subClassOf stx:Identity .
+
+
+###  http://purl.org/cyber/stix#IntrusionSet
+stx:IntrusionSet rdf:type owl:Class ;
+                 rdfs:subClassOf stx:Adversary ;
+                 rdfs:comment """An Intrusion Set is a grouped set of adversarial behaviors and resources with common properties that is believed to be orchestrated by a single organization. An Intrusion Set may capture multiple Campaigns or other activities that are all tied together by shared attributes indicating a common known or unknown Threat Actor. New activity can be attributed to an Intrusion Set even if the Threat Actors behind the attack are not known. Threat Actors can move from supporting one Intrusion Set to supporting another, or they may support multiple Intrusion Sets.
+
+Where a Campaign is a set of attacks over a period of time against a specific set of targets to achieve some objective, an Intrusion Set is the entire attack package and may be used over a very long period of time in multiple Campaigns to achieve potentially multiple purposes.
+
+ While sometimes an Intrusion Set is not active, or changes focus, it is usually difficult to know if it has truly disappeared or ended. Analysts may have varying level of fidelity on attributing an Intrusion Set back to Threat Actors and may be able to only attribute it back to a nation state or perhaps back to an organization within that nation state."""@en .
+
+
 ###  http://purl.org/cyber/stix#IpAddr
 stx:IpAddr rdf:type owl:Class ;
            rdfs:subClassOf stx:StixObservables .
 
 
+###  http://purl.org/cyber/stix#Ipv4Addr
+stx:Ipv4Addr rdf:type owl:Class ;
+             rdfs:subClassOf stx:IpAddr ;
+             rdfs:comment "The IPv4 Address Object represents one or more IPv4 addresses expressed using CIDR notation."@en .
+
+
+###  http://purl.org/cyber/stix#Ipv6Addr
+stx:Ipv6Addr rdf:type owl:Class ;
+             rdfs:subClassOf stx:IpAddr ;
+             rdfs:comment "The IPv6 Address Object represents one or more IPv6 addresses expressed using CIDR notation."@en .
+
+
+###  http://purl.org/cyber/stix#KillChain
+stx:KillChain rdf:type owl:Class ;
+              rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#KillChainPhase
+stx:KillChainPhase rdf:type owl:Class ;
+                   rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#LocalFile
+stx:LocalFile rdf:type owl:Class ;
+              rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#Location
+stx:Location rdf:type owl:Class ;
+             rdfs:subClassOf stx:Identity ,
+                             stx:StixObservables .
+
+
+###  http://purl.org/cyber/stix#Malware
+stx:Malware rdf:type owl:Class ;
+            rdfs:subClassOf stx:StixDomainObject ,
+                            stx:TTP ;
+            rdfs:comment """Note: The Malware object in STIX 2.0 is a stub. It is included to support basic use cases but is likely not useful for actual malware analysis or for including even simple malware instance data. Future versions of STIX 2 will expand it to include these capabilities.
+
+ Malware is a type of TTP that is also known as malicious code and malicious software, and refers to a program that is inserted into a system, usually covertly, with the intent of compromising the confidentiality, integrity, or availability of the victim's data, applications, or operating system (OS) or of otherwise annoying or disrupting the victim. Malware such as viruses and worms are usually designed to perform these nefarious functions in such a way that users are unaware of them, at least initially.[1]
+
+ The Malware SDO characterizes, identifies, and categorizes malware samples and families via a text description property. This provides detailed information about how the malware works and what it does. Relationships from Malware can capture what the malware targets (Vulnerability and Identity) and link it to another Malware SDO that it is a variant of."""@en .
+
+
+###  http://purl.org/cyber/stix#MarkingDefinition
+stx:MarkingDefinition rdf:type owl:Class ;
+                      rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#Mutex
+stx:Mutex rdf:type owl:Class ;
+          rdfs:subClassOf stx:StixObservables ;
+          rdfs:comment "The Mutex Object represents the properties of a mutual exclusion (mutex) object."@en .
+
+
 ###  http://purl.org/cyber/stix#NationState
 stx:NationState rdf:type owl:Class ;
-                owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+                owl:equivalentClass [ owl:intersectionOf ( stx:ThreatActor
                                                            [ rdf:type owl:Restriction ;
                                                              owl:onProperty stx:label ;
                                                              owl:someValuesFrom [ rdf:type rdfs:Datatype ;
@@ -1452,12 +1053,47 @@ stx:NationState rdf:type owl:Class ;
                                                          ) ;
                                       rdf:type owl:Class
                                     ] ;
-                rdfs:subClassOf stx:threat-actor .
+                rdfs:subClassOf stx:ThreatActor .
 
 
 ###  http://purl.org/cyber/stix#NetworkTraffic
 stx:NetworkTraffic rdf:type owl:Class ;
-                   rdfs:subClassOf stx:StixObservables .
+                   rdfs:subClassOf stx:StixObservables ;
+                   rdfs:comment """The Network Traffic Object represents arbitrary network traffic that originates from a source and is addressed to a destination. The network traffic MAY or MAY NOT constitute a valid unicast, multicast, or broadcast network connection. This MAY also include traffic that is not established, such as a SYN flood.
+
+To allow for use cases where a source or destination address may be sensitive and not suitable for sharing, such as addresses that are internal to an organization’s network, the source and destination properties (src_ref and dst_ref, respectively) are defined as optional in the properties table below. However, a Network Traffic Object MUST contain the protocols property and at least one of the src_ref or dst_ref properties and SHOULD contain the src_port and dst_port properties."""@en .
+
+
+###  http://purl.org/cyber/stix#Note
+stx:Note rdf:type owl:Class ;
+         rdfs:subClassOf stx:StixDomainObject .
+
+
+###  http://purl.org/cyber/stix#ObservedData
+stx:ObservedData rdf:type owl:Class ;
+                 rdfs:subClassOf stx:StixThing ;
+                 rdfs:comment """Observed Data conveys information that was observed on systems and networks using the Cyber Observable specification defined in parts 3 and 4 of this specification. For example, Observed Data can capture the observation of an IP address, a network connection, a file, or a registry key. Observed Data is not an intelligence assertion, it is simply information: this file was seen, without any context for what it means.
+
+Observed Data captures both a single observation of a single entity (file, network connection) as well as the aggregation of multiple observations of an entity. When the number_observed property is 1 the Observed Data is of a single entity. When the number_observed property is greater than 1, the observed data consists of several instances of an entity collected over the time window specified by the first_observed and last_observed properties. When used to collect aggregate data, it is likely that some fields in the Cyber Observable Object (e.g., timestamp fields) will be omitted because they would differ for each of the individual observations.
+
+Observed Data may be used by itself (without relationships) to convey raw data collected from network and host-based detection tools. A firewall could emit a single Observed Data instance containing a single Network Traffic object for each connection it sees. The firewall could also aggregate data and instead send out an Observed Data instance every ten minutes with an IP address and an appropriate number_observed value to indicate the number of times that IP address was observed in that window.
+
+Observed Data may also be related to other SDOs to represent raw data that is relevant to those objects. The Sighting object, which captures the sighting of an Indicator, Malware, or other SDO, uses Observed Data to represent the raw information that led to the creation of the Sighting (e.g., what was actually seen that suggested that a particular instance of malware was active)."""@en .
+
+
+###  http://purl.org/cyber/stix#Opinion
+stx:Opinion rdf:type owl:Class ;
+            rdfs:subClassOf stx:StixThing .
+
+
+###  http://purl.org/cyber/stix#Organization
+stx:Organization rdf:type owl:Class ;
+                 rdfs:subClassOf stx:Identity .
+
+
+###  http://purl.org/cyber/stix#Owner
+stx:Owner rdf:type owl:Class ;
+          rdfs:subClassOf stx:StixThing .
 
 
 ###  http://purl.org/cyber/stix#Port
@@ -1467,7 +1103,8 @@ stx:Port rdf:type owl:Class ;
 
 ###  http://purl.org/cyber/stix#Process
 stx:Process rdf:type owl:Class ;
-            rdfs:subClassOf stx:StixObservables .
+            rdfs:subClassOf stx:StixObservables ;
+            rdfs:comment "The Process Object represents common properties of an instance of a computer program as executed on an operating system. A Process Object MUST contain at least one property (other than type) from this object (or one of its extensions)."@en .
 
 
 ###  http://purl.org/cyber/stix#Protocol
@@ -1475,14 +1112,42 @@ stx:Protocol rdf:type owl:Class ;
              rdfs:subClassOf stx:StixObservables .
 
 
+###  http://purl.org/cyber/stix#Relationship
+stx:Relationship rdf:type owl:Class ;
+                 rdfs:subClassOf stx:StixThing ;
+                 rdfs:comment """he Relationship object is used to link together two SDOs in order to describe how they are related to each other. If SDOs are considered \"nodes\" or \"vertices\" in the graph, the Relationship Objects (SROs) represent \"edges\".
+
+STIX defines many relationship types to link together SDOs. These relationships are contained in the \"Relationships\" table under each SDO definition. Relationship types defined in the specification SHOULD be used to ensure consistency. An example of a specification-defined relationship is that an indicator indicates a campaign. That relationship type is listed in the Relationships section of the Indicator SDO definition.
+
+STIX also allows relationships from any SDO to any SDO that have not been defined in this specification. These relationships MAY use the related-to relationship type or MAY use a custom relationship type. As an example, a user might want to link malware directly to a tool. They can do so using related-to to say that the Malware is related to the Tool but not describe how, or they could use delivered-by (a custom name they determined) to indicate more detail.
+
+Note that some relationships in STIX may seem like \"shortcuts\". For example, an Indicator doesn't really detect a Campaign: it detects activity (Attack Patterns, Malware, etc.) that are often used by that campaign. While some analysts might want all of the source data and think that shortcuts are misleading, in many cases it's helpful to provide just the key points (shortcuts) and leave out the low-level details. In other cases, the low-level analysis may not be known or sharable, while the high-level analysis is. For these reasons, relationships that might appear to be \"shortcuts\" are not excluded from STIX."""@en .
+
+
+###  http://purl.org/cyber/stix#Report
+stx:Report rdf:type owl:Class ;
+           rdfs:subClassOf stx:StixDomainObject ;
+           rdfs:comment """Reports are collections of threat intelligence focused on one or more topics, such as a description of a threat actor, malware, or attack technique, including context and related details. They are used to group related threat intelligence together so that it can be published as a comprehensive cyber threat story.
+
+The Report SDO contains a list of references to SDOs and SROs (the CTI objects included in the report) along with a textual description and the name of the report.
+
+For example, a threat report produced by ACME Defense Corp. discussing the Glass Gazelle campaign should be represented using Report. The Report itself would contain the narrative of the report while the Campaign SDO and any related SDOs (e.g., Indicators for the Campaign, Malware it uses, and the associated Relationships) would be referenced in the report contents."""@en .
+
+
+###  http://purl.org/cyber/stix#Sighting
+stx:Sighting rdf:type owl:Class ;
+             rdfs:subClassOf stx:StixThing .
+
+
 ###  http://purl.org/cyber/stix#Software
 stx:Software rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables .
+             rdfs:subClassOf stx:StixObservables ;
+             rdfs:comment "The Software Object represents high-level properties associated with software, including software products."@en .
 
 
 ###  http://purl.org/cyber/stix#Spy
 stx:Spy rdf:type owl:Class ;
-        owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+        owl:equivalentClass [ owl:intersectionOf ( stx:ThreatActor
                                                    [ rdf:type owl:Restriction ;
                                                      owl:onProperty stx:label ;
                                                      owl:someValuesFrom [ rdf:type rdfs:Datatype ;
@@ -1495,38 +1160,23 @@ stx:Spy rdf:type owl:Class ;
                                                  ) ;
                               rdf:type owl:Class
                             ] ;
-        rdfs:subClassOf stx:threat-actor .
-
-
-###  http://purl.org/cyber/stix#StixCapecObject
-stx:StixCapecObject rdf:type owl:Class ;
-                    rdfs:subClassOf stx:StixThing .
+        rdfs:subClassOf stx:ThreatActor .
 
 
 ###  http://purl.org/cyber/stix#StixDomainObject
 stx:StixDomainObject rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixThing .
+                     rdfs:subClassOf stx:StixThing ;
+                     rdfs:comment """This specification defines the set of STIX Domain Objects (SDOs), each of which corresponds to a unique concept commonly represented in CTI. Using SDOs and STIX relationships as building blocks, individuals can create and share broad and comprehensive cyber threat intelligence.
 
+ Property information, relationship information, and examples are provided for each SDO defined below. Property information includes common properties as well as properties that are specific to each SDO. Relationship information includes embedded relationships (e.g., created_by_ref), common relationships (e.g., related-to), and SDO-specific relationships. Forward relationships (i.e., relationships from the SDO to other SDOs) are fully defined, while reverse relationships (i.e., relationships to the SDO from other SDOs) are duplicated for convenience.
 
-###  http://purl.org/cyber/stix#StixMispObject
-stx:StixMispObject rdf:type owl:Class ;
-                   rdfs:subClassOf stx:StixThing .
+ Some SDOs are similar and can be grouped together into categories. Attack Pattern, Malware, and Tool can all be considered types of tactics, techniques, and procedures (TTPs): they describe behaviors and resources that attackers use to carry out their attacks. Similarly, Campaign, Intrusion Set, and Threat Actor all describe information about why adversaries carry out attacks and how they organize themselves."""@en .
 
 
 ###  http://purl.org/cyber/stix#StixObservables
 stx:StixObservables rdf:type owl:Class ;
                     rdfs:subClassOf stx:StixThing ;
                     rdfs:comment "The ObservableType is a complex type representing a description of a single cyber observable."^^xsd:string .
-
-
-###  http://purl.org/cyber/stix#StixOtherObject
-stx:StixOtherObject rdf:type owl:Class ;
-                    rdfs:subClassOf stx:StixThing .
-
-
-###  http://purl.org/cyber/stix#StixRelationshipObject
-stx:StixRelationshipObject rdf:type owl:Class ;
-                           rdfs:subClassOf stx:StixThing .
 
 
 ###  http://purl.org/cyber/stix#StixThing
@@ -1541,7 +1191,7 @@ stx:TTP rdf:type owl:Class ;
 
 ###  http://purl.org/cyber/stix#Terrorist
 stx:Terrorist rdf:type owl:Class ;
-              owl:equivalentClass [ owl:intersectionOf ( stx:threat-actor
+              owl:equivalentClass [ owl:intersectionOf ( stx:ThreatActor
                                                          [ rdf:type owl:Restriction ;
                                                            owl:onProperty stx:label ;
                                                            owl:someValuesFrom [ rdf:type rdfs:Datatype ;
@@ -1554,7 +1204,33 @@ stx:Terrorist rdf:type owl:Class ;
                                                        ) ;
                                     rdf:type owl:Class
                                   ] ;
-              rdfs:subClassOf stx:threat-actor .
+              rdfs:subClassOf stx:ThreatActor .
+
+
+###  http://purl.org/cyber/stix#ThreatActor
+stx:ThreatActor rdf:type owl:Class ;
+                rdfs:subClassOf stx:Adversary ;
+                rdfs:comment """Threat Actors are actual individuals, groups, or organizations believed to be operating with malicious intent. A Threat Actor is not an Intrusion Set but may support or be affiliated with various Intrusion Sets, groups, or organizations over time.
+
+Threat Actors leverage their resources, and possibly the resources of an Intrusion Set, to conduct attacks and run Campaigns against targets.
+
+Threat Actors can be characterized by their motives, capabilities, goals, sophistication level, past activities, resources they have access to, and their role in the organization."""@en .
+
+
+###  http://purl.org/cyber/stix#Tool
+stx:Tool rdf:type owl:Class ;
+         rdfs:subClassOf stx:StixDomainObject ,
+                         stx:TTP ;
+         rdfs:comment """Tools are legitimate software that can be used by threat actors to perform attacks. Knowing how and when threat actors use such tools can be important for understanding how campaigns are executed. Unlike malware, these tools or software packages are often found on a system and have legitimate purposes for power users, system administrators, network administrators, or even normal users. Remote access tools (e.g., RDP) and network scanning tools (e.g., Nmap) are examples of Tools that may be used by a Threat Actor during an attack.
+
+The Tool SDO characterizes the properties of these software tools and can be used as a basis for making an assertion about how a Threat Actor uses them during an attack. It contains properties to name and describe the tool, a list of Kill Chain Phases the tool can be used to carry out, and the version of the tool.
+
+This SDO MUST NOT be used to characterize malware. Further, Tool MUST NOT be used to characterise tools used as part of a course of action in response to an attack. Tools used during response activities can be included directly as part of a Course of Action SDO."""@en .
+
+
+###  http://purl.org/cyber/stix#URL
+stx:URL rdf:type owl:Class ;
+        rdfs:subClassOf stx:StixObservables .
 
 
 ###  http://purl.org/cyber/stix#URLPath
@@ -1562,15 +1238,10 @@ stx:URLPath rdf:type owl:Class ;
             rdfs:subClassOf stx:StixObservables .
 
 
-###  http://purl.org/cyber/stix#Url
-stx:Url rdf:type owl:Class ;
-        rdfs:subClassOf stx:StixObservables .
-
-
 ###  http://purl.org/cyber/stix#UserAccount
 stx:UserAccount rdf:type owl:Class ;
                 rdfs:subClassOf stx:StixObservables ;
-                rdfs:comment "The User Account Object represents an instance of any type of user account, including but not limited to operating system, device, messaging service, and social media platform accounts." .
+                rdfs:comment "The User Account Object represents an instance of any type of user account, including but not limited to operating system, device, messaging service, and social media platform accounts."@en .
 
 
 ###  http://purl.org/cyber/stix#UserAgent
@@ -1578,12 +1249,24 @@ stx:UserAgent rdf:type owl:Class ;
               rdfs:subClassOf stx:StixObservables .
 
 
-###  http://purl.org/cyber/stix#artifact
-stx:artifact rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables ;
-             rdfs:comment """The Artifact Object permits capturing an array of bytes (8-bits), as a base64-encoded string, or linking to a file-like payload. The size of the base64-encoded data captured in the payload_bin property MUST be less than or equal to 10MB.
+###  http://purl.org/cyber/stix#Vulnerability
+stx:Vulnerability rdf:type owl:Class ;
+                  rdfs:subClassOf stx:StixDomainObject ;
+                  rdfs:comment """A Vulnerability is \"a mistake in software that can be directly used by a hacker to gain access to a system or network\" [CVE]. For example, if a piece of malware exploits CVE-2015-12345, a Malware object could be linked to a Vulnerability object that references CVE-2015-12345.
 
-One of payload_bin or url MUST be provided. It is incumbent on object creators to ensure that the URL is accessible for downstream consumers. If a URL is provided, then the hashes property MUST contain the hash of the URL contents.""" .
+ The Vulnerability SDO is primarily used to link to external definitions of vulnerabilities or to describe 0-day vulnerabilities that do not yet have an external definition. Typically, other SDOs assert relationships to Vulnerability objects when a specific vulnerability is targeted and exploited as part of malicious cyber activity. As such, Vulnerability objects can be used as a linkage to the asset management and compliance process."""@en .
+
+
+###  http://purl.org/cyber/stix#WindowsRegistryKey
+stx:WindowsRegistryKey rdf:type owl:Class ;
+                       rdfs:subClassOf stx:StixObservables ;
+                       rdfs:comment "The Registry Key Object represents the properties of a Windows registry key."@en .
+
+
+###  http://purl.org/cyber/stix#X509Certificate
+stx:X509Certificate rdf:type owl:Class ;
+                    rdfs:subClassOf stx:StixObservables ;
+                    rdfs:comment "The X.509 Certificate Object represents the properties of an X.509 certificate, as defined by ITU recommendation X.509 [X.509]. An X.509 Certificate Object MUST contain at least one property (other than type) from this object."@en .
 
 
 ###  http://purl.org/cyber/stix#attack-pattern
@@ -1591,148 +1274,10 @@ stx:attack-pattern rdf:type owl:Class ;
                    rdfs:subClassOf stx:TTP .
 
 
-###  http://purl.org/cyber/stix#bundle
-stx:bundle rdf:type owl:Class ;
-           rdfs:subClassOf stx:StixOtherObject ;
-           rdfs:comment "A Bundle is a collection of arbitrary STIX Objects and Marking Definitions grouped together in a single container. A Bundle does not have any semantic meaning and Objects are not considered related by virtue of being in the same Bundle. Bundle is not STIX Object, so it does not have any of the Common Properties other than the type and id properties. Bundle is transient and implementations should not assume that other implementations will treat it as a persistent object." .
-
-
-###  http://purl.org/cyber/stix#campaign
-stx:campaign rdf:type owl:Class ;
-             rdfs:subClassOf stx:Adversary ;
-             rdfs:comment "The CampaignType characterizes  a single cyber threat Campaign."^^xsd:string .
-
-
-###  http://purl.org/cyber/stix#course-of-action
-stx:course-of-action rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixDomainObject .
-
-
-###  http://purl.org/cyber/stix#definition-object
-stx:definition-object rdf:type owl:Class ;
-                      rdfs:subClassOf stx:StixOtherObject .
-
-
-###  http://purl.org/cyber/stix#domain-name
-stx:domain-name rdf:type owl:Class ;
-                rdfs:subClassOf stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#email-addr
-stx:email-addr rdf:type owl:Class ;
-               rdfs:subClassOf stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#email-message
-stx:email-message rdf:type owl:Class ;
-                  rdfs:subClassOf stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#external-reference
-stx:external-reference rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixOtherObject .
-
-
-###  http://purl.org/cyber/stix#file
-stx:file rdf:type owl:Class ;
-         rdfs:subClassOf stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#granular-marking
-stx:granular-marking rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixOtherObject .
-
-
-###  http://purl.org/cyber/stix#identity
-stx:identity rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixDomainObject ;
-             rdfs:comment "The Identity field characterizes the identity of this entry"^^xsd:string .
-
-
-###  http://purl.org/cyber/stix#indicator
-stx:indicator rdf:type owl:Class ;
-              rdfs:subClassOf stx:StixDomainObject ;
-              rdfs:comment "Indicators contain a pattern that can be used to detect suspicious or malicious cyber activity. For example, an Indicator may be used to represent a set of malicious domains and use the STIX Patterning Language to specify these domains." .
-
-
-###  http://purl.org/cyber/stix#individual
-stx:individual rdf:type owl:Class ;
-               owl:equivalentClass [ owl:intersectionOf ( stx:identity
-                                                          [ rdf:type owl:Restriction ;
-                                                            owl:onProperty stx:identity-class ;
-                                                            owl:allValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                owl:oneOf [ rdf:type rdf:List ;
-                                                                                            rdf:first "individual" ;
-                                                                                            rdf:rest rdf:nil
-                                                                                          ]
-                                                                              ]
-                                                          ]
-                                                        ) ;
-                                     rdf:type owl:Class
-                                   ] ;
-               rdfs:subClassOf stx:identity .
-
-
-###  http://purl.org/cyber/stix#intrusion-set
-stx:intrusion-set rdf:type owl:Class ;
-                  rdfs:subClassOf stx:Adversary .
-
-
-###  http://purl.org/cyber/stix#ipv4-addr
-stx:ipv4-addr rdf:type owl:Class ;
-              rdfs:subClassOf stx:IpAddr .
-
-
-###  http://purl.org/cyber/stix#ipv6-addr
-stx:ipv6-addr rdf:type owl:Class ;
-              rdfs:subClassOf stx:IpAddr .
-
-
-###  http://purl.org/cyber/stix#kill-chain
-stx:kill-chain rdf:type owl:Class ;
-               rdfs:subClassOf stx:StixOtherObject .
-
-
-###  http://purl.org/cyber/stix#kill-chain-phase
-stx:kill-chain-phase rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixOtherObject .
-
-
-###  http://purl.org/cyber/stix#location
-stx:location rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables ,
-                             stx:identity .
-
-
-###  http://purl.org/cyber/stix#mac-addr
-stx:mac-addr rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#malware
-stx:malware rdf:type owl:Class ;
-            rdfs:subClassOf stx:StixDomainObject ,
-                            stx:TTP .
-
-
-###  http://purl.org/cyber/stix#marking-definition
-stx:marking-definition rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixOtherObject .
-
-
-###  http://purl.org/cyber/stix#mutex
-stx:mutex rdf:type owl:Class ;
-          rdfs:subClassOf stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#note
-stx:note rdf:type owl:Class ;
-         rdfs:subClassOf stx:StixDomainObject .
-
-
-###  http://purl.org/cyber/stix#observed-data
-stx:observed-data rdf:type owl:Class ;
-                  rdfs:subClassOf stx:StixOtherObject .
+###  http://purl.org/cyber/stix#macAddr
+stx:macAddr rdf:type owl:Class ;
+            rdfs:subClassOf stx:StixObservables ;
+            rdfs:comment "The MAC Address Object represents a single Media Access Control (MAC) address."@en .
 
 
 ###  http://purl.org/cyber/stix#opinion
@@ -1740,230 +1285,11 @@ stx:opinion rdf:type owl:Class ;
             rdfs:subClassOf stx:StixDomainObject .
 
 
-###  http://purl.org/cyber/stix#organization
-stx:organization rdf:type owl:Class ;
-                 owl:equivalentClass [ owl:intersectionOf ( stx:identity
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty stx:identity-class ;
-                                                              owl:allValuesFrom [ rdf:type rdfs:Datatype ;
-                                                                                  owl:oneOf [ rdf:type rdf:List ;
-                                                                                              rdf:first "organization" ;
-                                                                                              rdf:rest rdf:nil
-                                                                                            ]
-                                                                                ]
-                                                            ]
-                                                          ) ;
-                                       rdf:type owl:Class
-                                     ] ;
-                 rdfs:subClassOf stx:identity .
-
-
-###  http://purl.org/cyber/stix#relationship
-stx:relationship rdf:type owl:Class ;
-                 rdfs:subClassOf stx:StixRelationshipObject .
-
-
-###  http://purl.org/cyber/stix#report
-stx:report rdf:type owl:Class ;
-           rdfs:subClassOf stx:StixDomainObject ;
-           rdfs:comment "Reports are collections of threat intelligence focused on one or more topics, such as a description of a threat actor, malware, or attack technique, including context and related details. They are used to group related threat intelligence together so that it can be published as a comprehensive cyber threat story." .
-
-
-###  http://purl.org/cyber/stix#sighting
-stx:sighting rdf:type owl:Class ;
-             rdfs:subClassOf stx:StixRelationshipObject .
-
-
-###  http://purl.org/cyber/stix#threat-actor
-stx:threat-actor rdf:type owl:Class ;
-                 rdfs:subClassOf stx:Adversary .
-
-
-###  http://purl.org/cyber/stix#tool
-stx:tool rdf:type owl:Class ;
-         rdfs:subClassOf stx:StixDomainObject ,
-                         stx:TTP .
-
-
-###  http://purl.org/cyber/stix#vulnerability
-stx:vulnerability rdf:type owl:Class ;
-                  rdfs:subClassOf stx:StixDomainObject ;
-                  rdfs:comment "The Vulnerability field identifies and characterizes a Vulnerability as a potential ExploitTarget."^^xsd:string .
-
-
-###  http://purl.org/cyber/stix#windows-registry-key
-stx:windows-registry-key rdf:type owl:Class ;
-                         rdfs:subClassOf stx:StixObservables .
-
-
-###  http://purl.org/cyber/stix#x-example-com-customobject
-stx:x-example-com-customobject rdf:type owl:Class ;
-                               rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-AS
-stx:x-misp-object-AS rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-btc
-stx:x-misp-object-btc rdf:type owl:Class ;
-                      rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-campaign-id
-stx:x-misp-object-campaign-id rdf:type owl:Class ;
-                              rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-campaign-name
-stx:x-misp-object-campaign-name rdf:type owl:Class ;
-                                rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-comment
-stx:x-misp-object-comment rdf:type owl:Class ;
-                          rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-datetime
-stx:x-misp-object-datetime rdf:type owl:Class ;
-                           rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-email-attachment
-stx:x-misp-object-email-attachment rdf:type owl:Class ;
-                                   rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-github-repository
-stx:x-misp-object-github-repository rdf:type owl:Class ;
-                                    rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-github-username
-stx:x-misp-object-github-username rdf:type owl:Class ;
-                                  rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-hex
-stx:x-misp-object-hex rdf:type owl:Class ;
-                      rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-jabber-id
-stx:x-misp-object-jabber-id rdf:type owl:Class ;
-                            rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-mobile-application-id
-stx:x-misp-object-mobile-application-id rdf:type owl:Class ;
-                                        rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-named-pipe
-stx:x-misp-object-named-pipe rdf:type owl:Class ;
-                             rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-other
-stx:x-misp-object-other rdf:type owl:Class ;
-                        rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-pattern-in-file
-stx:x-misp-object-pattern-in-file rdf:type owl:Class ;
-                                  rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-pattern-in-memory
-stx:x-misp-object-pattern-in-memory rdf:type owl:Class ;
-                                    rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-pattern-in-traffic
-stx:x-misp-object-pattern-in-traffic rdf:type owl:Class ;
-                                     rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-pdb
-stx:x-misp-object-pdb rdf:type owl:Class ;
-                      rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-prtn
-stx:x-misp-object-prtn rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-sigma
-stx:x-misp-object-sigma rdf:type owl:Class ;
-                        rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-snort
-stx:x-misp-object-snort rdf:type owl:Class ;
-                        rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-text
-stx:x-misp-object-text rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-threat-actor
-stx:x-misp-object-threat-actor rdf:type owl:Class ;
-                               rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-user-agent
-stx:x-misp-object-user-agent rdf:type owl:Class ;
-                             rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-whois-creation-date
-stx:x-misp-object-whois-creation-date rdf:type owl:Class ;
-                                      rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-whois-registrant-email
-stx:x-misp-object-whois-registrant-email rdf:type owl:Class ;
-                                         rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-whois-registrant-name
-stx:x-misp-object-whois-registrant-name rdf:type owl:Class ;
-                                        rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-whois-registrant-phone
-stx:x-misp-object-whois-registrant-phone rdf:type owl:Class ;
-                                         rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-whois-registrar
-stx:x-misp-object-whois-registrar rdf:type owl:Class ;
-                                  rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-windows-scheduled-task
-stx:x-misp-object-windows-scheduled-task rdf:type owl:Class ;
-                                         rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-windows-service-name
-stx:x-misp-object-windows-service-name rdf:type owl:Class ;
-                                       rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x-misp-object-yara
-stx:x-misp-object-yara rdf:type owl:Class ;
-                       rdfs:subClassOf stx:StixMispObject .
-
-
-###  http://purl.org/cyber/stix#x509-certificate
-stx:x509-certificate rdf:type owl:Class ;
-                     rdfs:subClassOf stx:StixObservables .
+#################################################################
+#    Annotations
+#################################################################
+
+stx:URL rdfs:comment "The URL Object represents the properties of a uniform resource locator (URL)."@en .
 
 
 ###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
