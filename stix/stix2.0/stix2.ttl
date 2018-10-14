@@ -153,15 +153,6 @@ stx:hasGranularMarking rdf:type owl:ObjectProperty ;
                        rdfs:comment "a GranularMarking that apply to this object" .
 
 
-###  http://purl.org/cyber/stix#hasHash
-stx:hasHash rdf:type owl:ObjectProperty ;
-            rdfs:domain [ rdf:type owl:Class ;
-                          owl:unionOf ( stx:ExternalReference
-                                        stx:File
-                                      )
-                        ] .
-
-
 ###  http://purl.org/cyber/stix#hasPhase
 stx:hasPhase rdf:type owl:ObjectProperty ;
              owl:inverseOf stx:phaseOf ;
@@ -427,7 +418,6 @@ stx:confidence rdf:type owl:DatatypeProperty ;
 ###  http://purl.org/cyber/stix#country
 stx:country rdf:type owl:DatatypeProperty ;
             rdfs:subPropertyOf stx:stixDataProperty ;
-            rdfs:domain stx:Location ;
             rdfs:range xsd:string .
 
 
@@ -483,6 +473,13 @@ stx:id rdf:type owl:DatatypeProperty ;
        rdfs:comment "The id property universally and uniquely identifies this object." .
 
 
+###  http://purl.org/cyber/stix#identityClass
+stx:identityClass rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf stx:stixDataProperty ;
+                  rdfs:domain stx:Identity ;
+                  rdfs:comment "This property describes the type of entity that the Identity represents: whether it describes an organization, group, individual, class or unknown" .
+
+
 ###  http://purl.org/cyber/stix#isMultipart
 stx:isMultipart rdf:type owl:DatatypeProperty ;
                 rdfs:subPropertyOf stx:emailProperty ;
@@ -507,7 +504,8 @@ stx:language rdf:type owl:DatatypeProperty ;
 
 ###  http://purl.org/cyber/stix#md5
 stx:md5 rdf:type owl:DatatypeProperty ;
-        rdfs:subPropertyOf stx:hash .
+        rdfs:subPropertyOf stx:hash ;
+        rdf:type owl:FunctionalProperty .
 
 
 ###  http://purl.org/cyber/stix#mimeType
@@ -596,29 +594,40 @@ stx:revoked rdf:type owl:DatatypeProperty ;
             rdfs:comment "The revoked property indicates whether the object has been revoked." .
 
 
+###  http://purl.org/cyber/stix#sector
+stx:sector rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf stx:stixDataProperty ;
+           rdfs:domain stx:Identity .
+
+
 ###  http://purl.org/cyber/stix#sha-1
 stx:sha-1 rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf stx:hash .
+          rdfs:subPropertyOf stx:hash ;
+          rdf:type owl:FunctionalProperty .
 
 
 ###  http://purl.org/cyber/stix#sha-224
 stx:sha-224 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
+            rdfs:subPropertyOf stx:hash ;
+            rdf:type owl:FunctionalProperty .
 
 
 ###  http://purl.org/cyber/stix#sha-256
 stx:sha-256 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
+            rdfs:subPropertyOf stx:hash ;
+            rdf:type owl:FunctionalProperty .
 
 
 ###  http://purl.org/cyber/stix#sha-384
 stx:sha-384 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
+            rdfs:subPropertyOf stx:hash ;
+            rdf:type owl:FunctionalProperty .
 
 
 ###  http://purl.org/cyber/stix#sha-512
 stx:sha-512 rdf:type owl:DatatypeProperty ;
-            rdfs:subPropertyOf stx:hash .
+            rdfs:subPropertyOf stx:hash ;
+            rdf:type owl:FunctionalProperty .
 
 
 ###  http://purl.org/cyber/stix#size
@@ -838,6 +847,12 @@ stx:AttackPattern rdf:type owl:Class ;
                   rdfs:comment "Attack Patterns are a type of TTP that describe ways that adversaries attempt to compromise targets. Attack Patterns are used to help categorize attacks, generalize specific attacks to the patterns that they follow, and provide detailed information about how attacks are performed. An example of an attack pattern is \"spear phishing\": a common type of attack where an attacker sends a carefully crafted e-mail message to a party with the intent of getting them to click a link or open an attachment to deliver malware. Attack Patterns can also be more specific; spear phishing as practiced by a particular threat actor (e.g., they might generally say that the target won a contest) can also be an Attack Pattern. The Attack Pattern SDO contains textual descriptions of the pattern along with references to externally-defined taxonomies of attacks such as CAPEC [CAPEC]. Relationships from Attack Pattern can be used to relate it to what it targets (Vulnerabilities and Identities) and which tools and malware use it (Tool and Malware)." .
 
 
+###  http://purl.org/cyber/stix#AutonomousSystem
+stx:AutonomousSystem rdf:type owl:Class ;
+                     rdfs:subClassOf stx:StixObservables ;
+                     rdfs:comment "Within the Internet, an autonomous system (AS) is a collection of connected Internet Protocol (IP) routing prefixes under the control of one or more network operators on behalf of a single administrative entity or domain that presents a common, clearly defined routing policy to the Internet.   An ISP must have an officially registered autonomous system number (ASN). A unique ASN is allocated to each AS for use in BGP routing. AS numbers are important because the ASN uniquely identifies each network on the Internet." .
+
+
 ###  http://purl.org/cyber/stix#Campaign
 stx:Campaign rdf:type owl:Class ;
              rdfs:subClassOf stx:Adversary ;
@@ -965,6 +980,19 @@ The Indicator SDO contains a simple textual description, the Kill Chain Phases t
 
 ###  http://purl.org/cyber/stix#Individual
 stx:Individual rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( stx:Identity
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty stx:identityClass ;
+                                                            owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                 owl:oneOf [ rdf:type rdf:List ;
+                                                                                             rdf:first "individual" ;
+                                                                                             rdf:rest rdf:nil
+                                                                                           ]
+                                                                               ]
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] ;
                rdfs:subClassOf stx:Identity .
 
 
@@ -1008,12 +1036,6 @@ stx:KillChainPhase rdf:type owl:Class ;
 ###  http://purl.org/cyber/stix#LocalFile
 stx:LocalFile rdf:type owl:Class ;
               rdfs:subClassOf stx:StixThing .
-
-
-###  http://purl.org/cyber/stix#Location
-stx:Location rdf:type owl:Class ;
-             rdfs:subClassOf stx:Identity ,
-                             stx:StixObservables .
 
 
 ###  http://purl.org/cyber/stix#Malware
@@ -1088,6 +1110,22 @@ stx:Opinion rdf:type owl:Class ;
 
 ###  http://purl.org/cyber/stix#Organization
 stx:Organization rdf:type owl:Class ;
+                 owl:equivalentClass [ owl:intersectionOf ( stx:Identity
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty stx:identityClass ;
+                                                              owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                   owl:oneOf [ rdf:type rdf:List ;
+                                                                                               rdf:first "organisation" ;
+                                                                                               rdf:rest [ rdf:type rdf:List ;
+                                                                                                          rdf:first "organization" ;
+                                                                                                          rdf:rest rdf:nil
+                                                                                                        ]
+                                                                                             ]
+                                                                                 ]
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
                  rdfs:subClassOf stx:Identity .
 
 
