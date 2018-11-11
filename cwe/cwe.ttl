@@ -1,1 +1,234 @@
-# coming soon
+@prefix : <http://purl.org/cyber/cwe#> .
+@prefix cwe: <http://purl.org/cyber/cwe#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://purl.org/cyber/cwe> .
+
+<http://purl.org/cyber/cwe> rdf:type owl:Ontology ;
+                             owl:versionIRI <http://purl.org/cyber/cwe> ;
+                             rdfs:label "Common Weakness Enumeration (CWE) Ontology" ;
+                             rdfs:comment "This ontology provides a vocabulary and representation for the Common Weakness Enumeration (CWE) which provides a unified, measurable set of software weaknesses that is enabling more effective discussion, description, selection, and use of software security tools and services that can find these weaknesses in source code and operational systems as well as better understanding and management of software weaknesses related to architecture and design." .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://www.w3.org/2000/01/rdf-schema#comment
+rdfs:comment rdfs:comment "a type of mistake in software that, in proper conditions, could contribute to the introduction of vulnerabilities within that software. This term applies to mistakes regardless of whether they occur in implementation, design, or other phases of the SDLC." ;
+             rdfs:label "Weakness" .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/cyber/cwe#canPrecede
+cwe:canPrecede rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf cwe:cweObjectProperty ;
+               rdfs:domain cwe:Weakness ;
+               rdfs:range cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#childOf
+cwe:childOf rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf cwe:cweObjectProperty ;
+            owl:inverseOf cwe:parentOf ;
+            rdfs:domain cwe:Weakness ;
+            rdfs:range cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#consequence
+cwe:consequence rdf:type owl:ObjectProperty ;
+                rdfs:subPropertyOf cwe:cweObjectProperty ;
+                rdfs:domain cwe:Weakness ;
+                rdfs:range cwe:Consequence .
+
+
+###  http://purl.org/cyber/cwe#cweObjectProperty
+cwe:cweObjectProperty rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/cyber/cwe#mitigation
+cwe:mitigation rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf cwe:cweObjectProperty ;
+               rdfs:domain cwe:Weakness ;
+               rdfs:range cwe:Mitigation .
+
+
+###  http://purl.org/cyber/cwe#modeOfIntroduction
+cwe:modeOfIntroduction rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf cwe:cweObjectProperty ;
+                       rdfs:domain cwe:Weakness ;
+                       rdfs:range cwe:ModeOfIntroduction .
+
+
+###  http://purl.org/cyber/cwe#parentOf
+cwe:parentOf rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf cwe:cweObjectProperty ;
+             rdfs:domain cwe:Weakness ;
+             rdfs:range cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#peerOf
+cwe:peerOf rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf cwe:cweObjectProperty ;
+           owl:inverseOf cwe:peerOf ;
+           rdf:type owl:SymmetricProperty ,
+                    owl:TransitiveProperty ;
+           rdfs:domain cwe:Weakness ;
+           rdfs:range cwe:Weakness .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://purl.org/cyber/cwe#abstraction
+cwe:abstraction rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf cwe:cweDataProperty ;
+                rdfs:domain cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#applicableLanguage
+cwe:applicableLanguage rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf cwe:cweDataProperty ;
+                       rdfs:domain cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#applicableOperatingSystem
+cwe:applicableOperatingSystem rdf:type owl:DatatypeProperty ;
+                              rdfs:subPropertyOf cwe:cweDataProperty ;
+                              rdfs:domain cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#applicableParadigm
+cwe:applicableParadigm rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf cwe:cweDataProperty ;
+                       rdfs:domain cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#applicableTechnology
+cwe:applicableTechnology rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf cwe:cweDataProperty ;
+                         rdfs:domain cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#author
+cwe:author rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf cwe:cweDataProperty ;
+           rdfs:domain cwe:Reference .
+
+
+###  http://purl.org/cyber/cwe#cweDataProperty
+cwe:cweDataProperty rdf:type owl:DatatypeProperty ;
+                    rdfs:domain cwe:CWEThing .
+
+
+###  http://purl.org/cyber/cwe#description
+cwe:description rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf cwe:cweDataProperty ;
+                rdfs:domain cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#edition
+cwe:edition rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf cwe:cweDataProperty ;
+            rdfs:domain cwe:Reference .
+
+
+###  http://purl.org/cyber/cwe#extendedDescription
+cwe:extendedDescription rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf cwe:cweDataProperty ;
+                        rdfs:domain cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#phase
+cwe:phase rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf cwe:cweDataProperty .
+
+
+###  http://purl.org/cyber/cwe#publicationDay
+cwe:publicationDay rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf cwe:cweDataProperty ;
+                   rdfs:domain cwe:Reference .
+
+
+###  http://purl.org/cyber/cwe#publicationMonth
+cwe:publicationMonth rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf cwe:cweDataProperty ;
+                     rdfs:domain cwe:Reference .
+
+
+###  http://purl.org/cyber/cwe#publicationYear
+cwe:publicationYear rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf cwe:cweDataProperty ;
+                    rdfs:domain cwe:Reference .
+
+
+###  http://purl.org/cyber/cwe#publisher
+cwe:publisher rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf cwe:cweDataProperty ;
+              rdfs:domain cwe:Reference .
+
+
+###  http://purl.org/cyber/cwe#status
+cwe:status rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf cwe:cweDataProperty ;
+           rdfs:domain cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#structure
+cwe:structure rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf cwe:cweDataProperty ;
+              rdfs:domain cwe:Weakness .
+
+
+###  http://purl.org/cyber/cwe#url
+cwe:url rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf cwe:cweDataProperty ;
+        rdfs:domain cwe:CWEThing .
+
+
+###  http://purl.org/cyber/cwe#urlDate
+cwe:urlDate rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf cwe:cweDataProperty ;
+            rdfs:domain cwe:Reference .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/cyber/cwe#CWEThing
+cwe:CWEThing rdf:type owl:Class .
+
+
+###  http://purl.org/cyber/cwe#Consequence
+cwe:Consequence rdf:type owl:Class ;
+                rdfs:subClassOf cwe:CWEThing .
+
+
+###  http://purl.org/cyber/cwe#Mitigation
+cwe:Mitigation rdf:type owl:Class ;
+               rdfs:subClassOf cwe:CWEThing .
+
+
+###  http://purl.org/cyber/cwe#ModeOfIntroduction
+cwe:ModeOfIntroduction rdf:type owl:Class ;
+                       rdfs:subClassOf cwe:CWEThing .
+
+
+###  http://purl.org/cyber/cwe#Reference
+cwe:Reference rdf:type owl:Class ;
+              rdfs:subClassOf cwe:CWEThing .
+
+
+###  http://purl.org/cyber/cwe#Weakness
+cwe:Weakness rdf:type owl:Class ;
+             rdfs:subClassOf cwe:CWEThing .
+
+
+###  Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi
