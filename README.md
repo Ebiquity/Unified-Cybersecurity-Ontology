@@ -8,3 +8,18 @@ The Unified Cybersecurity Ontology (UCO) is intended to support information inte
 If you use UCO or want to refer to it in a paper, please cite:
 
 > Zareen Syed, Ankur Padia, Tim Finin, Lisa Mathews and Anupam Joshi, UCO: Unified Cybersecurity Ontology, AAAI Workshop on Artificial Intelligence for Cyber Security, February 2016. http://ebiq.org/p/722
+
+
+Current versions of the UCO family of ontologies are stored in this repository.  We recommend using the following URIs to refer to the ontologoes,  This will redirect to the current current versions and will be maintained for the forseeable future.
+
+@prefix atk: <http://purl.org/cyber/atk#> .
+@prefix capec: <http://purl.org/cyber/capec#> .
+@prefix ckg: <http://purl.org/cyber/ckg#> .
+@prefix cve: <http://purl.org/cyber/cve#> .
+@prefix cwe: <http://purl.org/cyber/cwe#> .
+@prefix cyber: <http://purl.org/cyber#> .
+@prefix misp: <http://purl.org/cyber/misp#> .
+@prefix mitre: <http://purl.org/cyber/mitre#> .
+@prefix stx: <http://purl.org/cyber/stix#> .
+@prefix txi: <http://purl.org/cyber/taxii#> .
+@prefix uco: <http://purl.org/cyber/uco#> .
